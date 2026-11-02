@@ -16,8 +16,8 @@
 
     <style>
         :root {
-            --primary: #1a365d; /* Deep Humanitarian Blue */
-            --secondary: #ed8936; /* Warm Action Orange */
+            --primary: #1a365d;
+            --secondary: #ed8936;
             --accent: #2b6cb0;
             --light: #f7fafc;
             --dark: #1a202c;
@@ -79,12 +79,12 @@
         .activity-category { margin-bottom: 3rem; }
         .activity-category h3 { margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--secondary); display: inline-block; font-size: 1.5rem; }
         .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-        .image-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .image-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.3s; }
+        .image-card:hover { transform: translateY(-5px); }
         .image-card img { width: 100%; height: 220px; object-fit: cover; background-color: #e2e8f0; }
         .image-card .caption { padding: 1rem; font-size: 0.95rem; font-weight: 600; color: var(--text); text-align: center; }
-        .placeholder-img { display: flex; align-items: center; justify-content: center; height: 220px; background: #e2e8f0; color: #718096; font-size: 0.9rem; text-align: center; padding: 1rem; border: 2px dashed #cbd5e0; }
 
-        /* Contact & Footer (Simplified for brevity, keeping previous robust styles) */
+        /* Contact & Footer */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
         .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
         .contact-info-item i { color: var(--secondary); font-size: 1.25rem; margin-top: 0.25rem; }
@@ -189,7 +189,7 @@
         </div>
     </section>
 
-    <!-- 7 KEY DOMAINS SECTION (EXACTLY AS REQUESTED) -->
+    <!-- 7 KEY DOMAINS SECTION -->
     <section id="domains">
         <div class="section-title">
             <h2 class="lang-fr">Nos 7 Domaines d'Intervention Clés</h2>
@@ -288,112 +288,121 @@
         <div class="section-title">
             <h2 class="lang-fr">Nos Activités en Images</h2>
             <h2 class="lang-en">Our Activities in Pictures</h2>
-            <p class="lang-fr">Découvrez nos actions sur le terrain. (Remplacez les images par vos liens)</p>
-            <p class="lang-en">Discover our field actions. (Replace images with your links)</p>
+            <p class="lang-fr">Découvrez nos actions concrètes sur le terrain au Nord-Kivu.</p>
+            <p class="lang-en">Discover our concrete field actions in North Kivu.</p>
         </div>
 
-        <!-- Activity 1: Métiers Professionnels -->
+        <!-- Activity 1: Sécurité Alimentaire -->
         <div class="activity-category">
-            <h3 class="lang-fr">1. Activités : Métiers Professionnels</h3>
-            <h3 class="lang-en">1. Activities: Professional Trades</h3>
+            <h3 class="lang-fr">1. Activités : Sécurité Alimentaire et Moyens de subsistance</h3>
+            <h3 class="lang-en">1. Activities: Food Security and Livelihoods</h3>
             <div class="image-grid">
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE: Replace src with your image URL -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Coupe+et+Couture)" alt="Métiers Professionnels 1">
+                    <img src="https://i.ibb.co/20FB41DX/se-curite-Alimentaire.jpg" alt="Sécurité Alimentaire 1">
+                    <div class="caption lang-fr">Distribution de vivres et kits alimentaires</div>
+                    <div class="caption lang-en">Food and kit distribution</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://i.ibb.co/B28M9yHb/se-curite-Alimentaire1.jpg" alt="Sécurité Alimentaire 2">
+                    <div class="caption lang-fr">Appui aux jardins communautaires</div>
+                    <div class="caption lang-en">Support for community gardens</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://i.ibb.co/xS7kGHZ7/se-curite-Alimentaire2.jpg" alt="Sécurité Alimentaire 3">
+                    <div class="caption lang-fr">Renforcement de la sécurité alimentaire des ménages</div>
+                    <div class="caption lang-en">Strengthening household food security</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 2: Métiers Professionnels -->
+        <div class="activity-category">
+            <h3 class="lang-fr">2. Activités : Métiers Professionnels</h3>
+            <h3 class="lang-en">2. Activities: Professional Trades</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="https://i.ibb.co/QjfPPdGc/activite-s-de-Me-tiers.jpg" alt="Métiers Professionnels 1">
                     <div class="caption lang-fr">Formation en coupe et couture</div>
                     <div class="caption lang-en">Tailoring training</div>
                 </div>
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Menuiserie)" alt="Métiers Professionnels 2">
-                    <div class="caption lang-fr">Atelier de menuiserie</div>
-                    <div class="caption lang-en">Carpentry workshop</div>
+                    <img src="https://i.ibb.co/bjM2PzPC/activite-s-de-Me-tiers2.jpg" alt="Métiers Professionnels 2">
+                    <div class="caption lang-fr">Atelier pratique de menuiserie</div>
+                    <div class="caption lang-en">Practical carpentry workshop</div>
                 </div>
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Soudure)" alt="Métiers Professionnels 3">
+                    <img src="https://i.ibb.co/xqRhZK2D/activite-s-de-Me-tiers3.jpg" alt="Métiers Professionnels 3">
                     <div class="caption lang-fr">Formation en soudure et ajustage</div>
                     <div class="caption lang-en">Welding and fitting training</div>
                 </div>
             </div>
         </div>
 
-        <!-- Activity 2: Entrepreneuriat -->
+        <!-- Activity 3: Entrepreneuriat -->
         <div class="activity-category">
-            <h3 class="lang-fr">2. Activités : Entrepreneuriat et Leadership Féminin</h3>
-            <h3 class="lang-en">2. Activities: Entrepreneurship and Women's Leadership</h3>
+            <h3 class="lang-fr">3. Activités : Entrepreneuriat et Leadership Féminin</h3>
+            <h3 class="lang-en">3. Activities: Entrepreneurship and Women's Leadership</h3>
             <div class="image-grid">
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Leadership)" alt="Entrepreneuriat 1">
+                    <img src="https://i.ibb.co/20HH7bJP/Entre-Preneuriat-et-Leadership-Fe-minin.jpg" alt="Entrepreneuriat 1">
                     <div class="caption lang-fr">Atelier de leadership féminin</div>
                     <div class="caption lang-en">Women's leadership workshop</div>
                 </div>
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(AGR)" alt="Entrepreneuriat 2">
+                    <img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2">
                     <div class="caption lang-fr">Soutien aux Activités Génératrices de Revenus (AGR)</div>
                     <div class="caption lang-en">Support for Income-Generating Activities (IGA)</div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Activity 3: Sécurité Alimentaire -->
-        <div class="activity-category">
-            <h3 class="lang-fr">3. Activités : Sécurité Alimentaire et Moyens de subsistance</h3>
-            <h3 class="lang-en">3. Activities: Food Security and Livelihoods</h3>
-            <div class="image-grid">
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Distribution+Vivres)" alt="Sécurité Alimentaire 1">
-                    <div class="caption lang-fr">Distribution de vivres et kits alimentaires</div>
-                    <div class="caption lang-en">Food and kit distribution</div>
-                </div>
-                <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Jardin+Communautaire)" alt="Sécurité Alimentaire 2">
-                    <div class="caption lang-fr">Appui aux jardins communautaires</div>
-                    <div class="caption lang-en">Support for community gardens</div>
+                    <img src="https://i.ibb.co/tpsJ3D20/Entre-Preneuriat-et-Leadership-Fe-minin3.jpg" alt="Entrepreneuriat 3">
+                    <div class="caption lang-fr">Accompagnement des coopératives féminines</div>
+                    <div class="caption lang-en">Support for women's cooperatives</div>
                 </div>
             </div>
         </div>
 
-        <!-- Activity 4: Environnement -->
+        <!-- Activity 4: Éducation -->
         <div class="activity-category">
-            <h3 class="lang-fr">4. Activités : Environnement et Développement durable</h3>
-            <h3 class="lang-en">4. Activities: Environment and Sustainable Development</h3>
+            <h3 class="lang-fr">4. Activités : Éducation et Alphabétisation</h3>
+            <h3 class="lang-en">4. Activities: Education and Literacy</h3>
             <div class="image-grid">
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Reboisement)" alt="Environnement 1">
+                    <img src="https://i.ibb.co/SXff4zK8/activite-s-de-l-e-ducation.jpg" alt="Éducation 1">
+                    <div class="caption lang-fr">Classes d'alphabétisation pour adultes</div>
+                    <div class="caption lang-en">Adult literacy classes</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://i.ibb.co/8Lc9VFtR/activite-s-de-l-e-ducation2.jpg" alt="Éducation 2">
+                    <div class="caption lang-fr">Soutien scolaire et fournitures pour les enfants</div>
+                    <div class="caption lang-en">Educational support and supplies for children</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://i.ibb.co/Rkqkyh0W/activite-s-de-l-e-ducation3.jpg" alt="Éducation 3">
+                    <div class="caption lang-fr">Promotion de l'éducation des filles</div>
+                    <div class="caption lang-en">Promoting girls' education</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity 5: Environnement -->
+        <div class="activity-category">
+            <h3 class="lang-fr">5. Activités : Environnement et Développement durable</h3>
+            <h3 class="lang-en">5. Activities: Environment and Sustainable Development</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg" alt="Environnement 1">
                     <div class="caption lang-fr">Campagnes de reboisement communautaire</div>
                     <div class="caption lang-en">Community reforestation campaigns</div>
                 </div>
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Sensibilisation)" alt="Environnement 2">
+                    <img src="https://i.ibb.co/Q3qJQF8V/environnement-et-De-veloppement-durable2.jpg" alt="Environnement 2">
                     <div class="caption lang-fr">Sensibilisation à la protection de l'environnement</div>
                     <div class="caption lang-en">Environmental protection awareness</div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Activity 5: WASH & Protection (Additional Placeholders) -->
-        <div class="activity-category">
-            <h3 class="lang-fr">5. Activités : WASH, Protection et Éducation</h3>
-            <h3 class="lang-en">5. Activities: WASH, Protection and Education</h3>
-            <div class="image-grid">
                 <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(WASH)" alt="WASH">
-                    <div class="caption lang-fr">Construction de latrines et accès à l'eau potable</div>
-                    <div class="caption lang-en">Latrine construction and access to clean water</div>
-                </div>
-                <div class="image-card">
-                    <!-- PASTE IMAGE LINK HERE -->
-                    <img src="https://via.placeholder.com/400x300/e2e8f0/718096?text=PASTE+IMAGE+LINK+HERE+(Education)" alt="Education">
-                    <div class="caption lang-fr">Classes d'alphabétisation et soutien scolaire</div>
-                    <div class="caption lang-en">Literacy classes and educational support</div>
+                    <img src="https://i.ibb.co/XfQJcxF0/environnement-et-De-veloppement-durable3.jpg" alt="Environnement 3">
+                    <div class="caption lang-fr">Actions climatiques locales et durables</div>
+                    <div class="caption lang-en">Local and sustainable climate actions</div>
                 </div>
             </div>
         </div>
@@ -441,8 +450,8 @@
                     <div>
                         <h4 class="lang-fr">Personnes de Contact</h4>
                         <h4 class="lang-en">Contact Persons</h4>
-                        <p><strong>SIMBU Jonathan</strong> (PCA) : <a href="mailto:kibalasimbu@gmail.com">kibalasimbu@gmail.com</a> | +243 811 997 327</p>
-                        <p style="margin-top: 0.5rem;"><strong>Jean MUHINDO</strong> (Exécutif) : <a href="mailto:lukom02@gmail.com">lukom02@gmail.com</a> | +243 851 972 001</p>
+                        <p><strong>SIMBU Jonathan</strong> (PCA) : <a href="mailto:kibalasimbu@gmail.com" style="color: var(--text);">kibalasimbu@gmail.com</a> | +243 811 997 327</p>
+                        <p style="margin-top: 0.5rem;"><strong>Jean MUHINDO</strong> (Exécutif) : <a href="mailto:lukom02@gmail.com" style="color: var(--text);">lukom02@gmail.com</a> | +243 851 972 001</p>
                     </div>
                 </div>
             </div>
