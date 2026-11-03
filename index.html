@@ -37,7 +37,7 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* Header & Nav - FIXED */
+        /* Header & Nav - FIXED ALIGNMENT */
         header { 
             background: var(--white); 
             box-shadow: var(--shadow); 
@@ -51,13 +51,15 @@
             padding: 0.75rem 2rem; 
             display: flex; 
             justify-content: space-between; 
-            align-items: center; 
+            align-items: center;
+            gap: 2rem;
         }
         .logo { 
             display: flex; 
             align-items: center; 
             gap: 1rem; 
-            text-decoration: none; 
+            text-decoration: none;
+            flex-shrink: 0;
         }
         .logo img { 
             height: 50px; 
@@ -76,32 +78,30 @@
             color: var(--text-light); 
             font-family: 'Inter', sans-serif; 
         }
-        
-        /* Navigation - FIXED LAYOUT */
-        nav {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+        nav { 
+            flex: 1; 
+            display: flex; 
+            justify-content: flex-end;
         }
         nav ul { 
             display: flex; 
             list-style: none; 
-            gap: 2rem; 
-            align-items: center; 
-            justify-content: center;
+            gap: 0.5rem; 
+            align-items: center;
+            flex-wrap: wrap;
         }
         nav a { 
             text-decoration: none; 
             color: var(--text); 
             font-weight: 600; 
-            font-size: 0.9rem; 
+            font-size: 0.85rem; 
             transition: color 0.3s;
+            padding: 0.5rem 0.75rem;
             white-space: nowrap;
         }
         nav a:hover { 
             color: var(--secondary); 
         }
-        
         .lang-toggle { 
             background: var(--primary); 
             color: var(--white); 
@@ -110,7 +110,8 @@
             border-radius: var(--radius); 
             cursor: pointer; 
             font-weight: 600; 
-            transition: background 0.3s; 
+            transition: background 0.3s;
+            margin-left: 0.5rem;
         }
         .lang-toggle:hover { 
             background: var(--accent); 
@@ -124,9 +125,9 @@
             cursor: pointer; 
         }
 
-        /* Hero Section */
+        /* Hero Section - WITH UFAD IMAGE */
         .hero { 
-            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.7)), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); 
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.7)), url('https://i.ibb.co/20FB41DX/se-curite-Alimentaire.jpg'); 
             background-size: cover; 
             background-position: center; 
             color: var(--white); 
@@ -342,25 +343,41 @@
             font-size: 0.875rem; 
         }
 
+        @media (max-width: 1024px) {
+            .nav-container {
+                padding: 0.75rem 1rem;
+            }
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-btn { 
                 display: block; 
             }
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                box-shadow: var(--shadow);
+            }
             nav ul { 
                 display: none; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                right: 0; 
-                background: var(--white); 
                 flex-direction: column; 
-                padding: 1.5rem; 
-                box-shadow: var(--shadow); 
-                gap: 1rem; 
-                z-index: 999; 
+                padding: 1rem; 
+                gap: 0;
             }
             nav ul.active { 
                 display: flex; 
+            }
+            nav a {
+                padding: 0.75rem 1rem;
+                width: 100%;
+                border-bottom: 1px solid var(--light);
             }
             .hero h1 { 
                 font-size: 1.8rem; 
@@ -371,12 +388,6 @@
             .btn-outline { 
                 margin-left: 0; 
                 margin-top: 1rem; 
-            }
-            .nav-container {
-                padding: 0.75rem 1rem;
-            }
-            nav {
-                margin-left: auto;
             }
         }
     </style>
@@ -571,6 +582,7 @@
         </div>
         
         <div class="grid-3">
+            <!-- Domain 1 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">1. Sécurité Alimentaire (SECAL) & Moyens de Subsistance</h3>
                 <h3 class="lang-en">1. Food Security (FS) & Livelihoods</h3>
@@ -582,6 +594,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 2 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">2. PROTECTION</h3>
                 <h3 class="lang-en">2. PROTECTION</h3>
@@ -593,6 +606,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 3 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">3. SANTÉ (SSR, MHPSS) et NUTRITION</h3>
                 <h3 class="lang-en">3. HEALTH (SRH, MHPSS) and NUTRITION</h3>
@@ -604,6 +618,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 4 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">4. AMEs / NFIs et ABRIS</h3>
                 <h3 class="lang-en">4. Essential Household Items (NFIs) and SHELTER</h3>
@@ -615,6 +630,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 5 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">5. EDUCATION</h3>
                 <h3 class="lang-en">5. EDUCATION</h3>
@@ -624,6 +640,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 6 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">6. EHA / WASH</h3>
                 <h3 class="lang-en">6. WASH</h3>
@@ -633,6 +650,7 @@
                 </ul>
             </div>
 
+            <!-- Domain 7 -->
             <div class="domain-card card">
                 <h3 class="lang-fr">7. Environnement et Développement Durable</h3>
                 <h3 class="lang-en">7. Environment and Sustainable Development</h3>
@@ -768,20 +786,15 @@
             </div>
         </div>
         
-         <!-- Activity 6: AMEs/NFIs WITH IMAGE -->
+         <!-- Activity 6: AMEs/NFIs - WITH REAL IMAGE -->
         <div class="activity-category">
             <h3 class="lang-fr">6. Activités AMEs / NFIs et ABRIS</h3>
             <h3 class="lang-en">6. NFIs and Shelter Activities</h3>
             <div class="image-grid">
                 <div class="image-card">
-                    <img src="https://images.unsplash.com/photo-1584269600529-10d5b5322b27?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="NFI 1">
+                    <img src="https://i.ibb.co/B28M9yHb/se-curite-Alimentaire1.jpg" alt="NFI 1">
                     <div class="caption lang-fr">Distribution d'articles ménagers essentiels</div>
                     <div class="caption lang-en">Distribution of essential household items</div>
-                </div>
-                <div class="image-card">
-                    <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="NFI 2">
-                    <div class="caption lang-fr">Kits d'hygiène et articles non-alimentaires</div>
-                    <div class="caption lang-en">Hygiene kits and non-food items</div>
                 </div>
             </div>
         </div>
