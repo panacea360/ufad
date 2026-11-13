@@ -397,7 +397,6 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZzdGxmc2tvbGt0bnJwZHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyOTMzNjEsImV4cCI6MjEwNjg2OTM2MX0.cP1In9_cgG4E2VqxtOe3iZlP7Pr1E8vZkYEFHCas8YE';
         const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Secret suffix to make 4-digit PIN a valid 6+ char password for Supabase
         const PIN_SUFFIX = '_UFAD_SECURE';
 
         // --- 2. STATE & UTILS ---
@@ -487,6 +486,7 @@
             const pin = document.getElementById(`${prefix}-pin`).value;
 
             const cleanPhone = formatPhone(phone);
+            // We still use a synthetic email for Supabase Auth to avoid needing real emails
             const syntheticEmail = `${cleanPhone.replace('+', '')}@ufad.local`;
             const securePassword = pin + PIN_SUFFIX;
 
@@ -504,8 +504,10 @@
             });
 
             if (authError) {
-                if (authError.message.includes('already registered')) {
+                if (authError.message.includes('already registered') || authError.status === 422) {
                     showAlert('error', "Ce numéro est déjà enregistré. Veuillez vous connecter.", "This phone number is already registered. Please sign in.");
+                } else if (authError.message.includes('rate limit')) {
+                    showAlert('error', "Limite de création atteinte. Veuillez désactiver la confirmation par email dans Supabase.", "Rate limit reached. Please disable email confirmation in Supabase.");
                 } else {
                     showAlert('error', `Erreur: ${authError.message}`, `Error: ${authError.message}`);
                 }
@@ -515,7 +517,8 @@
             }
 
             showAlert('success', "Compte créé avec succès! Redirection...", "Account created successfully! Redirecting...");
-            setTimeout(() => redirectUser(authData.user.id), 1500);
+            // Since we disabled email confirmation, we can log them in immediately
+            setTimeout(() => redirectUser(authData.user.id), 1000);
         }
 
         async function handleLogin(role, btn, originalBtnHTML) {
