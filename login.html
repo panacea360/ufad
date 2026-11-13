@@ -55,7 +55,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow-x: hidden;
             transition: var(--transition);
         }
 
@@ -130,7 +130,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.5rem 2rem;
             z-index: 1;
         }
 
@@ -152,14 +152,14 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* --- TOGGLE SWITCH --- */
+        /* --- ROLE TOGGLE --- */
         .role-toggle-container {
             display: flex;
             background: var(--accent-light);
             border-radius: 50px;
             padding: 4px;
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             transition: var(--transition);
         }
         .role-toggle-slider {
@@ -196,40 +196,51 @@
         }
         .role-btn.active { color: var(--accent); }
 
-        /* --- FORM HEADER --- */
-        .form-title {
-            text-align: center;
+        /* --- AUTH MODE TOGGLE (LOGIN / SIGNUP) --- */
+        .auth-mode-switch {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
-        }
-        .form-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 0.3rem;
-        }
-        .form-title p {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.8rem;
         }
+        .mode-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .mode-btn.active { color: var(--text-dark); }
+        .mode-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.9rem;
+            left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px 3px 0 0;
+            animation: widthGrow 0.3s ease;
+        }
+        @keyframes widthGrow { from { width: 0; left: 50%; } to { width: 100%; left: 0; } }
 
-        /* --- FORMS --- */
+        /* --- FORM WRAPPER --- */
         .forms-wrapper {
             position: relative;
-            min-height: 320px;
         }
         .form-panel {
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            opacity: 0;
-            transform: translateX(20px);
-            pointer-events: none;
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            display: none;
+            animation: formSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        .form-panel.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-            position: relative;
+        .form-panel.active { display: block; }
+        @keyframes formSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-group { margin-bottom: 1rem; }
@@ -244,6 +255,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        .label-hint { font-size: 0.65rem; color: var(--text-muted); text-transform: none; font-weight: 500; }
 
         .input-wrapper {
             position: relative;
@@ -257,7 +269,7 @@
             font-size: 0.9rem;
             transition: var(--transition);
         }
-        .input-wrapper input, .input-wrapper select {
+        .input-wrapper input {
             width: 100%;
             padding: 0.9rem 1rem 0.9rem 2.8rem;
             border: 1.5px solid var(--border);
@@ -268,14 +280,12 @@
             color: var(--text-dark);
             transition: var(--transition);
         }
-        .input-wrapper input:focus, .input-wrapper select:focus {
+        .input-wrapper input:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 4px var(--accent-glow);
         }
-        .input-wrapper input:focus + i, .input-wrapper select:focus + i {
-            color: var(--accent);
-        }
+        .input-wrapper input:focus + i { color: var(--accent); }
 
         .btn-submit {
             width: 100%;
@@ -320,7 +330,7 @@
         }
         .admin-link:hover { color: var(--accent); }
 
-        /* --- MODAL --- */
+        /* --- ADMIN MODAL --- */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -358,7 +368,6 @@
             color: var(--text-muted);
             display: flex; align-items: center; justify-content: center;
         }
-
     </style>
 </head>
 <body class="lang-fr theme-donor">
@@ -372,7 +381,7 @@
     <!-- Header -->
     <header>
         <a href="#" class="logo">
-            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD Logo" id="header-logo">
+            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD Logo">
             <div class="logo-text">
                 UFAD
                 <span class="lang-fr">Portail d'Accès</span>
@@ -404,44 +413,25 @@
                 </button>
             </div>
 
-            <!-- Form Title -->
-            <div class="form-title">
-                <h1 class="lang-fr" id="title-fr">Bienvenue</h1>
-                <h1 class="lang-en" id="title-en">Welcome</h1>
-                <p class="lang-fr" id="subtitle-fr">Connectez-vous pour soutenir notre mission.</p>
-                <p class="lang-en" id="subtitle-en">Log in to support our mission.</p>
+            <!-- Auth Mode Switch (Login / Sign Up) -->
+            <div class="auth-mode-switch">
+                <button class="mode-btn active" id="btn-mode-login" onclick="switchAuthMode('login')">
+                    <span class="lang-fr">Connexion</span>
+                    <span class="lang-en">Sign In</span>
+                </button>
+                <button class="mode-btn" id="btn-mode-signup" onclick="switchAuthMode('signup')">
+                    <span class="lang-fr">Créer un compte</span>
+                    <span class="lang-en">Create Account</span>
+                </button>
             </div>
 
             <!-- Forms Container -->
             <div class="forms-wrapper">
                 
-                <!-- DONOR FORM -->
-                <form id="form-donor" class="form-panel active" onsubmit="event.preventDefault(); alert('Donor Login Logic Here');">
-                    <div class="form-group">
-                        <label class="lang-fr">Adresse Email</label>
-                        <label class="lang-en">Email Address</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="john@example.com" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="lang-fr">Mot de passe</label>
-                        <label class="lang-en">Password</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="••••••••" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <span class="lang-fr">Connexion Donateur</span>
-                        <span class="lang-en">Donor Login</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </form>
-
-                <!-- BENEFICIARY FORM -->
-                <form id="form-beneficiary" class="form-panel" onsubmit="event.preventDefault(); alert('Beneficiary Login Logic Here');">
+                <!-- ================= DONOR FORMS ================= -->
+                
+                <!-- Donor Login -->
+                <form id="donor-login" class="form-panel active" onsubmit="handleAuth(event, 'donor', 'login')">
                     <div class="form-group">
                         <label class="lang-fr">Numéro de Téléphone</label>
                         <label class="lang-en">Phone Number</label>
@@ -451,17 +441,126 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="lang-fr">Code PIN / Mot de passe</label>
-                        <label class="lang-en">PIN / Password</label>
+                        <label class="lang-fr">Code PIN</label>
+                        <label class="lang-en">PIN Code</label>
                         <div class="input-wrapper">
                             <i class="fas fa-key"></i>
-                            <input type="password" placeholder="••••" required>
+                            <input type="password" placeholder="••••" maxlength="4" pattern="\d*" inputmode="numeric" required>
                         </div>
                     </div>
                     <button type="submit" class="btn-submit">
-                        <span class="lang-fr">Accéder à mon Espace</span>
-                        <span class="lang-en">Access My Space</span>
+                        <span class="lang-fr">Se Connecter</span>
+                        <span class="lang-en">Sign In</span>
                         <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- Donor Signup -->
+                <form id="donor-signup" class="form-panel" onsubmit="handleAuth(event, 'donor', 'signup')">
+                    <div class="form-group">
+                        <label class="lang-fr">Nom Complet / Organisation</label>
+                        <label class="lang-en">Full Name / Organization</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Numéro de Téléphone</label>
+                        <label class="lang-en">Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="+243 ..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Email <span class="label-hint">(Optionnel / Dossier)</span></label>
+                        <label class="lang-en">Email <span class="label-hint">(Optional / Records)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Créer un Code PIN (4 chiffres)</label>
+                        <label class="lang-en">Create PIN Code (4 digits)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="••••" maxlength="4" pattern="\d*" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-fr">Devenir Donateur</span>
+                        <span class="lang-en">Become a Donor</span>
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </form>
+
+                <!-- ================= BENEFICIARY FORMS ================= -->
+
+                <!-- Beneficiary Login -->
+                <form id="beneficiary-login" class="form-panel" onsubmit="handleAuth(event, 'beneficiary', 'login')">
+                    <div class="form-group">
+                        <label class="lang-fr">Numéro de Téléphone</label>
+                        <label class="lang-en">Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="+243 ..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Code PIN</label>
+                        <label class="lang-en">PIN Code</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-key"></i>
+                            <input type="password" placeholder="••••" maxlength="4" pattern="\d*" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-fr">Se Connecter</span>
+                        <span class="lang-en">Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- Beneficiary Signup -->
+                <form id="beneficiary-signup" class="form-panel" onsubmit="handleAuth(event, 'beneficiary', 'signup')">
+                    <div class="form-group">
+                        <label class="lang-fr">Nom Complet</label>
+                        <label class="lang-en">Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Jane Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Numéro de Téléphone</label>
+                        <label class="lang-en">Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="+243 ..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Email <span class="label-hint">(Optionnel / Dossier)</span></label>
+                        <label class="lang-en">Email <span class="label-hint">(Optional / Records)</span></label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="jane@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Créer un Code PIN (4 chiffres)</label>
+                        <label class="lang-en">Create PIN Code (4 digits)</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="••••" maxlength="4" pattern="\d*" inputmode="numeric" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-fr">Créer mon Espace Membre</span>
+                        <span class="lang-en">Create My Member Space</span>
+                        <i class="fas fa-user-plus"></i>
                     </button>
                 </form>
 
@@ -483,11 +582,11 @@
     <div id="admin-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeAdminModal()"><i class="fas fa-times"></i></button>
-            <div class="form-title" style="margin-bottom: 1rem;">
-                <h1 class="lang-fr" style="font-size: 1.5rem;">Accès Staff</h1>
-                <h1 class="lang-en" style="font-size: 1.5rem;">Staff Access</h1>
-                <p class="lang-fr">Zone réservée aux administrateurs UFAD.</p>
-                <p class="lang-en">Area reserved for UFAD administrators.</p>
+            <div class="form-title" style="margin-bottom: 1.5rem; text-align: center;">
+                <h1 class="lang-fr" style="font-size: 1.5rem; font-family: 'Playfair Display', serif;">Accès Staff</h1>
+                <h1 class="lang-en" style="font-size: 1.5rem; font-family: 'Playfair Display', serif;">Staff Access</h1>
+                <p class="lang-fr" style="color: var(--text-muted); font-size: 0.85rem;">Zone réservée aux administrateurs UFAD.</p>
+                <p class="lang-en" style="color: var(--text-muted); font-size: 0.85rem;">Area reserved for UFAD administrators.</p>
             </div>
             <form onsubmit="event.preventDefault(); alert('Admin Login Logic Here');">
                 <div class="form-group">
@@ -514,7 +613,11 @@
     </div>
 
     <script>
-        // --- 1. LANGUAGE TOGGLE ---
+        // --- 1. STATE MANAGEMENT ---
+        let currentRole = 'donor';
+        let currentMode = 'login'; // 'login' or 'signup'
+
+        // --- 2. LANGUAGE TOGGLE ---
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-fr')) {
@@ -524,62 +627,80 @@
             }
         }
 
-        // --- 2. ROLE SWITCHING (THE MAGIC) ---
+        // --- 3. ROLE SWITCHING (THEME MAGIC) ---
         function switchRole(role) {
+            currentRole = role;
             const body = document.body;
-            const donorForm = document.getElementById('form-donor');
-            const benForm = document.getElementById('form-beneficiary');
             const donorBtn = document.querySelectorAll('.role-btn')[0];
             const benBtn = document.querySelectorAll('.role-btn')[1];
-            
-            // Titles
-            const titleFr = document.getElementById('title-fr');
-            const titleEn = document.getElementById('title-en');
-            const subFr = document.getElementById('subtitle-fr');
-            const subEn = document.getElementById('subtitle-en');
 
             // Reset active states
             donorBtn.classList.remove('active');
             benBtn.classList.remove('active');
-            donorForm.classList.remove('active');
-            benForm.classList.remove('active');
 
+            // Update Theme
             if (role === 'donor') {
-                body.className = 'lang-fr theme-donor'; // Reset classes
-                if (body.classList.contains('lang-en')) body.classList.add('lang-en');
-                
+                body.classList.remove('theme-beneficiary', 'theme-admin');
+                body.classList.add('theme-donor');
                 donorBtn.classList.add('active');
-                donorForm.classList.add('active');
-                
-                titleFr.innerText = "Bienvenue";
-                titleEn.innerText = "Welcome";
-                subFr.innerText = "Connectez-vous pour soutenir notre mission.";
-                subEn.innerText = "Log in to support our mission.";
-
             } else if (role === 'beneficiary') {
-                body.className = 'lang-fr theme-beneficiary'; // Change theme
-                if (body.classList.contains('lang-en')) body.classList.add('lang-en');
-
+                body.classList.remove('theme-donor', 'theme-admin');
+                body.classList.add('theme-beneficiary');
                 benBtn.classList.add('active');
-                benForm.classList.add('active');
+            }
 
-                titleFr.innerText = "Espace Membre";
-                titleEn.innerText = "Member Space";
-                subFr.innerText = "Suivez votre dossier et accédez à l'assistance.";
-                subEn.innerText = "Track your case and access assistance.";
+            // Refresh the form view to show the correct role + mode combo
+            updateFormView();
+        }
+
+        // --- 4. AUTH MODE SWITCHING (LOGIN VS SIGNUP) ---
+        function switchAuthMode(mode) {
+            currentMode = mode;
+            const loginBtn = document.getElementById('btn-mode-login');
+            const signupBtn = document.getElementById('btn-mode-signup');
+
+            if (mode === 'login') {
+                loginBtn.classList.add('active');
+                signupBtn.classList.remove('active');
+            } else {
+                signupBtn.classList.add('active');
+                loginBtn.classList.remove('active');
+            }
+
+            updateFormView();
+        }
+
+        // --- 5. UPDATE VIEW LOGIC ---
+        function updateFormView() {
+            // Hide all forms
+            document.querySelectorAll('.form-panel').forEach(f => f.classList.remove('active'));
+
+            // Show the correct form based on currentRole and currentMode
+            const targetForm = document.getElementById(`${currentRole}-${currentMode}`);
+            if (targetForm) {
+                targetForm.classList.add('active');
             }
         }
 
-        // --- 3. ADMIN MODAL ---
+        // --- 6. FORM SUBMISSION HANDLER ---
+        function handleAuth(e, role, mode) {
+            e.preventDefault();
+            // Here is where we will connect to Supabase later!
+            const action = mode === 'login' ? 'Logging in' : 'Signing up';
+            alert(`${action} as ${role}... (Database connection pending)`);
+        }
+
+        // --- 7. ADMIN MODAL ---
         function openAdminModal() {
             document.getElementById('admin-modal').classList.add('active');
-            // Optional: Change theme slightly when admin modal opens
             document.body.classList.add('theme-admin');
         }
 
         function closeAdminModal() {
             document.getElementById('admin-modal').classList.remove('active');
             document.body.classList.remove('theme-admin');
+            // Restore previous theme
+            document.body.classList.add(currentRole === 'donor' ? 'theme-donor' : 'theme-beneficiary');
         }
 
         // Close modal on outside click
