@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>UFAD | Portail d'Accès</title>
     
-    <!-- PWA META TAGS -->
+    <!-- === PWA META TAGS === -->
     <meta name="theme-color" content="#0B1D33">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -472,13 +472,17 @@
             const email = document.getElementById(`${prefix}-email`).value.trim();
             const pin = document.getElementById(`${prefix}-pin`).value;
 
-            const cleanPhone = formatPhone(phone);
+            // Standardize phone to include + if missing
+            let cleanPhone = formatPhone(phone);
+            if (!cleanPhone.startsWith('+')) {
+                cleanPhone = '+' + cleanPhone;
+            }
 
-            // Check if phone already exists
-            const { data: existing, error: checkError } = await sb
+            // Check if phone already exists (using ilike to be safe with + signs)
+            const { data: existing } = await sb
                 .from('ufad_profiles')
                 .select('id')
-                .eq('phone', cleanPhone)
+                .ilike('phone', `%${cleanPhone.replace('+', '')}%`)
                 .maybeSingle();
 
             if (existing) {
@@ -494,7 +498,7 @@
                 phone: cleanPhone,
                 email: email || 'N/A',
                 role: role,
-                pin_hash: pin // In production, hash this server-side, but this works for now
+                pin_hash: pin // In production, hash this server-side
             }]).select().single();
 
             if (error) {
@@ -516,13 +520,14 @@
             const phone = document.getElementById(`${prefix}-phone`).value.trim();
             const pin = document.getElementById(`${prefix}-pin`).value;
 
-            const cleanPhone = formatPhone(phone);
+            // Remove all spaces, dashes, and + signs to ensure the search matches
+            const cleanPhone = phone.replace(/\D/g, '');
 
-            // Verify credentials
+            // Verify credentials - using 'ilike' to ignore the + sign in the database
             const { data, error } = await sb
                 .from('ufad_profiles')
                 .select('*')
-                .eq('phone', cleanPhone)
+                .ilike('phone', `%${cleanPhone}%`) 
                 .eq('pin_hash', pin)
                 .maybeSingle();
 
