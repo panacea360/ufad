@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UFAD App | Portail Communautaire</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0B1D33">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="UFAD">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/h1smPWMH/UFAD.png">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --ink: #0B1D33;
+            --accent: #E8642C;
+            --accent-dark: #C94F1C;
+            --cream: #FAF7F2;
+            --white: #FFFFFF;
+            --border: #E5DFD6;
+            --text: #2A2A2A;
+            --text-muted: #6B6B6B;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(11, 29, 51, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            background: var(--cream); 
+            color: var(--text); 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Bilingual Logic */
+        body.lang-fr .lang-en { display: none !important; }
+        body.lang-en .lang-fr { display: none !important; }
+
+        /* App Header */
+        header {
+            background: var(--ink);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+        .header-brand { display: flex; align-items: center; gap: 0.8rem; }
+        .header-brand img { height: 36px; }
+        .header-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; }
+        
+        .lang-toggle {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Main App Area */
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+
+        /* Views */
+        .app-view { display: none; animation: fadeIn 0.3s ease; }
+        .app-view.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Home Screen Cards */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--ink) 0%, rgba(11,29,51,0.85) 100%), url('https://i.ibb.co/20HH7bJP/Entre-Preneuriat-et-Leadership-Fe-minin.jpg') center/cover;
+            color: white;
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .welcome-banner h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .welcome-banner p { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+
+        .action-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .action-card:active { transform: scale(0.98); }
+        .action-icon {
+            width: 50px; height: 50px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .donor-icon { background: #FDF0EA; color: var(--accent); }
+        .beneficiary-icon { background: #E0F2FE; color: #0284C7; }
+
+        .action-text h3 { font-size: 1.1rem; font-family: 'Playfair Display', serif; color: var(--ink); }
+        .action-text p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* Forms */
+        .form-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .back-btn { 
+            background: var(--white); border: 1px solid var(--border); width: 36px; height: 36px; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+        .form-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ink); }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; text-transform: uppercase; }
+        input, select, textarea {
+            width: 100%; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: 8px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--white); transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232, 100, 44, 0.15);
+        }
+
+        .btn-primary {
+            width: 100%; background: var(--accent); color: white; border: none;
+            padding: 1rem; border-radius: 50px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; margin-top: 1rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem;
+        }
+        .btn-primary:active { background: var(--accent-dark); }
+
+        /* Alerts */
+        .alert { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; display: none; text-align: center; }
+        .alert.success { background: #DCFCE7; color: #166534; display: block; border: 1px solid #BBF7D0; }
+        .alert.error { background: #FEE2E2; color: #991B1B; display: block; border: 1px solid #FECACA; }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 0.5rem;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 4px;
+            color: var(--text-muted); font-size: 0.65rem; font-weight: 600; cursor: pointer;
+            border: none; background: none; padding: 0.5rem;
+        }
+        .nav-item.active { color: var(--accent); }
+        .nav-item i { font-size: 1.2rem; }
+
+        /* PWA Install Prompt */
+        .install-banner {
+            display: none;
+            background: var(--ink);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            bottom: 80px; left: 1.5rem; right: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 100;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .install-banner.active { display: flex; animation: slideUp 0.5s ease; }
+        .install-banner p { font-size: 0.8rem; font-weight: 500; }
+        .install-banner button {
+            background: var(--accent); color: white; border: none; padding: 0.5rem 1rem;
+            border-radius: 20px; font-weight: 700; font-size: 0.75rem; cursor: pointer;
+        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    </style>
+</head>
+<body class="lang-fr">
+
+    <!-- Header -->
+    <header>
+        <div class="header-brand">
+            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <span>UFAD App</span>
+        </div>
+        <button class="lang-toggle" onclick="toggleLanguage()">
+            <span class="lang-fr">EN</span>
+            <span class="lang-en">FR</span>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        
+        <!-- VIEW 1: HOME -->
+        <div id="view-home" class="app-view active">
+            <div class="welcome-banner">
+                <h1 class="lang-fr">Bienvenue sur UFAD</h1>
+                <h1 class="lang-en">Welcome to UFAD</h1>
+                <p class="lang-fr">Union des Femmes Africaines pour le Développement.</p>
+                <p class="lang-en">Union of African Women for Development.</p>
+            </div>
+
+            <div class="action-card" onclick="switchView('view-donor')">
+                <div class="action-icon donor-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="action-text">
+                    <h3 class="lang-fr">Devenir Donateur</h3>
+                    <h3 class="lang-en">Become a Donor</h3>
+                    <p class="lang-fr">Soutenez nos actions humanitaires.</p>
+                    <p class="lang-en">Support our humanitarian actions.</p>
+                </div>
+            </div>
+
+            <div class="action-card" onclick="switchView('view-beneficiary')">
+                <div class="action-icon beneficiary-icon"><i class="fas fa-users"></i></div>
+                <div class="action-text">
+                    <h3 class="lang-fr">Espace Bénéficiaire</h3>
+                    <h3 class="lang-en">Beneficiary Portal</h3>
+                    <p class="lang-fr">Demandez une assistance ou inscrivez-vous.</p>
+                    <p class="lang-en">Request assistance or register.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: DONOR FORM -->
+        <div id="view-donor" class="app-view">
+            <div class="form-header">
+                <button class="back-btn" onclick="switchView('view-home')"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="lang-fr">Faire un Don</h2>
+                <h2 class="lang-en">Make a Donation</h2>
+            </div>
+            
+            <div id="donor-alert" class="alert"></div>
+
+            <form id="donor-form" onsubmit="submitDonation(event)">
+                <div class="form-group">
+                    <label class="lang-fr">Nom Complet / Organisation</label>
+                    <label class="lang-en">Full Name / Org</label>
+                    <input type="text" id="d-name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="d-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Téléphone</label>
+                        <label class="lang-en">Phone</label>
+                        <input type="tel" id="d-phone">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="lang-fr">Montant (USD)</label>
+                        <label class="lang-en">Amount (USD)</label>
+                        <input type="number" id="d-amount" required min="1" placeholder="50">
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Méthode</label>
+                        <label class="lang-en">Method</label>
+                        <select id="d-method" required>
+                            <option value="Mobile Money">Mobile Money</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Credit Card">Credit Card</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" id="d-submit" class="btn-primary">
+                    <i class="fas fa-heart"></i>
+                    <span class="lang-fr">Confirmer le Don</span>
+                    <span class="lang-en">Confirm Donation</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- VIEW 3: BENEFICIARY FORM -->
+        <div id="view-beneficiary" class="app-view">
+            <div class="form-header">
+                <button class="back-btn" onclick="switchView('view-home')"><i class="fas fa-arrow-left"></i></button>
+                <h2 class="lang-fr">Demande d'Assistance</h2>
+                <h2 class="lang-en">Assistance Request</h2>
+            </div>
+
+            <div id="ben-alert" class="alert"></div>
+
+            <form id="beneficiary-form" onsubmit="submitBeneficiary(event)">
+                <div class="form-group">
+                    <label class="lang-fr">Nom Complet</label>
+                    <label class="lang-en">Full Name</label>
+                    <input type="text" id="b-name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="b-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Téléphone</label>
+                        <label class="lang-en">Phone</label>
+                        <input type="tel" id="b-phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="lang-fr">Localisation (Ville/Village)</label>
+                    <label class="lang-en">Location (City/Village)</label>
+                    <input type="text" id="b-location" required>
+                </div>
+                <div class="form-group">
+                    <label class="lang-fr">Type de Besoin</label>
+                    <label class="lang-en">Type of Need</label>
+                    <select id="b-need" required>
+                        <option value="Education" class="lang-fr">Éducation / Scolarité</option>
+                        <option value="Education" class="lang-en">Education / Schooling</option>
+                        <option value="Medical" class="lang-fr">Soins Médicaux</option>
+                        <option value="Medical" class="lang-en">Medical Care</option>
+                        <option value="Food" class="lang-fr">Nourriture / Sécurité Alimentaire</option>
+                        <option value="Food" class="lang-en">Food / Food Security</option>
+                        <option value="Shelter" class="lang-fr">Abri / Logement</option>
+                        <option value="Shelter" class="lang-en">Shelter / Housing</option>
+                    </select>
+                </div>
+                <button type="submit" id="b-submit" class="btn-primary" style="background: #0284C7;">
+                    <i class="fas fa-paper-plane"></i>
+                    <span class="lang-fr">Envoyer la Demande</span>
+                    <span class="lang-en">Submit Request</span>
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchView('view-home', this)">
+            <i class="fas fa-home"></i>
+            <span class="lang-fr">Accueil</span><span class="lang-en">Home</span>
+        </button>
+        <button class="nav-item" onclick="switchView('view-donor', this)">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span class="lang-fr">Donateur</span><span class="lang-en">Donor</span>
+        </button>
+        <button class="nav-item" onclick="switchView('view-beneficiary', this)">
+            <i class="fas fa-users"></i>
+            <span class="lang-fr">Bénéficiaire</span><span class="lang-en">Beneficiary</span>
+        </button>
+    </nav>
+
+    <!-- PWA Install Prompt -->
+    <div id="install-prompt" class="install-banner">
+        <p class="lang-fr">Installez l'application UFAD sur votre téléphone !</p>
+        <p class="lang-en">Install the UFAD app on your phone!</p>
+        <button onclick="installPWA()">
+            <span class="lang-fr">Installer</span><span class="lang-en">Install</span>
+        </button>
+    </div>
+
+    <script>
+        // --- 1. SUPABASE CONFIG ---
+        const SUPABASE_URL = 'https://jmkvstlfskolktnrpdqd.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZzdGxmc2tvbGt0bnJwZHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyOTMzNjEsImV4cCI6MjEwNjg2OTM2MX0.cP1In9_cgG4E2VqxtOe3iZlP7Pr1E8vZkYEFHCas8YE';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // --- 2. VIEW SWITCHING ---
+        function switchView(viewId, btnElement) {
+            document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            
+            // Update Bottom Nav
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                // If called via code, find matching button
+                const index = viewId === 'view-home' ? 0 : viewId === 'view-donor' ? 1 : 2;
+                document.querySelectorAll('.nav-item')[index].classList.add('active');
+            }
+        }
+
+        // --- 3. LANGUAGE TOGGLE ---
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-fr')) {
+                body.classList.replace('lang-fr', 'lang-en');
+            } else {
+                body.classList.replace('lang-en', 'lang-fr');
+            }
+        }
+
+        // --- 4. SUBMIT DONATION ---
+        async function submitDonation(e) {
+            e.preventDefault();
+            const btn = document.getElementById('d-submit');
+            const alertBox = document.getElementById('donor-alert');
+            
+            const name = document.getElementById('d-name').value.trim();
+            const email = document.getElementById('d-email').value.trim();
+            const phone = document.getElementById('d-phone').value.trim();
+            const amount = parseFloat(document.getElementById('d-amount').value);
+            const method = document.getElementById('d-method').value;
+
+            alertBox.className = 'alert';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+
+            try {
+                let { data: existing } = await sb.from('ufad_donors').select('id').eq('email', email).single();
+                let donorId = existing ? existing.id : null;
+
+                if (!donorId) {
+                    const { data: newDonor, error: dErr } = await sb.from('ufad_donors')
+                        .insert([{ full_name: name, email, phone, donor_type: 'Individual' }]).select().single();
+                    if (dErr) throw dErr;
+                    donorId = newDonor.id;
+                }
+
+                const { error: donErr } = await sb.from('ufad_donations')
+                    .insert([{ donor_id: donorId, amount, currency: 'USD', payment_method: method, status: 'Pending' }]);
+                if (donErr) throw donErr;
+
+                alertBox.className = 'alert success';
+                alertBox.innerHTML = `<span class="lang-fr">Merci ! Votre don de $${amount} a été enregistré.</span><span class="lang-en">Thank you! Your $${amount} donation has been recorded.</span>`;
+                document.getElementById('donor-form').reset();
+            } catch (err) {
+                alertBox.className = 'alert error';
+                alertBox.innerHTML = `<span class="lang-fr">Erreur: ${err.message}</span><span class="lang-en">Error: ${err.message}</span>`;
+            } finally {
+                btn.innerHTML = `<i class="fas fa-heart"></i> <span class="lang-fr">Confirmer le Don</span><span class="lang-en">Confirm Donation</span>`;
+            }
+        }
+
+        // --- 5. SUBMIT BENEFICIARY ---
+        async function submitBeneficiary(e) {
+            e.preventDefault();
+            const btn = document.getElementById('b-submit');
+            const alertBox = document.getElementById('ben-alert');
+            
+            const name = document.getElementById('b-name').value.trim();
+            const email = document.getElementById('b-email').value.trim();
+            const phone = document.getElementById('b-phone').value.trim();
+            const location = document.getElementById('b-location').value.trim();
+            const need = document.getElementById('b-need').value;
+
+            alertBox.className = 'alert';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+
+            try {
+                const { error } = await sb.from('ufad_beneficiaries')
+                    .insert([{ full_name: name, email, phone, location, needs: need }]);
+                
+                if (error) throw error;
+
+                alertBox.className = 'alert success';
+                alertBox.innerHTML = `<span class="lang-fr">Demande envoyée avec succès ! Nous vous contacterons.</span><span class="lang-en">Request submitted successfully! We will contact you.</span>`;
+                document.getElementById('beneficiary-form').reset();
+            } catch (err) {
+                alertBox.className = 'alert error';
+                alertBox.innerHTML = `<span class="lang-fr">Erreur: ${err.message}</span><span class="lang-en">Error: ${err.message}</span>`;
+            } finally {
+                btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span class="lang-fr">Envoyer la Demande</span><span class="lang-en">Submit Request</span>`;
+            }
+        }
+
+        // --- 6. PWA INSTALL LOGIC ---
+        let deferredPrompt;
+        const installBanner = document.getElementById('install-prompt');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBanner.classList.add('active');
+        });
+
+        async function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    installBanner.classList.remove('active');
+                }
+                deferredPrompt = null;
+            }
+        }
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
