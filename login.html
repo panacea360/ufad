@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UFAD | Portail d'Accès</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- DYNAMIC THEME VARIABLES --- */
+        :root {
+            --bg-color: #FAF7F2;
+            --text-dark: #0B1D33;
+            --text-muted: #6B6B6B;
+            --white: #FFFFFF;
+            --border: #E5DFD6;
+            
+            /* Default: Donor Theme (Warm/Orange) */
+            --accent: #E8642C;
+            --accent-light: #FDF0EA;
+            --accent-glow: rgba(232, 100, 44, 0.4);
+            --gradient-1: #E8642C;
+            --gradient-2: #F59E0B;
+            
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Beneficiary Theme (Cool/Blue) */
+        body.theme-beneficiary {
+            --accent: #0284C7;
+            --accent-light: #E0F2FE;
+            --accent-glow: rgba(2, 132, 199, 0.4);
+            --gradient-1: #0284C7;
+            --gradient-2: #38BDF8;
+        }
+
+        /* Admin Theme (Dark/Gold) */
+        body.theme-admin {
+            --accent: #D97706;
+            --accent-light: #FEF3C7;
+            --accent-glow: rgba(217, 119, 6, 0.4);
+            --gradient-1: #D97706;
+            --gradient-2: #FBBF24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            background: var(--bg-color); 
+            color: var(--text-dark); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        /* Bilingual Logic */
+        body.lang-fr .lang-en { display: none !important; }
+        body.lang-en .lang-fr { display: none !important; }
+
+        /* --- ANIMATED BACKGROUND ORBS --- */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 10s infinite alternate ease-in-out;
+            transition: var(--transition);
+        }
+        .orb-1 {
+            width: 300px; height: 300px;
+            background: var(--gradient-1);
+            top: -100px; left: -100px;
+            opacity: 0.2;
+        }
+        .orb-2 {
+            width: 250px; height: 250px;
+            background: var(--gradient-2);
+            bottom: -50px; right: -50px;
+            opacity: 0.15;
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); }
+        .logo img { height: 36px; transition: var(--transition); }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.1; }
+        .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-top: 2px; }
+        
+        .lang-btn {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            color: var(--text-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+        .lang-btn:hover { background: var(--white); }
+
+        /* --- MAIN AUTH CONTAINER --- */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 1.5rem;
+            z-index: 1;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255,255,255,0.5) inset;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            animation: cardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* --- TOGGLE SWITCH --- */
+        .role-toggle-container {
+            display: flex;
+            background: var(--accent-light);
+            border-radius: 50px;
+            padding: 4px;
+            position: relative;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        .role-toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            height: calc(100% - 8px);
+            background: var(--white);
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
+            z-index: 1;
+        }
+        body.theme-beneficiary .role-toggle-slider { transform: translateX(100%); }
+        
+        .role-btn {
+            flex: 1;
+            padding: 0.8rem 0;
+            border: none;
+            background: none;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .role-btn.active { color: var(--accent); }
+
+        /* --- FORM HEADER --- */
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        .form-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- FORMS --- */
+        .forms-wrapper {
+            position: relative;
+            min-height: 320px;
+        }
+        .form-panel {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            opacity: 0;
+            transform: translateX(20px);
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .form-panel.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .input-wrapper input, .input-wrapper select {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .input-wrapper input:focus, .input-wrapper select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+        .input-wrapper input:focus + i, .input-wrapper select:focus + i {
+            color: var(--accent);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 8px 20px var(--accent-glow);
+        }
+        .btn-submit:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-submit:active { transform: translateY(0); }
+
+        /* --- ADMIN PORTAL --- */
+        .admin-portal-container {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border);
+        }
+        .admin-link {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+            text-decoration: underline;
+        }
+        .admin-link:hover { color: var(--accent); }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 29, 51, 0.8);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            z-index: 100;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: var(--bg-color);
+            border: none;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+    </style>
+</head>
+<body class="lang-fr theme-donor">
+
+    <!-- Animated Background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD Logo" id="header-logo">
+            <div class="logo-text">
+                UFAD
+                <span class="lang-fr">Portail d'Accès</span>
+                <span class="lang-en">Access Portal</span>
+            </div>
+        </a>
+        <button class="lang-btn" onclick="toggleLanguage()">
+            <span class="lang-fr">EN</span>
+            <span class="lang-en">FR</span>
+        </button>
+    </header>
+
+    <!-- Main Auth Card -->
+    <main>
+        <div class="auth-card">
+            
+            <!-- Role Toggle -->
+            <div class="role-toggle-container">
+                <div class="role-toggle-slider"></div>
+                <button class="role-btn active" onclick="switchRole('donor')">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span class="lang-fr">Donateur</span>
+                    <span class="lang-en">Donor</span>
+                </button>
+                <button class="role-btn" onclick="switchRole('beneficiary')">
+                    <i class="fas fa-users"></i>
+                    <span class="lang-fr">Bénéficiaire</span>
+                    <span class="lang-en">Beneficiary</span>
+                </button>
+            </div>
+
+            <!-- Form Title -->
+            <div class="form-title">
+                <h1 class="lang-fr" id="title-fr">Bienvenue</h1>
+                <h1 class="lang-en" id="title-en">Welcome</h1>
+                <p class="lang-fr" id="subtitle-fr">Connectez-vous pour soutenir notre mission.</p>
+                <p class="lang-en" id="subtitle-en">Log in to support our mission.</p>
+            </div>
+
+            <!-- Forms Container -->
+            <div class="forms-wrapper">
+                
+                <!-- DONOR FORM -->
+                <form id="form-donor" class="form-panel active" onsubmit="event.preventDefault(); alert('Donor Login Logic Here');">
+                    <div class="form-group">
+                        <label class="lang-fr">Adresse Email</label>
+                        <label class="lang-en">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Mot de passe</label>
+                        <label class="lang-en">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-fr">Connexion Donateur</span>
+                        <span class="lang-en">Donor Login</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- BENEFICIARY FORM -->
+                <form id="form-beneficiary" class="form-panel" onsubmit="event.preventDefault(); alert('Beneficiary Login Logic Here');">
+                    <div class="form-group">
+                        <label class="lang-fr">Numéro de Téléphone</label>
+                        <label class="lang-en">Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="+243 ..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="lang-fr">Code PIN / Mot de passe</label>
+                        <label class="lang-en">PIN / Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-key"></i>
+                            <input type="password" placeholder="••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-fr">Accéder à mon Espace</span>
+                        <span class="lang-en">Access My Space</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+            </div>
+
+            <!-- Admin Portal Link -->
+            <div class="admin-portal-container">
+                <button class="admin-link" onclick="openAdminModal()">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="lang-fr">Gestion du Bureau (Admin)</span>
+                    <span class="lang-en">Office Management (Admin)</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdminModal()"><i class="fas fa-times"></i></button>
+            <div class="form-title" style="margin-bottom: 1rem;">
+                <h1 class="lang-fr" style="font-size: 1.5rem;">Accès Staff</h1>
+                <h1 class="lang-en" style="font-size: 1.5rem;">Staff Access</h1>
+                <p class="lang-fr">Zone réservée aux administrateurs UFAD.</p>
+                <p class="lang-en">Area reserved for UFAD administrators.</p>
+            </div>
+            <form onsubmit="event.preventDefault(); alert('Admin Login Logic Here');">
+                <div class="form-group">
+                    <label>Admin ID</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user-shield"></i>
+                        <input type="text" placeholder="ADM-001" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="lang-fr">Mot de passe sécurisé</label>
+                    <label class="lang-en">Secure Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit" style="background: #0B1D33; box-shadow: 0 8px 20px rgba(11, 29, 51, 0.3);">
+                    <span class="lang-fr">Accéder au Système</span>
+                    <span class="lang-en">Access System</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. LANGUAGE TOGGLE ---
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-fr')) {
+                body.classList.replace('lang-fr', 'lang-en');
+            } else {
+                body.classList.replace('lang-en', 'lang-fr');
+            }
+        }
+
+        // --- 2. ROLE SWITCHING (THE MAGIC) ---
+        function switchRole(role) {
+            const body = document.body;
+            const donorForm = document.getElementById('form-donor');
+            const benForm = document.getElementById('form-beneficiary');
+            const donorBtn = document.querySelectorAll('.role-btn')[0];
+            const benBtn = document.querySelectorAll('.role-btn')[1];
+            
+            // Titles
+            const titleFr = document.getElementById('title-fr');
+            const titleEn = document.getElementById('title-en');
+            const subFr = document.getElementById('subtitle-fr');
+            const subEn = document.getElementById('subtitle-en');
+
+            // Reset active states
+            donorBtn.classList.remove('active');
+            benBtn.classList.remove('active');
+            donorForm.classList.remove('active');
+            benForm.classList.remove('active');
+
+            if (role === 'donor') {
+                body.className = 'lang-fr theme-donor'; // Reset classes
+                if (body.classList.contains('lang-en')) body.classList.add('lang-en');
+                
+                donorBtn.classList.add('active');
+                donorForm.classList.add('active');
+                
+                titleFr.innerText = "Bienvenue";
+                titleEn.innerText = "Welcome";
+                subFr.innerText = "Connectez-vous pour soutenir notre mission.";
+                subEn.innerText = "Log in to support our mission.";
+
+            } else if (role === 'beneficiary') {
+                body.className = 'lang-fr theme-beneficiary'; // Change theme
+                if (body.classList.contains('lang-en')) body.classList.add('lang-en');
+
+                benBtn.classList.add('active');
+                benForm.classList.add('active');
+
+                titleFr.innerText = "Espace Membre";
+                titleEn.innerText = "Member Space";
+                subFr.innerText = "Suivez votre dossier et accédez à l'assistance.";
+                subEn.innerText = "Track your case and access assistance.";
+            }
+        }
+
+        // --- 3. ADMIN MODAL ---
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.add('active');
+            // Optional: Change theme slightly when admin modal opens
+            document.body.classList.add('theme-admin');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.remove('active');
+            document.body.classList.remove('theme-admin');
+        }
+
+        // Close modal on outside click
+        document.getElementById('admin-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminModal();
+        });
+    </script>
+</body>
+</html>
