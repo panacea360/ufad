@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UFAD | Espace Donateur</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --bg-color: #FAF7F2;
+            --text-dark: #0B1D33;
+            --text-muted: #6B6B6B;
+            --white: #FFFFFF;
+            --border: #E5DFD6;
+            --accent: #E8642C;
+            --accent-light: #FDF0EA;
+            --accent-glow: rgba(232, 100, 44, 0.3);
+            --gradient-1: #E8642C;
+            --gradient-2: #F59E0B;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg-color); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        body.lang-fr .lang-en { display: none !important; }
+        body.lang-en .lang-fr { display: none !important; }
+
+        /* Background */
+        .bg-orb { position: fixed; top: -100px; left: -100px; width: 350px; height: 350px; background: var(--gradient-1); border-radius: 50%; filter: blur(80px); opacity: 0.1; z-index: -1; }
+
+        /* Header */
+        header { background: rgba(255,255,255,0.7); backdrop-filter: blur(15px); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); }
+        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); }
+        .logo img { height: 34px; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.1; }
+        .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; margin-top: 2px; font-weight: 700; }
+        
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
+        .lang-btn { background: transparent; border: 1px solid var(--border); padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; font-size: 0.7rem; cursor: pointer; color: var(--text-dark); }
+        .logout-btn { background: #FEE2E2; color: #991B1B; border: none; padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+
+        /* Main Layout */
+        main { flex: 1; padding: 1.5rem; max-width: 800px; margin: 0 auto; width: 100%; }
+
+        /* Welcome Card */
+        .welcome-card { background: linear-gradient(135deg, var(--text-dark) 0%, #1E3A5F 100%); color: white; padding: 2rem 1.5rem; border-radius: 20px; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(11, 29, 51, 0.2); margin-bottom: 1.5rem; }
+        .welcome-card::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--accent); border-radius: 50%; filter: blur(60px); opacity: 0.4; }
+        .welcome-text { position: relative; z-index: 1; }
+        .welcome-text h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.3rem; }
+        .welcome-text p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-card { background: var(--white); border-radius: 16px; padding: 1.2rem; border: 1px solid var(--border); box-shadow: 0 4px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 0.3rem; }
+        .stat-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .stat-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); }
+        
+        /* Action Button */
+        .btn-primary { width: 100%; background: var(--accent); color: white; border: none; padding: 1rem; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 8px 20px var(--accent-glow); margin-bottom: 2rem; transition: var(--transition); }
+        .btn-primary:hover { transform: translateY(-2px); }
+
+        /* History List */
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .history-item { background: var(--white); border-radius: 12px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; border: 1px solid var(--border); }
+        .history-info { display: flex; align-items: center; gap: 0.8rem; }
+        .history-icon { width: 36px; height: 36px; border-radius: 50%; background: #DCFCE7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .history-details h4 { font-size: 0.9rem; color: var(--text-dark); }
+        .history-details p { font-size: 0.7rem; color: var(--text-muted); }
+        .history-amount { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+        .empty-state { text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(11, 29, 51, 0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 1.5rem; z-index: 100; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: var(--white); border-radius: 24px; padding: 2rem 1.5rem; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-color); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; text-align: center; margin-bottom: 1.5rem; color: var(--text-dark); }
+
+        .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+        .amount-btn { padding: 0.8rem; border: 2px solid var(--border); border-radius: 10px; background: transparent; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+        .amount-btn.active, .amount-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+        
+        .input-wrapper { position: relative; margin-bottom: 1rem; }
+        .input-wrapper input, .input-wrapper select { width: 100%; padding: 0.9rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; background: var(--bg-color); transition: var(--transition); }
+        .input-wrapper input:focus, .input-wrapper select:focus { outline: none; border-color: var(--accent); background: var(--white); box-shadow: 0 0 0 4px var(--accent-glow); }
+        
+        /* Loading & Alerts */
+        .loading-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; color: var(--text-muted); }
+        .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body class="lang-fr">
+
+    <div class="bg-orb"></div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <div class="logo-text">
+                Espace Donateur
+                <span>Tableau de Bord</span>
+            </div>
+        </a>
+        <div class="header-actions">
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <span class="lang-fr">EN</span>
+                <span class="lang-en">FR</span>
+            </button>
+            <button class="logout-btn" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="lang-fr">Quitter</span>
+                <span class="lang-en">Exit</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Loading State -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+        <p class="lang-fr">Chargement de votre espace...</p>
+        <p class="lang-en">Loading your space...</p>
+    </div>
+
+    <!-- Main Content -->
+    <main id="dashboard-content" style="display: none;">
+        
+        <!-- Welcome -->
+        <div class="welcome-card">
+            <div class="welcome-text">
+                <h1 class="lang-fr">Bonjour, <span id="donor-name">Donateur</span> !</h1>
+                <h1 class="lang-en">Hello, <span id="donor-name-en">Donor</span>!</h1>
+                <p class="lang-fr">Merci de soutenir la mission de l'UFAD.</p>
+                <p class="lang-en">Thank you for supporting UFAD's mission.</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                <div class="stat-label lang-fr">Total Donné</div>
+                <div class="stat-label lang-en">Total Donated</div>
+                <div class="stat-value" id="total-donated">$0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#E0F2FE; color:#0284C7;"><i class="fas fa-receipt"></i></div>
+                <div class="stat-label lang-fr">Nombre de Dons</div>
+                <div class="stat-label lang-en">Number of Gifts</div>
+                <div class="stat-value" id="donation-count">0</div>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <button class="btn-primary" onclick="openDonationModal()">
+            <i class="fas fa-plus-circle"></i>
+            <span class="lang-fr">Faire un Nouveau Don</span>
+            <span class="lang-en">Make a New Donation</span>
+        </button>
+
+        <!-- History Section -->
+        <h2 class="section-title lang-fr">Historique des Dons</h2>
+        <h2 class="section-title lang-en">Donation History</h2>
+        <div id="history-list">
+            <!-- Donations will be injected here -->
+        </div>
+
+    </main>
+
+    <!-- Donation Modal -->
+    <div id="donation-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDonationModal()"><i class="fas fa-times"></i></button>
+            <h2 class="modal-title lang-fr">Faire un Don</h2>
+            <h2 class="modal-title lang-en">Make a Donation</h2>
+
+            <div class="amount-grid">
+                <button class="amount-btn" onclick="setAmount(10)">$10</button>
+                <button class="amount-btn" onclick="setAmount(25)">$25</button>
+                <button class="amount-btn" onclick="setAmount(50)">$50</button>
+                <button class="amount-btn" onclick="setAmount(100)">$100</button>
+                <button class="amount-btn" onclick="setAmount(250)">$250</button>
+                <button class="amount-btn" onclick="setAmount(0)">Autre</button>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="number" id="donation-amount" placeholder="Montant en USD" min="1" required>
+            </div>
+
+            <div class="input-wrapper">
+                <select id="donation-method">
+                    <option value="Mobile Money">Mobile Money (M-Pesa, Airtel)</option>
+                    <option value="Bank Transfer">Virement Bancaire</option>
+                    <option value="Credit Card">Carte de Crédit</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" id="btn-submit-donation" onclick="submitDonation()">
+                <i class="fas fa-heart"></i>
+                <span class="lang-fr">Confirmer le Don</span>
+                <span class="lang-en">Confirm Donation</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. SUPABASE CONFIG ---
+        const SUPABASE_URL = 'https://jmkvstlfskolktnrpdqd.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZzdGxmc2tvbGt0bnJwZHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyOTMzNjEsImV4cCI6MjEwNjg2OTM2MX0.cP1In9_cgG4E2VqxtOe3iZlP7Pr1E8vZkYEFHCas8YE';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+        let currentProfile = null;
+
+        // --- 2. LANGUAGE TOGGLE ---
+        function toggleLanguage() {
+            const body = document.body;
+            if (body.classList.contains('lang-fr')) body.classList.replace('lang-fr', 'lang-en');
+            else body.classList.replace('lang-en', 'lang-fr');
+        }
+
+        // --- 3. INITIALIZATION ---
+        async function init() {
+            // Check session
+            const { data: { session }, error } = await sb.auth.getSession();
+            
+            if (error || !session) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentUser = session.user;
+
+            // Fetch Profile
+            const { data: profile, error: pError } = await sb
+                .from('ufad_profiles')
+                .select('*')
+                .eq('id', currentUser.id)
+                .single();
+
+            if (pError || !profile) {
+                console.error(pError);
+                await sb.auth.signOut();
+                window.location.href = 'login.html';
+                return;
+            }
+
+            currentProfile = profile;
+
+            // Set UI
+            document.getElementById('donor-name').innerText = profile.full_name;
+            document.getElementById('donor-name-en').innerText = profile.full_name;
+
+            // Load Data
+            await loadDonations();
+
+            // Show content
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+        }
+
+        // --- 4. LOAD DONATIONS ---
+        async function loadDonations() {
+            const { data: donations, error } = await sb
+                .from('ufad_donations')
+                .select('*')
+                .eq('donor_id', currentUser.id)
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Error loading donations:', error);
+                return;
+            }
+
+            const historyList = document.getElementById('history-list');
+            let total = 0;
+
+            if (!donations || donations.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open" style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i>
+                        <p class="lang-fr">Vous n'avez pas encore fait de don.</p>
+                        <p class="lang-en">You haven't made any donations yet.</p>
+                    </div>
+                `;
+                document.getElementById('total-donated').innerText = '$0';
+                document.getElementById('donation-count').innerText = '0';
+                return;
+            }
+
+            donations.forEach(don => {
+                total += parseFloat(don.amount);
+                const date = new Date(don.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+                const statusColor = don.status === 'Completed' ? '#166534' : '#B45309';
+                const statusText = don.status === 'Completed' ? 'Complété' : 'En attente';
+
+                historyList.innerHTML += `
+                    <div class="history-item">
+                        <div class="history-info">
+                            <div class="history-icon"><i class="fas fa-check"></i></div>
+                            <div class="history-details">
+                                <h4>${don.payment_method}</h4>
+                                <p>${date} • <span style="color:${statusColor}; font-weight: 700;">${statusText}</span></p>
+                            </div>
+                        </div>
+                        <div class="history-amount">$${parseFloat(don.amount).toLocaleString()}</div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total-donated').innerText = '$' + total.toLocaleString();
+            document.getElementById('donation-count').innerText = donations.length;
+        }
+
+        // --- 5. DONATION MODAL LOGIC ---
+        function openDonationModal() {
+            document.getElementById('donation-modal').classList.add('active');
+        }
+
+        function closeDonationModal() {
+            document.getElementById('donation-modal').classList.remove('active');
+            document.getElementById('donation-amount').value = '';
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+        }
+
+        function setAmount(amount) {
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('donation-amount').value = amount > 0 ? amount : '';
+            if (amount > 0) event.target.classList.add('active');
+            else document.getElementById('donation-amount').focus();
+        }
+
+        // --- 6. SUBMIT DONATION ---
+        async function submitDonation() {
+            const amount = parseFloat(document.getElementById('donation-amount').value);
+            const method = document.getElementById('donation-method').value;
+            const btn = document.getElementById('btn-submit-donation');
+            const originalHTML = btn.innerHTML;
+
+            if (!amount || amount <= 0) {
+                alert("Veuillez entrer un montant valide. / Please enter a valid amount.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+            const { error } = await sb.from('ufad_donations').insert([{
+                donor_id: currentUser.id,
+                amount: amount,
+                currency: 'USD',
+                payment_method: method,
+                status: 'Pending' // In real life, this would go to a payment gateway, then update to 'Completed'
+            }]);
+
+            if (error) {
+                console.error(error);
+                alert("Erreur: " + error.message);
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                return;
+            }
+
+            // Success
+            closeDonationModal();
+            await loadDonations();
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+            
+            // Show simple alert
+            alert("Merci pour votre don ! / Thank you for your donation!");
+        }
+
+        // --- 7. LOGOUT ---
+        async function handleLogout() {
+            await sb.auth.signOut();
+            window.location.href = 'login.html';
+        }
+
+        // Close modal on outside click
+        document.getElementById('donation-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeDonationModal();
+        });
+
+        // Run
+        init();
+    </script>
+</body>
+</html>
