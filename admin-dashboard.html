@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UFAD | Gestion du Bureau</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root {
+            --bg-color: #FAF7F2;
+            --text-dark: #0B1D33;
+            --text-muted: #6B6B6B;
+            --white: #FFFFFF;
+            --border: #E5DFD6;
+            /* Admin Theme (Dark/Gold) */
+            --accent: #D97706;
+            --accent-light: #FEF3C7;
+            --accent-glow: rgba(217, 119, 6, 0.3);
+            --ink: #0B1D33;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--bg-color); color: var(--text-dark); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        body.lang-fr .lang-en { display: none !important; }
+        body.lang-en .lang-fr { display: none !important; }
+
+        /* Header */
+        header { background: var(--ink); color: white; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: white; }
+        .logo img { height: 34px; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.1; }
+        .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; margin-top: 2px; font-weight: 700; }
+        
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
+        .logout-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .logout-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* Main Layout */
+        main { flex: 1; padding: 1.5rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        @media(min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .stat-card { background: var(--white); border-radius: 16px; padding: 1.2rem; border: 1px solid var(--border); box-shadow: 0 4px 10px rgba(0,0,0,0.02); display: flex; flex-direction: column; }
+        .stat-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 0.2rem; }
+        .stat-value { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); }
+
+        /* Tabs */
+        .tabs-container { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; overflow-x: auto; }
+        .tab-btn { background: transparent; border: none; padding: 0.8rem 1.2rem; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; border-radius: 8px; transition: var(--transition); white-space: nowrap; }
+        .tab-btn.active { background: var(--ink); color: white; }
+
+        /* Data Section */
+        .data-section { display: none; animation: fadeIn 0.3s ease; }
+        .data-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .data-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .data-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+        .refresh-btn { background: var(--white); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+        .refresh-btn:hover { background: var(--bg-color); }
+
+        /* Table / Cards */
+        .list-item { background: var(--white); border-radius: 12px; padding: 1.2rem; margin-bottom: 0.8rem; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.8rem; transition: var(--transition); }
+        @media(min-width: 768px) { .list-item { flex-direction: row; justify-content: space-between; align-items: center; } }
+        .list-item:hover { border-color: var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        .item-info { flex: 1; }
+        .item-name { font-weight: 700; font-size: 1rem; color: var(--text-dark); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; }
+        .item-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.4rem; }
+        .item-desc { font-size: 0.85rem; color: var(--text-dark); line-height: 1.4; margin-bottom: 0.4rem; }
+        .item-notes { font-size: 0.8rem; color: var(--accent); font-style: italic; }
+
+        .item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; flex-shrink: 0; }
+        .status-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 20px; letter-spacing: 0.5px; }
+        .status-Pending, .status-Pending { background: #FEF3C7; color: #B45309; }
+        .status-Completed, .status-Approved, .status-Delivered { background: #DCFCE7; color: #166534; }
+        .status-Failed, .status-Rejected { background: #FEE2E2; color: #991B1B; }
+        .status-Under\ Review { background: #DBEAFE; color: #1D4ED8; }
+
+        .btn-action { background: var(--ink); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: var(--transition); }
+        .btn-action:hover { background: #1E3A5F; }
+
+        .amount-highlight { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+
+        /* Modal */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(11, 29, 51, 0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 1.5rem; z-index: 100; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: var(--white); border-radius: 24px; padding: 2rem 1.5rem; width: 100%; max-width: 500px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; max-height: 90vh; overflow-y: auto; }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-color); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-dark); }
+
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.4rem; text-transform: uppercase; }
+        .input-wrapper input, .input-wrapper select, .input-wrapper textarea { width: 100%; padding: 0.9rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--bg-color); transition: var(--transition); }
+        .input-wrapper input:focus, .input-wrapper select:focus, .input-wrapper textarea:focus { outline: none; border-color: var(--accent); background: var(--white); box-shadow: 0 0 0 4px var(--accent-glow); }
+        .input-wrapper textarea { min-height: 120px; resize: vertical; }
+
+        .btn-primary { width: 100%; background: var(--accent); color: white; border: none; padding: 1rem; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: var(--transition); margin-top: 1rem; }
+        .btn-primary:hover { background: #B45309; }
+
+        .loading-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; color: var(--text-muted); }
+        .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); background: var(--white); border-radius: 12px; border: 1px dashed var(--border); }
+    </style>
+</head>
+<body class="lang-fr">
+
+    <header>
+        <a href="#" class="logo">
+            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <div class="logo-text">
+                Gestion du Bureau
+                <span>Admin Dashboard</span>
+            </div>
+        </a>
+        <div class="header-actions">
+            <button class="logout-btn" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="lang-fr">Déconnexion</span>
+                <span class="lang-en">Logout</span>
+            </button>
+        </div>
+    </header>
+
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+        <p class="lang-fr">Vérification des accès...</p>
+        <p class="lang-en">Verifying access...</p>
+    </div>
+
+    <main id="dashboard-content" style="display: none;">
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#FDF0EA; color:#E8642C;"><i class="fas fa-donate"></i></div>
+                <div class="stat-label lang-fr">Total Collecté (Complété)</div>
+                <div class="stat-label lang-en">Total Raised (Completed)</div>
+                <div class="stat-value" id="stat-total-raised">$0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#E0F2FE; color:#0284C7;"><i class="fas fa-receipt"></i></div>
+                <div class="stat-label lang-fr">Tous les Dons</div>
+                <div class="stat-label lang-en">All Donations</div>
+                <div class="stat-value" id="stat-total-donations">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#FEF3C7; color:#D97706;"><i class="fas fa-clock"></i></div>
+                <div class="stat-label lang-fr">Demandes en Attente</div>
+                <div class="stat-label lang-en">Pending Requests</div>
+                <div class="stat-value" id="stat-pending-reqs">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#DCFCE7; color:#166534;"><i class="fas fa-users"></i></div>
+                <div class="stat-label lang-fr">Bénéficiaires Aidés</div>
+                <div class="stat-label lang-en">Beneficiaries Helped</div>
+                <div class="stat-value" id="stat-helped">0</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="switchTab('donations', this)">
+                <i class="fas fa-hand-holding-heart"></i> 
+                <span class="lang-fr">Dons</span><span class="lang-en">Donations</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('requests', this)">
+                <i class="fas fa-file-alt"></i> 
+                <span class="lang-fr">Demandes</span><span class="lang-en">Requests</span>
+            </button>
+        </div>
+
+        <!-- Donations Tab -->
+        <div id="section-donations" class="data-section active">
+            <div class="data-header">
+                <h2 class="lang-fr">Historique des Dons</h2>
+                <h2 class="lang-en">Donation History</h2>
+                <button class="refresh-btn" onclick="loadData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div id="donations-list"></div>
+        </div>
+
+        <!-- Requests Tab -->
+        <div id="section-requests" class="data-section">
+            <div class="data-header">
+                <h2 class="lang-fr">Demandes d'Assistance</h2>
+                <h2 class="lang-en">Assistance Requests</h2>
+                <button class="refresh-btn" onclick="loadData()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div id="requests-list"></div>
+        </div>
+
+    </main>
+
+    <!-- Update Request Modal -->
+    <div id="request-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h2 class="modal-title lang-fr">Mettre à jour la demande</h2>
+            <h2 class="modal-title lang-en">Update Request</h2>
+
+            <div id="modal-request-details" style="background:var(--bg-color); padding:1rem; border-radius:12px; margin-bottom:1.5rem; font-size:0.85rem;">
+                <!-- Details injected here -->
+            </div>
+
+            <form onsubmit="event.preventDefault(); saveRequestUpdate();">
+                <input type="hidden" id="update-req-id">
+                
+                <div class="form-group">
+                    <label class="lang-fr">Nouveau Statut</label>
+                    <label class="lang-en">New Status</label>
+                    <div class="input-wrapper">
+                        <select id="update-req-status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Under Review">Under Review</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="lang-fr">Notes Internes (Visibles par le bénéficiaire)</label>
+                    <label class="lang-en">Admin Notes (Visible to beneficiary)</label>
+                    <div class="input-wrapper">
+                        <textarea id="update-req-notes" placeholder="e.g., Approved for $50 school fees..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="btn-update-req">
+                    <i class="fas fa-save"></i>
+                    <span class="lang-fr">Enregistrer</span>
+                    <span class="lang-en">Save Changes</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Update Donation Modal -->
+    <div id="donation-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h2 class="modal-title lang-fr">Vérifier le Don</h2>
+            <h2 class="modal-title lang-en">Verify Donation</h2>
+
+            <div id="modal-donation-details" style="background:var(--bg-color); padding:1rem; border-radius:12px; margin-bottom:1.5rem; font-size:0.85rem;">
+                <!-- Details injected here -->
+            </div>
+
+            <form onsubmit="event.preventDefault(); saveDonationUpdate();">
+                <input type="hidden" id="update-don-id">
+                
+                <div class="form-group">
+                    <label class="lang-fr">Statut du Paiement</label>
+                    <label class="lang-en">Payment Status</label>
+                    <div class="input-wrapper">
+                        <select id="update-don-status" required>
+                            <option value="Pending">Pending (En attente)</option>
+                            <option value="Completed">Completed (Reçu / Complété)</option>
+                            <option value="Failed">Failed (Échoué)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="btn-update-don">
+                    <i class="fas fa-check"></i>
+                    <span class="lang-fr">Mettre à jour</span>
+                    <span class="lang-en">Update Status</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. SUPABASE CONFIG ---
+        const SUPABASE_URL = 'https://jmkvstlfskolktnrpdqd.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZzdGxmc2tvbGt0bnJwZHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyOTMzNjEsImV4cCI6MjEwNjg2OTM2MX0.cP1In9_cgG4E2VqxtOe3iZlP7Pr1E8vZkYEFHCas8YE';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUser = null;
+        let allDonations = [];
+        let allRequests = [];
+
+        // --- 2. INIT & SECURITY ---
+        async function init() {
+            const { data: { session }, error } = await sb.auth.getSession();
+            if (error || !session) { window.location.href = 'login.html'; return; }
+
+            currentUser = session.user;
+
+            const { data: profile, error: pError } = await sb
+                .from('ufad_profiles')
+                .select('*')
+                .eq('id', currentUser.id)
+                .single();
+
+            if (pError || !profile || profile.role !== 'admin') {
+                alert("Accès refusé. Vous n'êtes pas administrateur. / Access denied. You are not an admin.");
+                await sb.auth.signOut();
+                window.location.href = 'login.html';
+                return;
+            }
+
+            await loadData();
+
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+        }
+
+        // --- 3. LOAD DATA ---
+        async function loadData() {
+            // Load Donations (with donor names)
+            const { data: donations } = await sb.from('ufad_donations').select(`
+                *,
+                ufad_profiles (full_name, phone)
+            `).order('created_at', { ascending: false });
+
+            // Load Requests (with beneficiary names)
+            const { data: requests } = await sb.from('ufad_requests').select(`
+                *,
+                ufad_profiles (full_name, phone)
+            `).order('created_at', { ascending: false });
+
+            allDonations = donations || [];
+            allRequests = requests || [];
+
+            renderStats();
+            renderDonations();
+            renderRequests();
+        }
+
+        function renderStats() {
+            const completedDonations = allDonations.filter(d => d.status === 'Completed');
+            const totalRaised = completedDonations.reduce((sum, d) => sum + parseFloat(d.amount), 0);
+            const pendingReqs = allRequests.filter(r => r.status === 'Pending').length;
+            const helped = allRequests.filter(r => r.status === 'Approved' || r.status === 'Delivered').length;
+
+            document.getElementById('stat-total-raised').innerText = '$' + totalRaised.toLocaleString();
+            document.getElementById('stat-total-donations').innerText = allDonations.length;
+            document.getElementById('stat-pending-reqs').innerText = pendingReqs;
+            document.getElementById('stat-helped').innerText = helped;
+        }
+
+        // --- 4. RENDER DONATIONS ---
+        function renderDonations() {
+            const list = document.getElementById('donations-list');
+            if (allDonations.length === 0) {
+                list.innerHTML = '<div class="empty-state">Aucun don enregistré. / No donations recorded.</div>';
+                return;
+            }
+
+            list.innerHTML = allDonations.map(d => {
+                const date = new Date(d.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+                const statusClass = 'status-' + d.status;
+                return `
+                    <div class="list-item">
+                        <div class="item-info">
+                            <div class="item-name">
+                                <i class="fas fa-user-circle" style="color:var(--accent);"></i>
+                                ${d.ufad_profiles ? d.ufad_profiles.full_name : 'Unknown Donor'}
+                            </div>
+                            <div class="item-meta">
+                                <span><i class="fas fa-phone"></i> ${d.ufad_profiles ? d.ufad_profiles.phone : 'N/A'}</span>
+                                <span><i class="fas fa-calendar"></i> ${date}</span>
+                                <span><i class="fas fa-credit-card"></i> ${d.payment_method}</span>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <span class="amount-highlight">$${parseFloat(d.amount).toLocaleString()}</span>
+                            <span class="status-badge ${statusClass}">${d.status}</span>
+                            <button class="btn-action" onclick="openDonationModal('${d.id}')">
+                                <i class="fas fa-edit"></i> <span class="lang-fr">Gérer</span><span class="lang-en">Manage</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- 5. RENDER REQUESTS ---
+        function renderRequests() {
+            const list = document.getElementById('requests-list');
+            if (allRequests.length === 0) {
+                list.innerHTML = '<div class="empty-state">Aucune demande d\'assistance. / No assistance requests.</div>';
+                return;
+            }
+
+            list.innerHTML = allRequests.map(r => {
+                const date = new Date(r.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+                const statusClass = 'status-' + r.status.replace(' ', '\\ ');
+                const notesHTML = r.admin_notes ? `<div class="item-notes"><i class="fas fa-sticky-note"></i> ${r.admin_notes}</div>` : '';
+                
+                return `
+                    <div class="list-item">
+                        <div class="item-info">
+                            <div class="item-name">
+                                <i class="fas fa-user-circle" style="color:#0284C7;"></i>
+                                ${r.ufad_profiles ? r.ufad_profiles.full_name : 'Unknown'} 
+                                <span style="font-size:0.7rem; background:#E0F2FE; color:#0284C7; padding:0.1rem 0.4rem; border-radius:5px; margin-left:0.3rem;">${r.need_type}</span>
+                            </div>
+                            <div class="item-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> ${r.location}</span>
+                                <span><i class="fas fa-calendar"></i> ${date}</span>
+                                <span style="color:${r.urgency === 'Critical' ? '#DC2626' : (r.urgency === 'High' ? '#D97706' : 'inherit')};"><i class="fas fa-exclamation-circle"></i> ${r.urgency}</span>
+                            </div>
+                            <div class="item-desc">${r.description}</div>
+                            ${notesHTML}
+                        </div>
+                        <div class="item-actions">
+                            <span class="status-badge ${statusClass}">${r.status}</span>
+                            <button class="btn-action" onclick="openRequestModal('${r.id}')">
+                                <i class="fas fa-tasks"></i> <span class="lang-fr">Traiter</span><span class="lang-en">Process</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- 6. TAB SWITCHING ---
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.data-section').forEach(s => s.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById('section-' + tab).classList.add('active');
+        }
+
+        // --- 7. MODAL LOGIC (REQUESTS) ---
+        function openRequestModal(id) {
+            const req = allRequests.find(r => r.id === id);
+            if (!req) return;
+
+            document.getElementById('update-req-id').value = req.id;
+            document.getElementById('update-req-status').value = req.status;
+            document.getElementById('update-req-notes').value = req.admin_notes || '';
+
+            document.getElementById('modal-request-details').innerHTML = `
+                <strong>${req.ufad_profiles ? req.ufad_profiles.full_name : 'Beneficiary'}</strong><br>
+                <span style="color:var(--text-muted);">${req.need_type} — ${req.location}</span><br>
+                <p style="margin-top:0.5rem;">"${req.description}"</p>
+            `;
+
+            document.getElementById('request-modal').classList.add('active');
+        }
+
+        async function saveRequestUpdate() {
+            const id = document.getElementById('update-req-id').value;
+            const status = document.getElementById('update-req-status').value;
+            const notes = document.getElementById('update-req-notes').value.trim();
+            const btn = document.getElementById('btn-update-req');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            const { error } = await sb.from('ufad_requests')
+                .update({ status: status, admin_notes: notes })
+                .eq('id', id);
+
+            if (error) {
+                alert("Erreur: " + error.message);
+            } else {
+                closeModal();
+                await loadData();
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-save"></i> <span class="lang-fr">Enregistrer</span><span class="lang-en">Save Changes</span>';
+        }
+
+        // --- 8. MODAL LOGIC (DONATIONS) ---
+        function openDonationModal(id) {
+            const don = allDonations.find(d => d.id === id);
+            if (!don) return;
+
+            document.getElementById('update-don-id').value = don.id;
+            document.getElementById('update-don-status').value = don.status;
+
+            document.getElementById('modal-donation-details').innerHTML = `
+                <strong>${don.ufad_profiles ? don.ufad_profiles.full_name : 'Donor'}</strong><br>
+                <span style="color:var(--text-muted);">${don.payment_method} — ${don.ufad_profiles ? don.ufad_profiles.phone : ''}</span><br>
+                <span style="font-size:1.2rem; font-weight:700; color:var(--accent); margin-top:0.5rem; display:block;">$${parseFloat(don.amount).toLocaleString()}</span>
+            `;
+
+            document.getElementById('donation-modal').classList.add('active');
+        }
+
+        async function saveDonationUpdate() {
+            const id = document.getElementById('update-don-id').value;
+            const status = document.getElementById('update-don-status').value;
+            const btn = document.getElementById('btn-update-don');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+
+            const { error } = await sb.from('ufad_donations')
+                .update({ status: status })
+                .eq('id', id);
+
+            if (error) {
+                alert("Erreur: " + error.message);
+            } else {
+                closeModal();
+                await loadData();
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-check"></i> <span class="lang-fr">Mettre à jour</span><span class="lang-en">Update Status</span>';
+        }
+
+        // --- 9. UTILS ---
+        function closeModal() {
+            document.getElementById('request-modal').classList.remove('active');
+            document.getElementById('donation-modal').classList.remove('active');
+        }
+
+        async function handleLogout() {
+            await sb.auth.signOut();
+            window.location.href = 'login.html';
+        }
+
+        // Close modals on outside click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+        });
+
+        init();
+    </script>
+</body>
+</html>
