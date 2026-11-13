@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>UFAD | Portail d'Accès</title>
     
-    <!-- === PWA META TAGS === -->
+    <!-- PWA META TAGS -->
     <meta name="theme-color" content="#0B1D33">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,7 +21,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* --- DYNAMIC THEME VARIABLES --- */
         :root {
             --bg-color: #FAF7F2;
             --text-dark: #0B1D33;
@@ -68,14 +67,12 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* --- ANIMATED BACKGROUND ORBS --- */
         .bg-orbs { position: fixed; inset: 0; z-index: -1; overflow: hidden; opacity: 0.6; transition: var(--transition); }
         .orb { position: absolute; border-radius: 50%; filter: blur(60px); animation: float 10s infinite alternate ease-in-out; transition: var(--transition); }
         .orb-1 { width: 300px; height: 300px; background: var(--gradient-1); top: -100px; left: -100px; opacity: 0.2; }
         .orb-2 { width: 250px; height: 250px; background: var(--gradient-2); bottom: -50px; right: -50px; opacity: 0.15; animation-delay: -5s; }
         @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, 50px) scale(1.1); } }
 
-        /* --- HEADER --- */
         header { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
         .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); }
         .logo img { height: 36px; transition: var(--transition); }
@@ -85,7 +82,6 @@
         .lang-btn { background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border: 1px solid var(--border); color: var(--text-dark); padding: 0.4rem 1rem; border-radius: 50px; cursor: pointer; font-weight: 700; font-size: 0.75rem; transition: var(--transition); }
         .lang-btn:hover { background: var(--white); }
 
-        /* --- MAIN AUTH CONTAINER --- */
         main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem 1.5rem 2rem; z-index: 1; }
 
         .auth-card {
@@ -103,7 +99,6 @@
         }
         @keyframes cardEntrance { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-        /* --- ROLE TOGGLE --- */
         .role-toggle-container { display: flex; background: var(--accent-light); border-radius: 50px; padding: 4px; position: relative; margin-bottom: 1.5rem; transition: var(--transition); }
         .role-toggle-slider { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: var(--white); border-radius: 50px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease; z-index: 1; }
         body.theme-beneficiary .role-toggle-slider { transform: translateX(100%); }
@@ -111,14 +106,12 @@
         .role-btn { flex: 1; padding: 0.8rem 0; border: none; background: none; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; position: relative; z-index: 2; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .role-btn.active { color: var(--accent); }
 
-        /* --- AUTH MODE SWITCH --- */
         .auth-mode-switch { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.8rem; }
         .mode-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: var(--transition); position: relative; font-family: 'DM Sans', sans-serif; }
         .mode-btn.active { color: var(--text-dark); }
         .mode-btn.active::after { content: ''; position: absolute; bottom: -0.9rem; left: 0; right: 0; height: 3px; background: var(--accent); border-radius: 3px 3px 0 0; animation: widthGrow 0.3s ease; }
         @keyframes widthGrow { from { width: 0; left: 50%; } to { width: 100%; left: 0; } }
 
-        /* --- FORMS --- */
         .forms-wrapper { position: relative; }
         .form-panel { display: none; animation: formSlide 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         .form-panel.active { display: block; }
@@ -139,17 +132,14 @@
         .btn-submit:active { transform: translateY(0); }
         .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-        /* --- ALERTS --- */
         .alert { padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; display: none; text-align: center; }
         .alert.success { background: #DCFCE7; color: #166534; display: block; border: 1px solid #BBF7D0; }
         .alert.error { background: #FEE2E2; color: #991B1B; display: block; border: 1px solid #FECACA; }
 
-        /* --- ADMIN PORTAL --- */
         .admin-portal-container { text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--border); }
         .admin-link { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition); text-decoration: underline; }
         .admin-link:hover { color: var(--accent); }
 
-        /* --- ADMIN MODAL --- */
         .modal-overlay { position: fixed; inset: 0; background: rgba(11, 29, 51, 0.8); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 1.5rem; z-index: 100; }
         .modal-overlay.active { display: flex; }
         .modal-content { background: var(--white); border-radius: 20px; padding: 2rem 1.5rem; width: 100%; max-width: 380px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
@@ -207,7 +197,6 @@
                 </button>
             </div>
 
-            <!-- ALERT BOX -->
             <div id="alert-box" class="alert"></div>
 
             <div class="forms-wrapper">
@@ -397,8 +386,6 @@
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impta3ZzdGxmc2tvbGt0bnJwZHFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyOTMzNjEsImV4cCI6MjEwNjg2OTM2MX0.cP1In9_cgG4E2VqxtOe3iZlP7Pr1E8vZkYEFHCas8YE';
         const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        const PIN_SUFFIX = '_UFAD_SECURE';
-
         // --- 2. STATE & UTILS ---
         let currentRole = 'donor';
         let currentMode = 'login';
@@ -454,7 +441,7 @@
             return phone.replace(/[\s\-\(\)]/g, '');
         }
 
-        // --- 3. AUTH LOGIC ---
+        // --- 3. AUTH LOGIC (Custom Database) ---
         async function handleAuth(e, role, mode) {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
@@ -486,39 +473,42 @@
             const pin = document.getElementById(`${prefix}-pin`).value;
 
             const cleanPhone = formatPhone(phone);
-            // We still use a synthetic email for Supabase Auth to avoid needing real emails
-            const syntheticEmail = `${cleanPhone.replace('+', '')}@ufad.local`;
-            const securePassword = pin + PIN_SUFFIX;
 
-            const { data: authData, error: authError } = await sb.auth.signUp({
-                email: syntheticEmail,
-                password: securePassword,
-                options: {
-                    data: {
-                        full_name: name,
-                        phone: cleanPhone,
-                        record_email: email || 'N/A',
-                        role: role
-                    }
-                }
-            });
+            // Check if phone already exists
+            const { data: existing, error: checkError } = await sb
+                .from('ufad_profiles')
+                .select('id')
+                .eq('phone', cleanPhone)
+                .maybeSingle();
 
-            if (authError) {
-                if (authError.message.includes('already registered') || authError.status === 422) {
-                    showAlert('error', "Ce numéro est déjà enregistré. Veuillez vous connecter.", "This phone number is already registered. Please sign in.");
-                } else if (authError.message.includes('rate limit')) {
-                    showAlert('error', "Limite de création atteinte. Veuillez désactiver la confirmation par email dans Supabase.", "Rate limit reached. Please disable email confirmation in Supabase.");
-                } else {
-                    showAlert('error', `Erreur: ${authError.message}`, `Error: ${authError.message}`);
-                }
+            if (existing) {
+                showAlert('error', "Ce numéro est déjà enregistré. Veuillez vous connecter.", "This phone number is already registered. Please sign in.");
                 btn.disabled = false;
                 btn.innerHTML = originalBtnHTML;
                 return;
             }
 
+            // Save to ufad_profiles directly
+            const { data, error } = await sb.from('ufad_profiles').insert([{
+                full_name: name,
+                phone: cleanPhone,
+                email: email || 'N/A',
+                role: role,
+                pin_hash: pin // In production, hash this server-side, but this works for now
+            }]).select().single();
+
+            if (error) {
+                showAlert('error', `Erreur: ${error.message}`, `Error: ${error.message}`);
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHTML;
+                return;
+            }
+
+            // Save session locally
+            localStorage.setItem('ufad_session', JSON.stringify(data));
+            
             showAlert('success', "Compte créé avec succès! Redirection...", "Account created successfully! Redirecting...");
-            // Since we disabled email confirmation, we can log them in immediately
-            setTimeout(() => redirectUser(authData.user.id), 1000);
+            setTimeout(() => redirectUser(data.role), 1000);
         }
 
         async function handleLogin(role, btn, originalBtnHTML) {
@@ -527,57 +517,43 @@
             const pin = document.getElementById(`${prefix}-pin`).value;
 
             const cleanPhone = formatPhone(phone);
-            const syntheticEmail = `${cleanPhone.replace('+', '')}@ufad.local`;
-            const securePassword = pin + PIN_SUFFIX;
 
-            const { data, error } = await sb.auth.signInWithPassword({
-                email: syntheticEmail,
-                password: securePassword
-            });
+            // Verify credentials
+            const { data, error } = await sb
+                .from('ufad_profiles')
+                .select('*')
+                .eq('phone', cleanPhone)
+                .eq('pin_hash', pin)
+                .maybeSingle();
 
-            if (error) {
+            if (error || !data) {
                 showAlert('error', "Numéro de téléphone ou PIN incorrect.", "Incorrect phone number or PIN.");
                 btn.disabled = false;
                 btn.innerHTML = originalBtnHTML;
                 return;
             }
 
-            // Verify Role matches using ufad_profiles
-            const { data: profile, error: profileError } = await sb
-                .from('ufad_profiles')
-                .select('role')
-                .eq('id', data.user.id)
-                .single();
-
-            if (profileError || !profile) {
-                showAlert('error', "Erreur de profil. Contactez le support.", "Profile error. Contact support.");
-                await sb.auth.signOut();
-                btn.disabled = false;
-                btn.innerHTML = originalBtnHTML;
-                return;
-            }
-
-            if (profile.role !== role) {
+            if (data.role !== role) {
                 showAlert('error', "Ce compte n'est pas un compte " + role + ".", "This is not a " + role + " account.");
-                await sb.auth.signOut();
                 btn.disabled = false;
                 btn.innerHTML = originalBtnHTML;
                 return;
             }
+
+            // Save session locally
+            localStorage.setItem('ufad_session', JSON.stringify(data));
 
             showAlert('success', "Connexion réussie! Redirection...", "Login successful! Redirecting...");
-            setTimeout(() => redirectUser(data.user.id), 1000);
+            setTimeout(() => redirectUser(data.role), 1000);
         }
 
-        // --- 4. REDIRECTION LOGIC ---
-        async function redirectUser(userId) {
-            const { data: profile } = await sb.from('ufad_profiles').select('role').eq('id', userId).single();
-            
-            if (profile.role === 'donor') {
+        // --- 4. REDIRECTION ---
+        function redirectUser(role) {
+            if (role === 'donor') {
                 window.location.href = 'donor-dashboard.html';
-            } else if (profile.role === 'beneficiary') {
+            } else if (role === 'beneficiary') {
                 window.location.href = 'member-dashboard.html';
-            } else if (profile.role === 'admin') {
+            } else if (role === 'admin') {
                 window.location.href = 'admin-dashboard.html';
             }
         }
@@ -598,7 +574,7 @@
             if (e.target === this) closeAdminModal();
         });
 
-        // --- 6. PWA SERVICE WORKER REGISTRATION ---
+        // --- 6. PWA SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -606,7 +582,6 @@
                     .catch(err => console.log('Service Worker Error', err));
             });
         }
-
     </script>
 </body>
 </html>
