@@ -29,15 +29,62 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* Header */
-        header { background: var(--ink); color: white; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: white; }
-        .logo img { height: 34px; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.1; }
-        .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; margin-top: 2px; font-weight: 700; }
+        /* --- HEADER with logo on white plate --- */
+        header { 
+            background: var(--ink); 
+            color: white; 
+            padding: 0.9rem 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+            gap: 1rem;
+        }
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.7rem; 
+            text-decoration: none; 
+            color: var(--text-dark);
+            background: var(--white);
+            padding: 0.4rem 0.75rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+        }
+        .logo:hover { 
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+        }
+        .logo img { 
+            height: 44px; 
+            width: auto;
+            transition: var(--transition);
+        }
+        .logo-text { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            line-height: 1.1; 
+            color: var(--text-dark);
+        }
+        .logo-text span { 
+            display: block; 
+            font-family: 'DM Sans', sans-serif; 
+            font-size: 0.55rem; 
+            text-transform: uppercase; 
+            color: var(--accent); 
+            letter-spacing: 1px; 
+            margin-top: 2px; 
+            font-weight: 700; 
+        }
         
-        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
-        .logout-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .header-actions { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+        .logout-btn { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
         .logout-btn:hover { background: rgba(255,255,255,0.2); }
 
         /* Main Layout */
@@ -72,15 +119,15 @@
         @media(min-width: 768px) { .list-item { flex-direction: row; justify-content: space-between; align-items: center; } }
         .list-item:hover { border-color: var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-        .item-info { flex: 1; }
-        .item-name { font-weight: 700; font-size: 1rem; color: var(--text-dark); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; }
+        .item-info { flex: 1; min-width: 0; }
+        .item-name { font-weight: 700; font-size: 1rem; color: var(--text-dark); margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
         .item-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.4rem; }
-        .item-desc { font-size: 0.85rem; color: var(--text-dark); line-height: 1.4; margin-bottom: 0.4rem; }
+        .item-desc { font-size: 0.85rem; color: var(--text-dark); line-height: 1.4; margin-bottom: 0.4rem; word-break: break-word; }
         .item-notes { font-size: 0.8rem; color: var(--accent); font-style: italic; }
 
         .item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; flex-shrink: 0; }
         .status-badge { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 20px; letter-spacing: 0.5px; }
-        .status-Pending, .status-Pending { background: #FEF3C7; color: #B45309; }
+        .status-Pending { background: #FEF3C7; color: #B45309; }
         .status-Completed, .status-Approved, .status-Delivered { background: #DCFCE7; color: #166534; }
         .status-Failed, .status-Rejected { background: #FEE2E2; color: #991B1B; }
         .status-Under\ Review { background: #DBEAFE; color: #1D4ED8; }
@@ -112,15 +159,28 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         
         .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); background: var(--white); border-radius: 12px; border: 1px dashed var(--border); }
+
+        /* Responsive logo sizing */
+        @media (min-width: 480px) {
+            .logo img { height: 50px; }
+        }
+        @media (max-width: 400px) {
+            header { padding: 0.7rem 1rem; }
+            .logo { padding: 0.35rem 0.6rem; gap: 0.5rem; }
+            .logo img { height: 38px; }
+            .logo-text { font-size: 0.95rem; }
+            .logo-text span { font-size: 0.5rem; }
+        }
     </style>
 </head>
 <body class="lang-fr">
 
     <header>
         <a href="#" class="logo">
-            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD">
             <div class="logo-text">
-                Gestion du Bureau
+                <span class="lang-fr">Gestion du Bureau</span>
+                <span class="lang-en">Office Management</span>
                 <span>Admin Dashboard</span>
             </div>
         </a>
@@ -299,6 +359,22 @@
 
         // --- 2. INIT & SECURITY ---
         async function init() {
+            // Check local custom session first (created by login.html admin modal / custom auth)
+            const sessionData = localStorage.getItem('ufad_session');
+            if (sessionData) {
+                try {
+                    const profile = JSON.parse(sessionData);
+                    if (profile && profile.role === 'admin') {
+                        currentUser = { id: profile.id };
+                        await loadData();
+                        document.getElementById('loading-screen').style.display = 'none';
+                        document.getElementById('dashboard-content').style.display = 'block';
+                        return;
+                    }
+                } catch (e) { /* fall through to Supabase auth */ }
+            }
+
+            // Fallback to Supabase auth session
             const { data: { session }, error } = await sb.auth.getSession();
             if (error || !session) { window.location.href = 'login.html'; return; }
 
@@ -529,6 +605,7 @@
         }
 
         async function handleLogout() {
+            localStorage.removeItem('ufad_session');
             await sb.auth.signOut();
             window.location.href = 'login.html';
         }
