@@ -82,15 +82,33 @@
             gap: 1rem;
             position: relative;
         }
+
+        /* --- LOGO: WHITE PLATE + LARGER SIZE --- */
         .logo { 
             display: flex; 
             align-items: center; 
+            justify-content: center;
             text-decoration: none; 
             flex-shrink: 0;
             min-width: 0;
             z-index: 1001;
+            background: var(--white);
+            padding: 0.5rem 0.9rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
         }
-        .logo img { height: 44px; width: auto; flex-shrink: 0; }
+        .logo:hover { 
+            box-shadow: var(--shadow); 
+            transform: translateY(-1px);
+            border-color: var(--accent);
+        }
+        .logo img { 
+            height: 56px; 
+            width: auto; 
+            flex-shrink: 0;
+        }
         
         /* MOBILE MENU BUTTON */
         .mobile-menu-btn { 
@@ -230,7 +248,7 @@
         }
         .mobile-lang-toggle:hover { background: var(--stone); }
 
-        /* --- NEW HERO CARD (No Logo, text only) --- */
+        /* --- HERO CARD (with prominent logo badge) --- */
         .hero-wrapper {
             padding: 1.5rem;
             max-width: 1280px;
@@ -271,6 +289,24 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
+        /* --- HERO LOGO BADGE (large, white card on dark hero) --- */
+        .hero-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            padding: 0.9rem 1.4rem;
+            border-radius: 16px;
+            margin: 0 auto 1.6rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .hero-logo img { 
+            height: 80px; 
+            width: auto; 
+        }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -718,7 +754,7 @@
         }
         .footer-section a:hover { color: var(--accent); }
         .footer-brand { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
-        .footer-brand img { height: 40px; background: var(--white); padding: 4px; border-radius: 4px; }
+        .footer-brand img { height: 44px; background: var(--white); padding: 6px; border-radius: 8px; }
         .copyright { 
             border-top: 1px solid rgba(255,255,255,0.1); 
             padding-top: 1.5rem; 
@@ -735,14 +771,16 @@
             .image-grid { grid-template-columns: repeat(2, 1fr); }
             .legal-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-badge { font-size: 0.78rem; padding: 0.5rem 1.1rem; }
+            .hero-logo img { height: 90px; }
         }
 
         @media (min-width: 640px) {
             section, .section-alt { padding: 4rem 2rem; }
             .nav-container { padding: 1rem 2rem; }
-            .logo img { height: 48px; }
+            .logo img { height: 64px; }
             .hero-wrapper { padding: 2rem; }
             .hero-card { padding: 5rem 2rem; }
+            .hero-logo img { height: 96px; }
             .hero-buttons .btn { width: auto; min-width: 180px; }
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
@@ -755,7 +793,7 @@
         }
 
         @media (min-width: 1024px) {
-            .nav-container { padding: 1.1rem 2.5rem; }
+            .nav-container { padding: 1rem 2.5rem; }
             section, .section-alt { padding: 5.5rem 2.5rem; }
             .section-header { margin-bottom: 3.5rem; }
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -765,6 +803,8 @@
             .target-card { padding: 2rem 1.5rem; }
             .contact-form { padding: 2.5rem; }
             .hero-card { padding: 6rem 3rem; }
+            .hero-logo img { height: 110px; }
+            .logo img { height: 72px; }
             .footer-content { gap: 3rem; }
         }
 
@@ -776,6 +816,13 @@
             /* Make hero buttons full width on mobile */
             .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
             .hero-buttons .btn { width: 100%; }
+        }
+
+        /* VERY SMALL SCREENS: icon-only menu button for more logo space */
+        @media (max-width: 400px) {
+            .mobile-menu-btn { padding: 0.6rem 0.8rem; }
+            .mobile-menu-btn .btn-label { display: none; }
+            .mobile-menu-btn i { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -789,8 +836,8 @@
             </a>
             
             <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu">
-                <i class="fas fa-bars"></i> Menu
+            <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars"></i> <span class="btn-label">Menu</span>
             </button>
 
             <!-- Small Mobile Popup Menu -->
@@ -845,10 +892,15 @@
         </div>
     </header>
 
-    <!-- NEW HERO CARD (No Logo, text only) -->
+    <!-- HERO CARD with prominent logo badge -->
     <div class="hero-wrapper">
         <div class="hero-card">
             <div class="hero-content">
+                <!-- PROMINENT LOGO BADGE -->
+                <div class="hero-logo">
+                    <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
+                </div>
+
                 <div class="hero-badge">
                     <i class="fas fa-circle"></i>
                     <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC · Depuis 2015</span>
@@ -1413,9 +1465,11 @@
     <script>
         // Toggle Small Mobile Popup Menu
         function toggleMenu(event) {
-            if (event) event.stopPropagation(); // Prevent triggering document click
+            if (event) event.stopPropagation();
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('active');
+            const btn = document.querySelector('.mobile-menu-btn');
+            const isOpen = menu.classList.toggle('active');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
 
         // Close menu when clicking outside
@@ -1424,13 +1478,24 @@
             const btn = document.querySelector('.mobile-menu-btn');
             if (menu.classList.contains('active') && !menu.contains(event.target) && !btn.contains(event.target)) {
                 menu.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
             }
         });
 
         // Close menu function for links
         function closeMenu() {
-            document.getElementById('mobile-menu').classList.remove('active');
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            menu.classList.remove('active');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
         }
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
 
         // Language Toggle
         function toggleLanguage() {
