@@ -32,16 +32,64 @@
         /* Background */
         .bg-orb { position: fixed; top: -100px; left: -100px; width: 350px; height: 350px; background: var(--gradient-1); border-radius: 50%; filter: blur(80px); opacity: 0.1; z-index: -1; }
 
-        /* Header */
-        header { background: rgba(255,255,255,0.7); backdrop-filter: blur(15px); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); }
-        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text-dark); }
-        .logo img { height: 34px; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; line-height: 1.1; }
-        .logo-text span { display: block; font-family: 'DM Sans', sans-serif; font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; margin-top: 2px; font-weight: 700; }
+        /* --- HEADER with logo on white plate --- */
+        header { 
+            background: rgba(255,255,255,0.7); 
+            backdrop-filter: blur(15px); 
+            padding: 0.8rem 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            border-bottom: 1px solid var(--border); 
+            gap: 1rem;
+        }
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.7rem; 
+            text-decoration: none; 
+            color: var(--text-dark);
+            background: var(--white);
+            padding: 0.4rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 14px rgba(11, 29, 51, 0.06);
+            transition: var(--transition);
+        }
+        .logo:hover { 
+            box-shadow: 0 8px 20px rgba(11, 29, 51, 0.10);
+            transform: translateY(-1px);
+        }
+        .logo img { 
+            height: 44px; 
+            width: auto;
+            transition: var(--transition);
+        }
+        .logo-text { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            line-height: 1.1; 
+        }
+        .logo-text span { 
+            display: block; 
+            font-family: 'DM Sans', sans-serif; 
+            font-size: 0.55rem; 
+            text-transform: uppercase; 
+            color: var(--accent); 
+            letter-spacing: 1px; 
+            margin-top: 2px; 
+            font-weight: 700; 
+        }
         
-        .header-actions { display: flex; align-items: center; gap: 0.8rem; }
-        .lang-btn { background: transparent; border: 1px solid var(--border); padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; font-size: 0.7rem; cursor: pointer; color: var(--text-dark); }
-        .logout-btn { background: #FEE2E2; color: #991B1B; border: none; padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .header-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+        .lang-btn { background: var(--white); border: 1px solid var(--border); padding: 0.4rem 0.9rem; border-radius: 50px; font-weight: 700; font-size: 0.7rem; cursor: pointer; color: var(--text-dark); transition: var(--transition); }
+        .lang-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+        .logout-btn { background: #FEE2E2; color: #991B1B; border: none; padding: 0.45rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; transition: var(--transition); }
+        .logout-btn:hover { background: #FECACA; }
 
         /* Main Layout */
         main { flex: 1; padding: 1.5rem; max-width: 800px; margin: 0 auto; width: 100%; }
@@ -66,18 +114,18 @@
 
         /* History List */
         .section-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-dark); }
-        .history-item { background: var(--white); border-radius: 12px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; border: 1px solid var(--border); }
-        .history-info { display: flex; align-items: center; gap: 0.8rem; }
-        .history-icon { width: 36px; height: 36px; border-radius: 50%; background: #DCFCE7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+        .history-item { background: var(--white); border-radius: 12px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.7rem; border: 1px solid var(--border); gap: 0.75rem; }
+        .history-info { display: flex; align-items: center; gap: 0.8rem; min-width: 0; }
+        .history-icon { width: 36px; height: 36px; border-radius: 50%; background: #DCFCE7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
         .history-details h4 { font-size: 0.9rem; color: var(--text-dark); }
         .history-details p { font-size: 0.7rem; color: var(--text-muted); }
-        .history-amount { font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+        .history-amount { font-weight: 700; color: var(--text-dark); font-size: 1rem; white-space: nowrap; flex-shrink: 0; }
         .empty-state { text-align: center; padding: 2rem 1rem; color: var(--text-muted); font-size: 0.9rem; }
 
         /* Modal */
         .modal-overlay { position: fixed; inset: 0; background: rgba(11, 29, 51, 0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; padding: 1.5rem; z-index: 100; }
         .modal-overlay.active { display: flex; }
-        .modal-content { background: var(--white); border-radius: 24px; padding: 2rem 1.5rem; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+        .modal-content { background: var(--white); border-radius: 24px; padding: 2rem 1.5rem; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; max-height: 90vh; overflow-y: auto; }
         @keyframes modalPop { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg-color); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; }
         .modal-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; text-align: center; margin-bottom: 1.5rem; color: var(--text-dark); }
@@ -95,6 +143,17 @@
         .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* Responsive logo sizing */
+        @media (min-width: 480px) {
+            .logo img { height: 50px; }
+        }
+        @media (max-width: 400px) {
+            header { padding: 0.7rem 1rem; }
+            .logo { padding: 0.35rem 0.6rem; gap: 0.5rem; }
+            .logo img { height: 38px; }
+            .logo-text { font-size: 1rem; }
+            .logo-text span { font-size: 0.5rem; }
+        }
     </style>
 </head>
 <body class="lang-fr">
@@ -104,10 +163,12 @@
     <!-- Header -->
     <header>
         <a href="#" class="logo">
-            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD">
             <div class="logo-text">
-                Espace Donateur
-                <span>Tableau de Bord</span>
+                <span class="lang-fr">Espace Donateur</span>
+                <span class="lang-en">Donor Space</span>
+                <span class="lang-fr">Tableau de Bord</span>
+                <span class="lang-en">Dashboard</span>
             </div>
         </a>
         <div class="header-actions">
@@ -183,23 +244,26 @@
             <h2 class="modal-title lang-en">Make a Donation</h2>
 
             <div class="amount-grid">
-                <button class="amount-btn" onclick="setAmount(10)">$10</button>
-                <button class="amount-btn" onclick="setAmount(25)">$25</button>
-                <button class="amount-btn" onclick="setAmount(50)">$50</button>
-                <button class="amount-btn" onclick="setAmount(100)">$100</button>
-                <button class="amount-btn" onclick="setAmount(250)">$250</button>
-                <button class="amount-btn" onclick="setAmount(0)">Autre</button>
+                <button class="amount-btn" onclick="setAmount(10, this)">$10</button>
+                <button class="amount-btn" onclick="setAmount(25, this)">$25</button>
+                <button class="amount-btn" onclick="setAmount(50, this)">$50</button>
+                <button class="amount-btn" onclick="setAmount(100, this)">$100</button>
+                <button class="amount-btn" onclick="setAmount(250, this)">$250</button>
+                <button class="amount-btn" onclick="setAmount(0, this)">
+                    <span class="lang-fr">Autre</span>
+                    <span class="lang-en">Other</span>
+                </button>
             </div>
 
             <div class="input-wrapper">
-                <input type="number" id="donation-amount" placeholder="Montant en USD" min="1" required>
+                <input type="number" id="donation-amount" placeholder="Montant en USD / Amount in USD" min="1" required>
             </div>
 
             <div class="input-wrapper">
                 <select id="donation-method">
                     <option value="Mobile Money">Mobile Money (M-Pesa, Airtel)</option>
-                    <option value="Bank Transfer">Virement Bancaire</option>
-                    <option value="Credit Card">Carte de Crédit</option>
+                    <option value="Bank Transfer">Virement Bancaire / Bank Transfer</option>
+                    <option value="Credit Card">Carte de Crédit / Credit Card</option>
                 </select>
             </div>
 
@@ -223,13 +287,36 @@
         // --- 2. LANGUAGE TOGGLE ---
         function toggleLanguage() {
             const body = document.body;
-            if (body.classList.contains('lang-fr')) body.classList.replace('lang-fr', 'lang-en');
-            else body.classList.replace('lang-en', 'lang-fr');
+            if (body.classList.contains('lang-fr')) {
+                body.classList.replace('lang-fr', 'lang-en');
+                document.documentElement.lang = 'en';
+            } else {
+                body.classList.replace('lang-en', 'lang-fr');
+                document.documentElement.lang = 'fr';
+            }
         }
 
         // --- 3. INITIALIZATION ---
         async function init() {
-            // Check session
+            // Check local custom session first (created by login.html)
+            const sessionData = localStorage.getItem('ufad_session');
+            if (sessionData) {
+                try {
+                    const profile = JSON.parse(sessionData);
+                    if (profile && profile.role === 'donor') {
+                        currentUser = { id: profile.id };
+                        currentProfile = profile;
+                        document.getElementById('donor-name').innerText = profile.full_name;
+                        document.getElementById('donor-name-en').innerText = profile.full_name;
+                        await loadDonations();
+                        document.getElementById('loading-screen').style.display = 'none';
+                        document.getElementById('dashboard-content').style.display = 'block';
+                        return;
+                    }
+                } catch (e) { /* fall through to Supabase auth */ }
+            }
+
+            // Fallback to Supabase auth session
             const { data: { session }, error } = await sb.auth.getSession();
             
             if (error || !session) {
@@ -296,6 +383,8 @@
                 return;
             }
 
+            historyList.innerHTML = '';
+
             donations.forEach(don => {
                 total += parseFloat(don.amount);
                 const date = new Date(don.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -331,11 +420,15 @@
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
         }
 
-        function setAmount(amount) {
+        function setAmount(amount, btnEl) {
             document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('donation-amount').value = amount > 0 ? amount : '';
-            if (amount > 0) event.target.classList.add('active');
-            else document.getElementById('donation-amount').focus();
+            if (amount > 0) {
+                document.getElementById('donation-amount').value = amount;
+                if (btnEl) btnEl.classList.add('active');
+            } else {
+                document.getElementById('donation-amount').value = '';
+                document.getElementById('donation-amount').focus();
+            }
         }
 
         // --- 6. SUBMIT DONATION ---
@@ -381,6 +474,7 @@
 
         // --- 7. LOGOUT ---
         async function handleLogout() {
+            localStorage.removeItem('ufad_session');
             await sb.auth.signOut();
             window.location.href = 'login.html';
         }
