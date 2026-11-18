@@ -158,84 +158,79 @@
         }
         .lang-toggle:hover { background: var(--ink); color: var(--cream); }
 
-        /* --- MOBILE FULLSCREEN MENU --- */
-        .mobile-nav-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--cream);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            padding: 6rem 1.5rem 2rem;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .mobile-nav-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .mobile-nav-overlay ul {
-            list-style: none;
+        /* --- SMALL MOBILE POPUP MENU --- */
+        .mobile-popup-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 1.5rem;
+            width: 250px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
         }
-        .mobile-nav-overlay a {
+        .mobile-popup-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mobile-popup-menu a {
             text-decoration: none;
             color: var(--ink);
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            transition: var(--transition);
         }
-        .mobile-nav-overlay a:hover, .mobile-nav-overlay a:active {
+        .mobile-popup-menu a:hover {
             background: var(--accent-soft);
-            border-color: var(--accent);
             color: var(--accent);
-            transform: translateX(5px);
         }
-        .mobile-nav-overlay a i { color: var(--text-muted); font-size: 0.9rem; }
-        
-        /* MOBILE ACTION BUTTONS INSIDE MENU */
-        .mobile-actions {
-            margin-top: 2rem;
+        .mobile-popup-menu .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.5rem 0;
+        }
+        .mobile-popup-menu .mobile-actions {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
-            width: 100%;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.5rem;
         }
-        .mobile-actions .btn { width: 100%; }
+        .mobile-popup-menu .btn { width: 100%; padding: 0.8rem; font-size: 0.85rem; }
+        .mobile-popup-menu .btn-outline { border-color: var(--border); color: var(--ink); }
+        .mobile-popup-menu .btn-outline:hover { background: var(--stone); color: var(--ink); }
         .mobile-lang-toggle {
-            background: var(--ink);
-            color: var(--white);
-            border: none;
-            padding: 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
+            background: var(--cream);
+            color: var(--ink);
+            border: 1px solid var(--border);
+            padding: 0.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            margin-top: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
         }
+        .mobile-lang-toggle:hover { background: var(--stone); }
 
-        /* --- NEW HERO CARD --- */
+        /* --- NEW HERO CARD (No Logo, text only) --- */
         .hero-wrapper {
             padding: 1.5rem;
             max-width: 1280px;
@@ -276,18 +271,6 @@
             max-width: 900px;
             margin: 0 auto;
         }
-        
-        .hero-logo {
-            max-width: 280px;
-            width: 100%;
-            height: auto;
-            margin: 0 auto 2rem;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-        }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -760,7 +743,6 @@
             .logo img { height: 48px; }
             .hero-wrapper { padding: 2rem; }
             .hero-card { padding: 5rem 2rem; }
-            .hero-logo { max-width: 350px; padding: 2rem; }
             .hero-buttons .btn { width: auto; min-width: 180px; }
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
@@ -790,6 +772,8 @@
         @media (max-width: 1023px) {
             .mobile-menu-btn { display: inline-flex; }
             nav.desktop-nav { display: none; }
+            
+            /* Make hero buttons full width on mobile */
             .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
             .hero-buttons .btn { width: 100%; }
         }
@@ -805,9 +789,39 @@
             </a>
             
             <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
+            <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu">
                 <i class="fas fa-bars"></i> Menu
             </button>
+
+            <!-- Small Mobile Popup Menu -->
+            <div class="mobile-popup-menu" id="mobile-menu">
+                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#objectives" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#targets" onclick="closeMenu()"><span class="lang-fr">Cibles</span><span class="lang-en">Targets</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#portal" onclick="closeMenu()"><span class="lang-fr">Portail</span><span class="lang-en">Portal</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-chevron-right"></i></a>
+                
+                <div class="divider"></div>
+                
+                <div class="mobile-actions">
+                    <a href="#contact" class="btn" onclick="closeMenu()">
+                        <i class="fas fa-paper-plane"></i> 
+                        <span class="lang-fr">Nous Contacter</span><span class="lang-en">Contact Us</span>
+                    </a>
+                    <a href="#activities" class="btn btn-outline" onclick="closeMenu()">
+                        <i class="fas fa-images"></i> 
+                        <span class="lang-fr">Nos Actions</span><span class="lang-en">Our Actions</span>
+                    </a>
+                    <button class="mobile-lang-toggle" onclick="toggleLanguage()">
+                        <i class="fas fa-globe"></i>
+                        <span class="lang-fr">Passer en EN</span>
+                        <span class="lang-en">Switch to FR</span>
+                    </button>
+                </div>
+            </div>
 
             <!-- Desktop Navigation -->
             <nav class="desktop-nav">
@@ -831,45 +845,10 @@
         </div>
     </header>
 
-    <!-- MOBILE FULLSCREEN MENU OVERLAY -->
-    <div class="mobile-nav-overlay" id="mobile-menu">
-        <ul>
-            <li><a href="#about" onclick="toggleMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#mission" onclick="toggleMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#objectives" onclick="toggleMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#targets" onclick="toggleMenu()"><span class="lang-fr">Cibles</span><span class="lang-en">Targets</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#domains" onclick="toggleMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#activities" onclick="toggleMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#portal" onclick="toggleMenu()"><span class="lang-fr">Portail</span><span class="lang-en">Portal</span><i class="fas fa-chevron-right"></i></a></li>
-            <li><a href="#contact" onclick="toggleMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-chevron-right"></i></a></li>
-        </ul>
-        
-        <!-- Mobile Action Buttons -->
-        <div class="mobile-actions">
-            <a href="#contact" class="btn" onclick="toggleMenu()">
-                <i class="fas fa-paper-plane"></i> 
-                <span class="lang-fr">Nous Contacter</span><span class="lang-en">Contact Us</span>
-            </a>
-            <a href="#activities" class="btn btn-outline" style="color: var(--ink); border-color: var(--border);" onclick="toggleMenu()">
-                <i class="fas fa-images"></i> 
-                <span class="lang-fr">Nos Actions</span><span class="lang-en">Our Actions</span>
-            </a>
-            <button class="mobile-lang-toggle" onclick="toggleLanguage()">
-                <i class="fas fa-globe"></i>
-                <span class="lang-fr">Passer en Anglais (EN)</span>
-                <span class="lang-en">Switch to French (FR)</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- NEW HERO CARD WITH LARGE LOGO -->
+    <!-- NEW HERO CARD (No Logo, text only) -->
     <div class="hero-wrapper">
         <div class="hero-card">
             <div class="hero-content">
-                
-                <!-- BIG LOGO -->
-                <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo" class="hero-logo">
-                
                 <div class="hero-badge">
                     <i class="fas fa-circle"></i>
                     <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC · Depuis 2015</span>
@@ -1432,17 +1411,25 @@
 
     <!-- JavaScript -->
     <script>
-        // Toggle Fullscreen Mobile Menu
-        function toggleMenu() {
+        // Toggle Small Mobile Popup Menu
+        function toggleMenu(event) {
+            if (event) event.stopPropagation(); // Prevent triggering document click
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('active');
-            
-            // Prevent body scrolling when menu is open
-            if (menu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (menu.classList.contains('active') && !menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('active');
             }
+        });
+
+        // Close menu function for links
+        function closeMenu() {
+            document.getElementById('mobile-menu').classList.remove('active');
         }
 
         // Language Toggle
@@ -1458,15 +1445,6 @@
                 document.documentElement.lang = 'fr';
             }
         }
-
-        // Close mobile menu when a link is clicked (handled by onclick in HTML, but this is fallback)
-        document.querySelectorAll('.mobile-nav-overlay a').forEach(link => {
-            link.addEventListener('click', () => {
-                const menu = document.getElementById('mobile-menu');
-                menu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
 
         // Header shadow on scroll
         window.addEventListener('scroll', () => {
