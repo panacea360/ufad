@@ -16,9 +16,9 @@
 
     <style>
         :root {
-            --ink: #0B1D33;       /* Bleu foncé / Noir */
+            --ink: #0B1D33;
             --ink-soft: #1E3A5F;
-            --accent: #E8642C;     /* Orange/Rouge actuel */
+            --accent: #E8642C;
             --accent-soft: #FDF0EA;
             --accent-dark: #C94F1C;
             --cream: #FAF7F2;
@@ -60,7 +60,6 @@
 
         img { max-width: 100%; height: auto; display: block; }
 
-        /* Language Toggle */
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
@@ -86,45 +85,15 @@
         .logo { 
             display: flex; 
             align-items: center; 
-            gap: 0.7rem; 
             text-decoration: none; 
             flex-shrink: 0;
             min-width: 0;
         }
-        .logo img { height: 38px; width: auto; flex-shrink: 0; }
-        .logo-text { 
-            font-family: 'Playfair Display', serif;
-            font-weight: 800; 
-            font-size: 1.2rem; 
-            color: var(--ink); 
-            line-height: 1;
-            letter-spacing: -0.02em;
-        }
-        .logo-text span { 
-            display: block; 
-            font-size: 0.58rem; 
-            font-weight: 500; 
-            color: var(--text-muted); 
-            font-family: 'DM Sans', sans-serif; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
-        }
+        /* LOGO IN HEADER ONLY */
+        .logo img { height: 44px; width: auto; flex-shrink: 0; }
         
-        nav { 
-            display: flex; 
-            align-items: center;
-        }
-        nav ul { 
-            display: flex; 
-            gap: 0.1rem; 
-            align-items: center; 
-            list-style: none;
-        }
+        nav { display: flex; align-items: center; }
+        nav ul { display: flex; gap: 0.1rem; align-items: center; list-style: none; }
         nav a { 
             text-decoration: none; 
             color: var(--ink); 
@@ -181,34 +150,62 @@
         }
         .mobile-menu-btn i { display: block; }
 
-        /* --- HERO --- */
-        .hero { 
-            background: var(--ink);
+        /* --- NEW HERO CARD --- */
+        .hero-wrapper {
+            padding: 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .hero-card { 
+            background: linear-gradient(135deg, var(--ink) 0%, #1E3A5F 100%);
+            border-radius: var(--radius-lg);
+            padding: 4rem 1.5rem; 
+            text-align: center;
             position: relative;
-            color: var(--white); 
-            padding: 5rem 1.5rem 6rem; 
             overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
-        .hero::before {
+        /* Decorative blurred circles */
+        .hero-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: url('https://i.ibb.co/20HH7bJP/Entre-Preneuriat-et-Leadership-Fe-minin.jpg') center/cover;
-            opacity: 0.35;
+            top: -100px; right: -100px;
+            width: 350px; height: 350px;
+            background: var(--accent);
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.4;
         }
-        .hero::after {
+        .hero-card::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(11, 29, 51, 0.95) 0%, rgba(11, 29, 51, 0.6) 60%, rgba(232, 100, 44, 0.2) 100%);
+            bottom: -100px; left: -100px;
+            width: 300px; height: 300px;
+            background: #F59E0B;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
         }
         .hero-content {
             position: relative;
             z-index: 2;
             max-width: 900px;
             margin: 0 auto;
-            text-align: center;
         }
+        
+        /* BIG LOGO IN HERO */
+        .hero-logo {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            /* Optional: slightly round the image if the source logo is square */
+        }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -223,21 +220,17 @@
             letter-spacing: 0.3px;
             margin-bottom: 1.5rem;
             color: rgba(255,255,255,0.95);
-            text-align: center;
         }
         .hero-badge i { color: var(--accent); font-size: 0.6rem; flex-shrink: 0; }
-        .hero h1 { 
+        .hero-card h1 { 
             color: var(--white); 
-            font-size: clamp(1.9rem, 6vw, 3.8rem); 
+            font-size: clamp(1.9rem, 6vw, 3.5rem); 
             margin-bottom: 1.2rem; 
             font-weight: 700;
             line-height: 1.12;
         }
-        .hero h1 em {
-            font-style: normal;
-            color: var(--accent);
-        }
-        .hero p { 
+        .hero-card h1 em { font-style: normal; color: var(--accent); }
+        .hero-card p { 
             font-size: clamp(0.95rem, 2.5vw, 1.15rem); 
             max-width: 620px; 
             margin: 0 auto 2.2rem; 
@@ -245,12 +238,7 @@
             font-weight: 300;
             line-height: 1.7;
         }
-        .hero-buttons {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .hero-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
         .btn { 
             display: inline-flex;
             align-items: center;
@@ -288,25 +276,11 @@
         }
 
         /* --- SECTIONS --- */
-        section, .section-alt { 
-            padding: 3.5rem 1.5rem; 
-        }
-        section { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .section-alt {
-            background: var(--white);
-            max-width: 100%;
-        }
-        .section-alt > .inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-header { 
-            text-align: center; 
-            margin-bottom: 2.5rem; 
-        }
+        section, .section-alt { padding: 3.5rem 1.5rem; }
+        section { max-width: 1200px; margin: 0 auto; }
+        .section-alt { background: var(--white); max-width: 100%; }
+        .section-alt > .inner { max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
         .section-eyebrow {
             display: inline-block;
             font-size: 0.72rem;
@@ -317,28 +291,12 @@
             margin-bottom: 0.8rem;
             font-family: 'DM Sans', sans-serif;
         }
-        .section-header h2 { 
-            font-size: clamp(1.6rem, 5vw, 2.8rem); 
-            margin-bottom: 0.8rem; 
-        }
-        .section-header p { 
-            color: var(--text-muted); 
-            max-width: 620px; 
-            margin: 0 auto; 
-            font-size: 0.98rem; 
-        }
+        .section-header h2 { font-size: clamp(1.6rem, 5vw, 2.8rem); margin-bottom: 0.8rem; }
+        .section-header p { color: var(--text-muted); max-width: 620px; margin: 0 auto; font-size: 0.98rem; }
         
         /* --- GRIDS --- */
-        .grid-2 { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 1.5rem; 
-        }
-        .grid-3 { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 1.2rem; 
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
         
         /* --- CARDS --- */
         .card { 
@@ -351,64 +309,34 @@
             position: relative;
             overflow: hidden;
         }
-        .section-alt .card {
-            background: var(--cream);
-        }
+        .section-alt .card { background: var(--cream); }
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
+            top: 0; left: 0;
+            width: 0; height: 3px;
             background: var(--accent);
             transition: width 0.4s ease;
         }
-        .card:hover { 
-            transform: translateY(-4px); 
-            box-shadow: var(--shadow-lg); 
-            border-color: transparent;
-        }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
         .card:hover::before { width: 100%; }
         
         .card-icon {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             background: var(--accent-soft);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin-bottom: 1.2rem;
             color: var(--accent);
             font-size: 1.2rem;
             transition: var(--transition);
             flex-shrink: 0;
         }
-        .card:hover .card-icon {
-            background: var(--accent);
-            color: var(--white);
-        }
-        .card h3 { 
-            font-size: 1.25rem; 
-            margin-bottom: 0.8rem; 
-            color: var(--ink); 
-        }
-        .card h4 {
-            font-size: 1rem;
-            margin-bottom: 0.7rem;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-        }
-        .card ul { 
-            list-style: none; 
-            padding-left: 0; 
-        }
+        .card:hover .card-icon { background: var(--accent); color: var(--white); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.8rem; color: var(--ink); }
+        .card h4 { font-size: 1rem; margin-bottom: 0.7rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0.2px; }
+        .card p { color: var(--text-muted); font-size: 0.92rem; }
+        .card ul { list-style: none; padding-left: 0; }
         .card li { 
             position: relative; 
             padding-left: 1.5rem; 
@@ -423,8 +351,7 @@
             font-weight: 900; 
             color: var(--accent); 
             position: absolute; 
-            left: 0; 
-            top: 3px; 
+            left: 0; top: 3px; 
             font-size: 0.72rem; 
         }
 
@@ -455,15 +382,8 @@
             gap: 0.6rem;
             flex-wrap: wrap;
         }
-        .legal-card h4 i {
-            color: var(--accent);
-            font-size: 0.95rem;
-        }
-        .legal-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.7rem;
-        }
+        .legal-card h4 i { color: var(--accent); font-size: 0.95rem; }
+        .legal-grid { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
         .legal-item {
             background: var(--white);
             padding: 0.85rem 1rem;
@@ -484,40 +404,18 @@
         }
 
         /* --- MISSION --- */
-        .mission-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
+        .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         .mission-card {
             padding: 2rem 1.6rem;
             border-radius: var(--radius-lg);
             position: relative;
             overflow: hidden;
         }
-        .mission-card.mission {
-            background: var(--ink);
-            color: var(--white);
-        }
-        .mission-card.vision {
-            background: var(--accent);
-            color: var(--white);
-        }
-        .mission-card .m-icon {
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
-            opacity: 0.9;
-        }
-        .mission-card h3 {
-            color: var(--white);
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-        }
-        .mission-card p {
-            color: rgba(255,255,255,0.88);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
+        .mission-card.mission { background: var(--ink); color: var(--white); }
+        .mission-card.vision { background: var(--accent); color: var(--white); }
+        .mission-card .m-icon { font-size: 1.8rem; margin-bottom: 1.2rem; opacity: 0.9; }
+        .mission-card h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .mission-card p { color: rgba(255,255,255,0.88); font-size: 0.95rem; line-height: 1.7; }
 
         /* --- TARGETS --- */
         .target-card {
@@ -528,33 +426,18 @@
             border: 1px solid var(--border);
             transition: var(--transition);
         }
-        .section-alt .target-card {
-            background: var(--cream);
-        }
-        .target-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-        }
+        .section-alt .target-card { background: var(--cream); }
+        .target-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
         .target-card .t-icon {
-            width: 46px;
-            height: 46px;
+            width: 46px; height: 46px;
             margin: 0 auto 1rem;
             background: var(--accent-soft);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             color: var(--accent);
             font-size: 1.05rem;
         }
-        .target-card h4 {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--ink);
-            line-height: 1.4;
-        }
+        .target-card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
 
         /* --- DOMAINS --- */
         .domain-number {
@@ -570,38 +453,20 @@
         /* --- ACTIVITIES --- */
         .activity-block { margin-bottom: 3rem; }
         .activity-block:last-child { margin-bottom: 0; }
-        .activity-title { 
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
+        .activity-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .activity-title .num {
-            width: 38px;
-            height: 38px;
+            width: 38px; height: 38px;
             background: var(--accent);
             color: var(--white);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1rem;
             flex-shrink: 0;
         }
-        .activity-title h3 { 
-            font-size: 1.25rem; 
-            margin: 0;
-            flex: 1;
-            min-width: 0;
-        }
-        .image-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 1.2rem; 
-        }
+        .activity-title h3 { font-size: 1.25rem; margin: 0; flex: 1; min-width: 0; }
+        .image-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
         .image-card { 
             background: var(--cream); 
             border-radius: var(--radius); 
@@ -610,24 +475,10 @@
             transition: var(--transition); 
             border: 1px solid var(--border);
         }
-        .image-card:hover { 
-            transform: translateY(-4px); 
-            box-shadow: var(--shadow-lg);
-            border-color: transparent;
-        }
-        .image-card .img-wrap {
-            overflow: hidden;
-            height: 220px;
-        }
-        .image-card img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.6s ease;
-        }
-        .image-card:hover img {
-            transform: scale(1.05);
-        }
+        .image-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .image-card .img-wrap { overflow: hidden; height: 220px; }
+        .image-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .image-card:hover img { transform: scale(1.05); }
         .image-card .caption { 
             padding: 1rem 1.2rem; 
             font-size: 0.85rem; 
@@ -667,20 +518,13 @@
             filter: blur(100px);
             opacity: 0.25;
         }
-        .app-cta-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .app-cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
         .app-cta-icon {
             width: 72px; height: 72px;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin: 0 auto 1.5rem;
             font-size: 2rem;
             color: var(--accent);
@@ -697,23 +541,10 @@
             color: var(--white);
             margin-bottom: 1rem;
         }
-        .app-cta-content p {
-            color: rgba(255,255,255,0.8);
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-        .app-cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .app-cta-content p { color: rgba(255,255,255,0.8); font-size: 1rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.6; }
+        .app-cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .app-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
+            display: inline-flex; align-items: center; gap: 0.7rem;
             padding: 1rem 1.8rem;
             border-radius: 50px;
             font-weight: 700;
@@ -726,71 +557,34 @@
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
         }
-        .app-btn-primary {
-            background: var(--accent);
-            color: var(--white);
-            box-shadow: 0 10px 30px rgba(232, 100, 44, 0.4);
-        }
-        .app-btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(232, 100, 44, 0.5);
-        }
-        .app-btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--white);
-            border: 1.5px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
-        }
-        .app-btn-secondary:hover {
-            background: var(--white);
-            color: var(--ink);
-            transform: translateY(-3px);
-        }
+        .app-btn-primary { background: var(--accent); color: var(--white); box-shadow: 0 10px 30px rgba(232, 100, 44, 0.4); }
+        .app-btn-primary:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(232, 100, 44, 0.5); }
+        .app-btn-secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px); }
+        .app-btn-secondary:hover { background: var(--white); color: var(--ink); transform: translateY(-3px); }
         .app-btn i { font-size: 1.1rem; }
         .app-badge-row {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+            display: flex; gap: 1.5rem; justify-content: center;
+            margin-top: 2rem; flex-wrap: wrap;
             font-size: 0.75rem;
             color: rgba(255,255,255,0.6);
         }
-        .app-badge-row span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
+        .app-badge-row span { display: flex; align-items: center; gap: 0.4rem; }
         .app-badge-row i { color: #4ADE80; }
 
         /* --- CONTACT --- */
-        .contact-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 2rem; 
-        }
-        .contact-info-item { 
-            display: flex; 
-            gap: 1rem; 
-            margin-bottom: 1.5rem; 
-            align-items: flex-start; 
-        }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
         .contact-info-item i { 
             color: var(--white); 
             background: var(--ink);
             width: 42px; height: 42px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 10px;
             font-size: 0.95rem; 
             flex-shrink: 0;
             transition: var(--transition);
         }
-        .contact-info-item:hover i {
-            background: var(--accent);
-        }
+        .contact-info-item:hover i { background: var(--accent); }
         .contact-info-item h4 { 
             font-family: 'DM Sans', sans-serif;
             font-size: 0.78rem; 
@@ -818,10 +612,7 @@
             box-shadow: var(--shadow); 
             border: 1px solid var(--border);
         }
-        .contact-form h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1.2rem;
-        }
+        .contact-form h3 { font-size: 1.25rem; margin-bottom: 1.2rem; }
         .contact-form input, .contact-form textarea { 
             width: 100%; 
             padding: 0.85rem 1rem; 
@@ -845,21 +636,9 @@
         .contact-form .btn { width: 100%; }
 
         /* --- FOOTER --- */
-        footer { 
-            background: var(--ink); 
-            color: var(--white); 
-            padding: 3rem 1.5rem 1.5rem; 
-        }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer-content { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 2rem; 
-            margin-bottom: 2rem; 
-        }
+        footer { background: var(--ink); color: var(--white); padding: 3rem 1.5rem 1.5rem; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-content { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
         .footer-section h4 { 
             color: var(--white); 
             margin-bottom: 1rem; 
@@ -869,11 +648,7 @@
             letter-spacing: 1.5px;
             font-weight: 600;
         }
-        .footer-section p { 
-            color: rgba(255,255,255,0.65); 
-            font-size: 0.88rem; 
-            line-height: 1.7;
-        }
+        .footer-section p { color: rgba(255,255,255,0.65); font-size: 0.88rem; line-height: 1.7; }
         .footer-section a { 
             color: rgba(255,255,255,0.65); 
             text-decoration: none; 
@@ -883,19 +658,8 @@
             font-size: 0.88rem;
         }
         .footer-section a:hover { color: var(--accent); }
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            margin-bottom: 0.8rem;
-        }
-        .footer-brand img { height: 34px; }
-        .footer-brand span {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--white);
-        }
+        .footer-brand { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.8rem; }
+        .footer-brand img { height: 40px; background: var(--white); padding: 4px; border-radius: 4px; }
         .copyright { 
             border-top: 1px solid rgba(255,255,255,0.1); 
             padding-top: 1.5rem; 
@@ -907,8 +671,6 @@
         /* ============================================
            RESPONSIVE BREAKPOINTS
            ============================================ */
-
-        /* Small tablets / large phones */
         @media (min-width: 480px) {
             .grid-3 { grid-template-columns: repeat(2, 1fr); }
             .image-grid { grid-template-columns: repeat(2, 1fr); }
@@ -916,14 +678,13 @@
             .hero-badge { font-size: 0.78rem; padding: 0.5rem 1.1rem; }
         }
 
-        /* Tablets */
         @media (min-width: 640px) {
             section, .section-alt { padding: 4rem 2rem; }
             .nav-container { padding: 1rem 2rem; }
-            .logo img { height: 42px; }
-            .logo-text { font-size: 1.3rem; }
-            .logo-text span { max-width: 260px; }
-            .hero { padding: 6rem 2rem 7rem; }
+            .logo img { height: 48px; }
+            .hero-wrapper { padding: 2rem; }
+            .hero-card { padding: 5rem 2rem; }
+            .hero-logo { max-width: 350px; padding: 2rem; }
             .hero-buttons .btn { width: auto; min-width: 180px; }
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
@@ -935,7 +696,6 @@
             .app-cta-section { padding: 5rem 2rem; }
         }
 
-        /* Desktop */
         @media (min-width: 1024px) {
             .nav-container { padding: 1.1rem 2.5rem; }
             section, .section-alt { padding: 5.5rem 2.5rem; }
@@ -946,16 +706,12 @@
             .card { padding: 2.2rem 2rem; }
             .target-card { padding: 2rem 1.5rem; }
             .contact-form { padding: 2.5rem; }
-            .hero { padding: 7rem 2.5rem 8rem; }
+            .hero-card { padding: 6rem 3rem; }
             .footer-content { gap: 3rem; }
         }
 
-        /* ============================================
-           MOBILE NAVIGATION (max-width: 1023px)
-           ============================================ */
         @media (max-width: 1023px) {
             .mobile-menu-btn { display: block; }
-            
             nav {
                 position: absolute;
                 top: 100%;
@@ -969,52 +725,29 @@
                 transition: max-height 0.4s ease, padding 0.3s ease;
                 padding: 0 1.5rem;
             }
-            nav.active {
-                max-height: 500px;
-                padding: 0.8rem 1.5rem 1.2rem;
-                overflow-y: auto;
-            }
-            nav ul { 
-                flex-direction: column; 
-                align-items: stretch;
-                gap: 0.15rem;
-                width: 100%;
-            }
-            nav a { 
-                padding: 0.75rem 0.8rem;
-                font-size: 0.9rem;
-                border-radius: var(--radius-sm);
-            }
+            nav.active { max-height: 500px; padding: 0.8rem 1.5rem 1.2rem; overflow-y: auto; }
+            nav ul { flex-direction: column; align-items: stretch; gap: 0.15rem; width: 100%; }
+            nav a { padding: 0.75rem 0.8rem; font-size: 0.9rem; border-radius: var(--radius-sm); }
             nav a:hover { background: var(--stone); }
             nav a::after { display: none; }
-            
-            .lang-toggle { 
-                margin: 0.6rem 0 0; 
-                width: 100%; 
-                padding: 0.6rem;
-                text-align: center;
-            }
+            .lang-toggle { margin: 0.6rem 0 0; width: 100%; padding: 0.6rem; text-align: center; }
         }
 
-        /* ============================================
-           VERY SMALL SCREENS (max-width: 380px)
-           ============================================ */
         @media (max-width: 380px) {
             .nav-container { padding: 0.75rem 1rem; }
-            .logo img { height: 34px; }
-            .logo-text { font-size: 1.05rem; }
-            .logo-text span { display: none; }
+            .logo img { height: 38px; }
+            .hero-wrapper { padding: 1rem; }
+            .hero-card { padding: 3rem 1rem; }
+            .hero-logo { max-width: 220px; padding: 1rem; }
             section, .section-alt { padding: 2.8rem 1rem; }
-            .hero { padding: 4rem 1rem 5rem; }
-            .hero h1 { font-size: 1.75rem; }
-            .hero p { font-size: 0.9rem; }
+            .hero-card h1 { font-size: 1.75rem; }
+            .hero-card p { font-size: 0.9rem; }
             .btn { padding: 0.85rem 1.4rem; font-size: 0.85rem; }
             .card { padding: 1.4rem 1.2rem; }
             .activity-title h3 { font-size: 1.1rem; }
             .activity-title .num { width: 34px; height: 34px; font-size: 0.9rem; }
             .contact-form { padding: 1.4rem 1.1rem; }
             .legal-card { padding: 1.4rem 1rem; }
-            .footer-brand span { font-size: 1.1rem; }
             .app-cta-section { padding: 3rem 1rem; }
             .app-btn { min-width: 100%; font-size: 0.85rem; padding: 0.9rem 1.2rem; }
         }
@@ -1026,12 +759,8 @@
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD Logo">
-                <div class="logo-text">
-                    UFAD
-                    <span class="lang-fr">Femmes Africaines pour le Développement</span>
-                    <span class="lang-en">African Women for Development</span>
-                </div>
+                <!-- Removed text, keeping only the image logo -->
+                <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
             </a>
             <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
                 <i class="fas fa-bars"></i>
@@ -1057,26 +786,32 @@
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-circle"></i>
-                <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC · Depuis 2015</span>
-                <span class="lang-en">Humanitarian NGO · North Kivu, DRC · Since 2015</span>
-            </div>
-            <h1 class="lang-fr">Autonomiser les femmes, protéger les vulnérables, <em>bâtir l'avenir.</em></h1>
-            <h1 class="lang-en">Empowering women, protecting the vulnerable, <em>building the future.</em></h1>
-            <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême au Nord-Kivu.</p>
-            <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty in North Kivu.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Nous Contacter</a>
-                <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact Us</a>
-                <a href="#activities" class="btn btn-outline lang-fr"><i class="fas fa-images"></i> Nos Actions</a>
-                <a href="#activities" class="btn btn-outline lang-en"><i class="fas fa-images"></i> Our Actions</a>
+    <!-- NEW HERO CARD WITH LARGE LOGO -->
+    <div class="hero-wrapper">
+        <div class="hero-card">
+            <div class="hero-content">
+                
+                <!-- BIG LOGO -->
+                <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo" class="hero-logo">
+                
+                <div class="hero-badge">
+                    <i class="fas fa-circle"></i>
+                    <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC · Depuis 2015</span>
+                    <span class="lang-en">Humanitarian NGO · North Kivu, DRC · Since 2015</span>
+                </div>
+                <h1 class="lang-fr">Autonomiser les femmes, protéger les vulnérables, <em>bâtir l'avenir.</em></h1>
+                <h1 class="lang-en">Empowering women, protecting the vulnerable, <em>building the future.</em></h1>
+                <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême au Nord-Kivu.</p>
+                <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty in North Kivu.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Nous Contacter</a>
+                    <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact Us</a>
+                    <a href="#activities" class="btn btn-outline lang-fr"><i class="fas fa-images"></i> Nos Actions</a>
+                    <a href="#activities" class="btn btn-outline lang-en"><i class="fas fa-images"></i> Our Actions</a>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- About -->
     <section id="about">
@@ -1089,46 +824,35 @@
         <p class="about-intro lang-fr">L'UFAD ONGD est une organisation nationale humanitaire non gouvernementale à « Caractère Féminin », non confessionnelle et apolitique, créée le 23 Septembre 2015 dans la Province du Nord-Kivu en RDC. UFAD se consacre à lutter contre les inégalités sociales, réduire la souffrance et mettre fin à la pauvreté extrême.</p>
         <p class="about-intro lang-en">UFAD ONGD is a national, non-governmental humanitarian organization with a "Feminine Character", non-denominational and apolitical, created on September 23, 2015, in the North Kivu Province of DRC. UFAD is dedicated to fighting social inequalities, reducing suffering, and ending extreme poverty.</p>
         
-                <div class="legal-card">
+        <div class="legal-card">
             <h4><i class="fas fa-certificate"></i> <span class="lang-fr">Statut Juridique & Enregistrements</span><span class="lang-en">Legal Status & Registrations</span></h4>
             <div class="legal-grid">
-                
-                <!-- 1. Enregistrement National (Mis à jour) -->
                 <div class="legal-item">
                     <strong class="lang-fr">Enregistrement National</strong>
                     <strong class="lang-en">National Registration</strong>
                     F.92/49.994<br>
                     No. JUST.SG/20/TK/4385/2022
                 </div>
-
-                <!-- 2. Autorisation Provinciale -->
                 <div class="legal-item">
                     <strong class="lang-fr">Autorisation Provinciale</strong>
                     <strong class="lang-en">Provincial Authorization</strong>
                     N° 01/284/CAB/GP-NK/2019
                 </div>
-
-                <!-- 3. Justice Provinciale -->
                 <div class="legal-item">
                     <strong class="lang-fr">Justice Provinciale</strong>
                     <strong class="lang-en">Provincial Justice</strong>
                     JUST.112/778/NK/2023
                 </div>
-
-                <!-- 4. Affaires Sociales -->
                 <div class="legal-item">
                     <strong class="lang-fr">Affaires Sociales</strong>
                     <strong class="lang-en">Social Affairs</strong>
                     N° 08/DIVAS/N-K/AS/95/2023
                 </div>
-
-                <!-- 5. Genre, Famille & Enfants -->
                 <div class="legal-item">
                     <strong class="lang-fr">Genre, Famille & Enfants</strong>
                     <strong class="lang-en">Gender, Family & Children</strong>
                     N° 12/DIV-PR/GEFAE-NK/2024
                 </div>
-
             </div>
         </div>
     </section>
@@ -1600,8 +1324,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-brand">
-                        <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
-                        <span>UFAD</span>
+                        <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
                     </div>
                     <p class="lang-fr">Union des Femmes Africaines pour le Développement. Ensemble pour un monde solidaire et inclusif.</p>
                     <p class="lang-en">Union of African Women for Development. Together for a solidary and inclusive world.</p>
@@ -1650,14 +1373,12 @@
             document.getElementById('main-nav').classList.toggle('active');
         }
 
-        // Close mobile menu when a link is clicked
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('main-nav').classList.remove('active');
             });
         });
 
-        // Header shadow on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 20) {
