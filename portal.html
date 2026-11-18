@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="UFAD">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/h1smPWMH/UFAD.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png">
 
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -49,30 +49,56 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* App Header */
+        /* --- HEADER with logo on white plate --- */
         header {
             background: var(--ink);
             color: var(--white);
-            padding: 1rem 1.5rem;
+            padding: 0.9rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
             z-index: 10;
+            gap: 1rem;
         }
-        .header-brand { display: flex; align-items: center; gap: 0.8rem; }
-        .header-brand img { height: 36px; }
-        .header-brand span { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; }
+        .header-brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            background: var(--white);
+            padding: 0.4rem 0.75rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        .header-brand img { 
+            height: 44px; 
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        .header-brand span { 
+            font-family: 'Playfair Display', serif; 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            color: var(--ink);
+        }
         
         .lang-toggle {
             background: rgba(255,255,255,0.1);
-            border: none;
+            border: 1px solid rgba(255,255,255,0.25);
             color: white;
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 0.9rem;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: var(--accent);
+            border-color: var(--accent);
         }
 
         /* Main App Area */
@@ -133,6 +159,7 @@
         .back-btn { 
             background: var(--white); border: 1px solid var(--border); width: 36px; height: 36px; 
             border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+            flex-shrink: 0;
         }
         .form-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--ink); }
 
@@ -192,15 +219,27 @@
             z-index: 100;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
         .install-banner.active { display: flex; animation: slideUp 0.5s ease; }
         .install-banner p { font-size: 0.8rem; font-weight: 500; }
         .install-banner button {
             background: var(--accent); color: white; border: none; padding: 0.5rem 1rem;
             border-radius: 20px; font-weight: 700; font-size: 0.75rem; cursor: pointer;
+            flex-shrink: 0;
         }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
+        /* Responsive logo sizing */
+        @media (min-width: 480px) {
+            .header-brand img { height: 50px; }
+        }
+        @media (max-width: 400px) {
+            header { padding: 0.8rem 1rem; }
+            .header-brand { padding: 0.35rem 0.6rem; gap: 0.5rem; }
+            .header-brand img { height: 38px; }
+            .header-brand span { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body class="lang-fr">
@@ -208,7 +247,7 @@
     <!-- Header -->
     <header>
         <div class="header-brand">
-            <img src="https://i.ibb.co/h1smPWMH/UFAD.png" alt="UFAD">
+            <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD">
             <span>UFAD App</span>
         </div>
         <button class="lang-toggle" onclick="toggleLanguage()">
@@ -409,8 +448,10 @@
             const body = document.body;
             if (body.classList.contains('lang-fr')) {
                 body.classList.replace('lang-fr', 'lang-en');
+                document.documentElement.lang = 'en';
             } else {
                 body.classList.replace('lang-en', 'lang-fr');
+                document.documentElement.lang = 'fr';
             }
         }
 
@@ -427,10 +468,12 @@
             const method = document.getElementById('d-method').value;
 
             alertBox.className = 'alert';
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
             try {
-                let { data: existing } = await sb.from('ufad_donors').select('id').eq('email', email).single();
+                let { data: existing } = await sb.from('ufad_donors').select('id').eq('email', email).maybeSingle();
                 let donorId = existing ? existing.id : null;
 
                 if (!donorId) {
@@ -451,7 +494,8 @@
                 alertBox.className = 'alert error';
                 alertBox.innerHTML = `<span class="lang-fr">Erreur: ${err.message}</span><span class="lang-en">Error: ${err.message}</span>`;
             } finally {
-                btn.innerHTML = `<i class="fas fa-heart"></i> <span class="lang-fr">Confirmer le Don</span><span class="lang-en">Confirm Donation</span>`;
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
             }
         }
 
@@ -468,6 +512,8 @@
             const need = document.getElementById('b-need').value;
 
             alertBox.className = 'alert';
+            btn.disabled = true;
+            const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
             try {
@@ -483,7 +529,8 @@
                 alertBox.className = 'alert error';
                 alertBox.innerHTML = `<span class="lang-fr">Erreur: ${err.message}</span><span class="lang-en">Error: ${err.message}</span>`;
             } finally {
-                btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span class="lang-fr">Envoyer la Demande</span><span class="lang-en">Submit Request</span>`;
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
             }
         }
 
