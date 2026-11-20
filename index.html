@@ -4,63 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="description" content="UFAD - Union des Femmes Africaines pour le Développement. ONG humanitaire en RDC, Nord-Kivu.">
-    <meta name="theme-color" content="#0F172A">
+    <meta name="theme-color" content="#0B2A4A">
+    
+    <meta property="og:title" content="UFAD | Union des Femmes Africaines pour le Développement">
+    <meta property="og:description" content="ONG humanitaire en RDC, Nord-Kivu. Autonomiser les femmes, protéger les vulnérables, bâtir l'avenir.">
+    <meta property="og:image" content="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <title>UFAD | Union des Femmes Africaines pour le Développement</title>
     
-    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
             --ink: #0F172A;
-            --ink-soft: #475569;
+            --ink-soft: #334155;
             --accent: #E8642C;
-            --accent-soft: #FFF4ED;
             --accent-dark: #C94F1C;
+            --accent-soft: #FFF4ED;
             
-            --bg-primary: #FFFFFF;
-            --bg-secondary: #F8FAFC;
+            /* Premium Textured Background */
+            --bg-base: #F8FAFC; 
+            
+            /* Solid Soft Card Colors */
+            --card-1: #FFF1F2; --card-1-border: #FFE4E6; --card-1-text: #9F1239;
+            --card-2: #EFF6FF; --card-2-border: #DBEAFE; --card-2-text: #1E40AF;
+            --card-3: #F0FDF4; --card-3-border: #DCFCE7; --card-3-text: #166534;
+            --card-4: #FFFBEB; --card-4-border: #FEF3C7; --card-4-text: #92400E;
+            --card-5: #FAF5FF; --card-5-border: #F3E8FF; --card-5-text: #6B21A8;
+            --card-6: #F0FDFA; --card-6-border: #CCFBF1; --card-6-text: #115E59;
+            --card-7: #FFF5F7; --card-7-border: #FCE7F3; --card-7-text: #9D174D;
+
             --border: #E2E8F0;
             --text: #334155;
             --text-muted: #64748B;
-            
-            --logo-red: #E2001A; 
-            --logo-blue: #0055FF;
-            --logo-green: #4CA100;
-            
             --radius-sm: 8px;
             --radius: 12px;
             --radius-lg: 16px;
-            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
-            --shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
-            --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        html { 
+            scroll-behavior: smooth; 
+            -webkit-text-size-adjust: 100%; 
+            scroll-padding-top: 80px; 
+        }
         
-        /* RICH, TEXTURED BACKGROUND (Not empty white) */
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'DM Sans', sans-serif; 
             color: var(--text); 
             line-height: 1.6; 
-            background-color: #F1F5F9;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(232, 100, 44, 0.04) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(0, 85, 255, 0.04) 0px, transparent 50%),
-                radial-gradient(#CBD5E1 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 24px 24px;
-            background-attachment: fixed;
+            background-color: var(--bg-base);
+            /* Subtle dot pattern to prevent "empty white" look */
+            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 24px 24px;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            width: 100%;
-            transition: background-color 0.6s ease;
         }
         
         h1, h2, h3, h4 { 
@@ -71,411 +77,462 @@
             letter-spacing: -0.02em;
         }
 
+        .ui-font { font-family: 'Plus Jakarta Sans', sans-serif; }
         img { max-width: 100%; height: auto; display: block; }
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
         /* --- COMPACT, NORMAL HEADER --- */
         header { 
-            background: rgba(255, 255, 255, 0.9); 
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            border-bottom: 1px solid var(--border);
             position: sticky; 
             top: 0; 
             z-index: 1000;
-            transition: var(--transition);
+            height: 64px; /* Fixed compact height */
+            display: flex;
+            align-items: center;
         }
-        header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
-        }
+        header.scrolled { box-shadow: var(--shadow); }
+        
         .nav-container { 
-            max-width: 1280px; 
+            width: 100%;
+            max-width: 1200px; 
             margin: 0 auto; 
-            padding: 0.5rem 1rem; /* COMPACT PADDING */
+            padding: 0 1rem; 
             display: flex; 
             align-items: center; 
             justify-content: space-between;
-            gap: 0.8rem;
         }
 
         .logo { 
             display: flex; 
             align-items: center; 
             text-decoration: none; 
-            flex-shrink: 0;
+            gap: 0.5rem;
         }
-        .logo img { height: 40px; width: auto; } /* SMALL, NORMAL LOGO */
+        .logo img { height: 40px; width: auto; }
+        .logo-text { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-weight: 800; 
+            font-size: 1.1rem; 
+            color: var(--ink);
+            letter-spacing: -0.5px;
+        }
         
         .mobile-menu-btn { 
             display: flex; 
             background: transparent; 
             color: var(--ink);
             border: 1px solid var(--border); 
-            padding: 0; 
+            width: 40px; height: 40px;
             border-radius: var(--radius-sm); 
             cursor: pointer; 
-            font-size: 1.1rem; 
             align-items: center;
             justify-content: center;
-            width: 38px; height: 38px; /* COMPACT BUTTON */
-            flex-shrink: 0;
+            font-size: 1.1rem;
             transition: var(--transition);
-            z-index: 1002;
         }
-        .mobile-menu-btn:active { background: var(--bg-secondary); }
+        .mobile-menu-btn:active { background: var(--bg-base); }
 
-        nav.desktop-nav { display: none; } /* Hidden on mobile by default */
-        nav.desktop-nav ul { display: flex; gap: 0.2rem; align-items: center; list-style: none; }
+        nav.desktop-nav ul { display: flex; gap: 0.5rem; align-items: center; list-style: none; }
         nav.desktop-nav a { 
             text-decoration: none; 
             color: var(--ink-soft); 
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 600; 
             font-size: 0.85rem; 
             transition: var(--transition);
-            white-space: nowrap;
-            padding: 0.5rem 0.8rem;
+            padding: 0.4rem 0.8rem;
             border-radius: var(--radius-sm);
         }
         nav.desktop-nav a:hover { color: var(--accent); background: var(--accent-soft); }
         
         .lang-toggle { 
-            background: var(--bg-primary); 
+            background: var(--bg-base); 
             color: var(--ink); 
             border: 1px solid var(--border); 
-            padding: 0.4rem 0.9rem; 
+            padding: 0.4rem 0.8rem; 
             border-radius: 50px; 
             cursor: pointer; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700; 
             font-size: 0.75rem; 
             transition: var(--transition);
-            flex-shrink: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .lang-toggle:hover { background: var(--ink); color: #FFF; }
+        .lang-toggle:hover { background: var(--ink); color: white; border-color: var(--ink); }
 
-        /* --- MOBILE MENU (Compact & Clean) --- */
+        /* Mobile Menu */
         .mobile-popup-menu {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(16px);
-            padding: 4rem 1.5rem 1.5rem;
+            position: absolute;
+            top: 64px;
+            right: 0;
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            padding: 1rem;
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
+            transform: translateY(-10px);
             transition: var(--transition);
-            overflow-y: auto;
         }
         .mobile-popup-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .mobile-popup-menu a {
             text-decoration: none;
             color: var(--ink);
-            font-size: 1.1rem;
-            font-weight: 700;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            padding: 0.9rem 0;
-            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .mobile-popup-menu a:active { color: var(--accent); }
-        .mobile-popup-menu .mobile-actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
-        .mobile-popup-menu .btn { width: 100%; padding: 0.9rem; font-size: 0.95rem; justify-content: center; border-radius: var(--radius); }
+        .mobile-popup-menu a:hover { background: var(--accent-soft); color: var(--accent); }
+        .mobile-popup-menu .divider { height: 1px; background: var(--border); margin: 0.5rem 0; }
+        .mobile-popup-menu .mobile-actions { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.5rem; }
+        .mobile-popup-menu .btn { width: 100%; padding: 0.75rem; font-size: 0.9rem; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; }
         .mobile-lang-toggle {
-            background: var(--bg-secondary);
+            background: var(--bg-base);
             color: var(--ink);
             border: 1px solid var(--border);
-            padding: 0.9rem;
-            border-radius: var(--radius);
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* --- HERO CARD WITH BLURRY BACKGROUND --- */
-        .hero-wrapper { padding: 1.5rem 1rem; max-width: 1280px; margin: 0 auto; }
+        /* --- HERO WITH BLURRY BACKGROUND --- */
+        .hero-wrapper { padding: 1.5rem 1rem; max-width: 1200px; margin: 0 auto; }
         .hero-card { 
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
             border-radius: var(--radius-lg);
-            padding: 2.5rem 1.25rem; 
+            padding: 3rem 1.5rem; 
             text-align: center;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--border);
+            background: white;
         }
-        /* BLURRY BACKGROUND IMAGE EFFECT */
+        /* Blurry Background Image Effect */
         .hero-card::before {
             content: '';
             position: absolute;
-            inset: -20px;
-            background: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1000&q=80') center/cover;
-            filter: blur(30px) brightness(1.2);
-            opacity: 0.5;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            filter: blur(12px) brightness(1.15);
             z-index: 0;
+            transform: scale(1.15); /* Prevent blur edges */
         }
-        .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        /* Glassmorphism Overlay for readability */
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
 
         .hero-logo {
             display: inline-flex;
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             padding: 1rem 1.5rem;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.25rem;
         }
-        .hero-logo img { height: 70px; width: auto; }
+        .hero-logo img { height: 60px; width: auto; }
 
         .hero-fullname {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-size: clamp(1.3rem, 5vw, 2rem);
             font-weight: 700;
             color: var(--ink);
             line-height: 1.3;
             margin-bottom: 1rem;
         }
-        .hero-fullname .c-u { color: var(--logo-red); }
-        .hero-fullname .c-f { color: var(--logo-blue); }
-        .hero-fullname .c-a { color: var(--logo-green); }
-        .hero-fullname .c-d { color: var(--logo-blue); }
-        .hero-fullname span.word { margin: 0 0.15em; white-space: nowrap; }
+        .hero-fullname .c-u { color: #E2001A; }
+        .hero-fullname .c-f { color: #0055FF; }
+        .hero-fullname .c-a { color: #4CA100; }
+        .hero-fullname .c-d { color: #0055FF; }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            background: rgba(255, 255, 255, 0.8);
+            background: white;
             border: 1px solid var(--border);
             padding: 0.4rem 1rem;
             border-radius: 50px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.25rem;
             color: var(--ink-soft);
+            box-shadow: var(--shadow-sm);
         }
         .hero-badge i { color: var(--accent); font-size: 0.4rem; }
         
-        .hero-card h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 0.8rem; }
-        .hero-card h1 em { font-style: italic; color: var(--accent); }
-        .hero-card p { font-size: 1rem; max-width: 550px; margin: 0 auto 1.5rem; color: var(--ink-soft); font-weight: 500; }
+        .hero-card h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); margin-bottom: 1rem; }
+        .hero-card h1 em { font-style: normal; color: var(--accent); }
+        .hero-card p { font-size: clamp(0.95rem, 2.5vw, 1.05rem); max-width: 550px; margin: 0 auto 1.5rem; color: var(--text-muted); }
         
-        .hero-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+        .hero-buttons { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
         .btn { 
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            background: var(--accent); color: #FFF; padding: 0.85rem 1.5rem; border-radius: 50px; 
-            text-decoration: none; font-weight: 700; transition: var(--transition); border: none; 
-            cursor: pointer; font-size: 0.9rem; font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 46px; box-shadow: 0 4px 12px rgba(232, 100, 44, 0.25);
+            background: var(--accent); color: white; padding: 0.75rem 1.5rem; 
+            border-radius: 50px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600; transition: var(--transition); border: none; cursor: pointer; font-size: 0.9rem;
         }
-        .btn:active { transform: scale(0.97); }
-        .btn-outline { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); box-shadow: none; }
-        .btn-outline:active { background: var(--ink); color: #FFF; }
+        .btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+        .btn-outline { background: white; border: 1.5px solid var(--ink); color: var(--ink); }
+        .btn-outline:hover { background: var(--ink); color: white; }
 
-        /* --- COMPACT SECTIONS & GRIDS --- */
-        section, .section-alt { padding: 3rem 1rem; transition: background-color 0.6s ease; } /* TIGHTER PADDING */
+        /* --- SECTIONS & TIGHTER SPACING --- */
+        section, .section-alt { padding: 3rem 1rem; } /* Much tighter on mobile */
         section { max-width: 1200px; margin: 0 auto; }
-        .section-alt { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .section-alt { max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: white; }
         .section-alt > .inner { max-width: 1200px; margin: 0 auto; }
         
-        .section-header { text-align: center; margin-bottom: 2rem; } /* TIGHTER MARGIN */
+        /* Scroll Color Effects for Sections */
+        #about { background: white; }
+        #mission { background: #F8FAFC; }
+        #objectives { background: #F0F9FF; }
+        #targets { background: #F0FDF4; }
+        #domains { background: #FAF5FF; }
+        #activities { background: #FFF7ED; }
+        #media { background: white; }
+        #careers { background: #F0FDFA; }
+        #contact { background: white; }
+
+        .section-header { text-align: center; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
         .section-eyebrow {
-            display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+            display: inline-block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+            background: var(--accent-soft);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
         }
-        .section-header h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 0.6rem; }
-        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem; }
+        .section-header h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 0.75rem; }
+        .section-header p { color: var(--text-muted); font-size: 0.95rem; }
         
-        .grid-2, .grid-3, .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1rem; } /* TIGHTER GAP */
+        /* --- GRIDS & SOLID COLOR CARDS --- */
+        .grid-2, .grid-3, .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1rem; } /* Tight gap on mobile */
         
         .card { 
-            background: var(--bg-primary); 
-            padding: 1.25rem; /* COMPACT INTERNAL PADDING */
+            padding: 1.25rem; /* Compact padding */
             border-radius: var(--radius); 
             box-shadow: var(--shadow-sm); 
-            border: 1px solid var(--border);
+            border: 1px solid transparent;
             transition: var(--transition); 
+            height: 100%;
         }
-        .card:active { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-        .card-icon {
-            width: 44px; height: 44px; background: var(--accent-soft); border-radius: var(--radius-sm);
-            display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem;
-            color: var(--accent); font-size: 1.1rem;
-        }
-        .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-        .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-        .card ul { list-style: none; padding-left: 0; }
-        .card li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
-        .card li::before { 
-            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--accent); 
-            position: absolute; left: 0; top: 3px; font-size: 0.7rem; 
-        }
-
-        /* --- ABOUT & LEGAL --- */
-        .about-intro { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; font-size: 1rem; color: var(--ink-soft); line-height: 1.7; }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
         
-        .zone-highlight {
-            max-width: 800px; margin: 0 auto 2rem; background: #FFF; border: 1px solid #BAE6FD;
-            border-left: 3px solid var(--logo-blue); border-radius: var(--radius);
-            padding: 1.2rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-sm);
+        .card-icon {
+            width: 40px; height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            background: white;
+            box-shadow: var(--shadow-sm);
         }
-        .zone-highlight i { font-size: 1.5rem; color: var(--logo-blue); flex-shrink: 0; }
-        .zone-highlight h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.2rem; font-weight: 800; }
-        .zone-highlight p { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0; line-height: 1.4; }
-
-        .legal-card { background: #FFF; border-radius: var(--radius); padding: 1.5rem 1.25rem; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        .legal-card h4 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .legal-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
-        .legal-item {
-            background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);
-            font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--border);
+        .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        .card ul { list-style: none; padding-left: 0; margin-top: 0.75rem; }
+        .card li { 
+            position: relative; padding-left: 1.25rem; margin-bottom: 0.4rem; 
+            font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;
         }
-        .legal-item strong { display: block; color: var(--ink); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.3rem; font-weight: 800; }
+        .card li::before { 
+            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; 
+            position: absolute; left: 0; top: 2px; font-size: 0.7rem; 
+        }
 
-        /* --- MISSION & TARGETS --- */
-        .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .mission-card { padding: 2rem 1.5rem; border-radius: var(--radius); }
-        .mission-card.mission { background: var(--ink); color: #FFF; }
-        .mission-card.vision { background: var(--accent); color: #FFF; }
-        .mission-card .m-icon { font-size: 2rem; margin-bottom: 0.8rem; opacity: 0.9; }
-        .mission-card h3 { color: #FFF; font-size: 1.3rem; margin-bottom: 0.6rem; }
-        .mission-card p { color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.6; }
+        /* Solid Color Themes for Cards */
+        .theme-1 { background: var(--card-1); border-color: var(--card-1-border); }
+        .theme-1 .card-icon, .theme-1 li::before { color: var(--card-1-text); }
+        .theme-1 h3 { color: var(--card-1-text); }
+
+        .theme-2 { background: var(--card-2); border-color: var(--card-2-border); }
+        .theme-2 .card-icon, .theme-2 li::before { color: var(--card-2-text); }
+        .theme-2 h3 { color: var(--card-2-text); }
+
+        .theme-3 { background: var(--card-3); border-color: var(--card-3-border); }
+        .theme-3 .card-icon, .theme-3 li::before { color: var(--card-3-text); }
+        .theme-3 h3 { color: var(--card-3-text); }
+
+        .theme-4 { background: var(--card-4); border-color: var(--card-4-border); }
+        .theme-4 .card-icon, .theme-4 li::before { color: var(--card-4-text); }
+        .theme-4 h3 { color: var(--card-4-text); }
+
+        .theme-5 { background: var(--card-5); border-color: var(--card-5-border); }
+        .theme-5 .card-icon, .theme-5 li::before { color: var(--card-5-text); }
+        .theme-5 h3 { color: var(--card-5-text); }
+
+        .theme-6 { background: var(--card-6); border-color: var(--card-6-border); }
+        .theme-6 .card-icon, .theme-6 li::before { color: var(--card-6-text); }
+        .theme-6 h3 { color: var(--card-6-text); }
+
+        .theme-7 { background: var(--card-7); border-color: var(--card-7-border); }
+        .theme-7 .card-icon, .theme-7 li::before { color: var(--card-7-text); }
+        .theme-7 h3 { color: var(--card-7-text); }
 
         .target-card {
-            background: #FFF; padding: 1.5rem 1rem; border-radius: var(--radius);
-            text-align: center; border: 1px solid var(--border); transition: var(--transition);
+            padding: 1.25rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid transparent;
+            transition: var(--transition);
         }
         .target-card .t-icon {
-            width: 48px; height: 48px; margin: 0 auto 0.8rem; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+            width: 44px; height: 44px; margin: 0 auto 0.75rem;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; background: white; box-shadow: var(--shadow-sm);
         }
-        .target-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+        .target-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; line-height: 1.3; }
 
-        /* UNIQUE TARGET CARD COLORS */
-        .target-card:nth-child(1) { background: #FFF5F5; border-color: #FED7D7; } .target-card:nth-child(1) .t-icon { background: #FED7D7; color: #C53030; }
-        .target-card:nth-child(2) { background: #F0F4FF; border-color: #C3DAFE; } .target-card:nth-child(2) .t-icon { background: #C3DAFE; color: #3182CE; }
-        .target-card:nth-child(3) { background: #F0FFF4; border-color: #C6F6D5; } .target-card:nth-child(3) .t-icon { background: #C6F6D5; color: #2F855A; }
-        .target-card:nth-child(4) { background: #FFFBF0; border-color: #FEEBC8; } .target-card:nth-child(4) .t-icon { background: #FEEBC8; color: #C05621; }
-        .target-card:nth-child(5) { background: #F5F3FF; border-color: #E9D8FD; } .target-card:nth-child(5) .t-icon { background: #E9D8FD; color: #6B46C1; }
-        .target-card:nth-child(6) { background: #FFF0F5; border-color: #FED7E2; } .target-card:nth-child(6) .t-icon { background: #FED7E2; color: #B83280; }
-        .target-card:nth-child(7) { background: #F0FDFA; border-color: #B2F5EA; } .target-card:nth-child(7) .t-icon { background: #B2F5EA; color: #285E61; }
+        /* --- ABOUT & LEGAL --- */
+        .about-intro { max-width: 700px; margin: 0 auto 2rem; text-align: center; font-size: 0.95rem; color: var(--ink-soft); }
+        .legal-card { background: white; border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .legal-card h4 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .legal-card h4 i { color: var(--accent); }
+        .legal-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+        .legal-item { background: var(--bg-base); padding: 1rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--border); }
+        .legal-item strong { display: block; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; font-weight: 700; }
 
-        /* --- DOMAINS & ACTIVITIES --- */
-        .domain-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--accent); opacity: 0.1; line-height: 1; margin-bottom: 0.3rem; }
-        .activity-block { margin-bottom: 2.5rem; } /* TIGHTER MARGIN */
-        .activity-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
+        /* --- MISSION --- */
+        .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .mission-card { padding: 1.5rem; border-radius: var(--radius); }
+        .mission-card.mission { background: var(--ink); color: white; }
+        .mission-card.vision { background: var(--accent); color: white; }
+        .mission-card .m-icon { font-size: 1.5rem; margin-bottom: 0.75rem; opacity: 0.9; }
+        .mission-card h3 { color: white; font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .mission-card p { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; }
+
+        /* --- ACTIVITIES --- */
+        .activity-block { margin-bottom: 2.5rem; }
+        .activity-title { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
         .activity-title .num {
-            width: 36px; height: 36px; background: var(--ink); color: #FFF; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+            width: 32px; height: 32px; background: var(--ink); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
         }
-        .activity-title h3 { font-size: 1.25rem; margin: 0; }
+        .activity-title h3 { font-size: 1.15rem; margin: 0; }
         
         .image-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .image-card { background: #FFF; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-        .image-card .img-wrap { overflow: hidden; aspect-ratio: 16/10; } /* SHORTER IMAGES ON MOBILE */
+        .image-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+        .image-card .img-wrap { overflow: hidden; height: 180px; } /* Shorter on mobile */
         .image-card img { width: 100%; height: 100%; object-fit: cover; }
-        .image-card .caption { padding: 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--ink); text-align: center; background: #FFF; }
-
-        /* UNIQUE DOMAIN CARD COLORS */
-        .domain-card-1 { border-left: 3px solid #E8642C; background: linear-gradient(to right, #FFF4ED, #FFF); }
-        .domain-card-2 { border-left: 3px solid #0055FF; background: linear-gradient(to right, #F0F4FF, #FFF); }
-        .domain-card-3 { border-left: 3px solid #4CA100; background: linear-gradient(to right, #F0FFF4, #FFF); }
-        .domain-card-4 { border-left: 3px solid #805AD5; background: linear-gradient(to right, #F5F3FF, #FFF); }
-        .domain-card-5 { border-left: 3px solid #D69E2E; background: linear-gradient(to right, #FFFBF0, #FFF); }
-        .domain-card-6 { border-left: 3px solid #319795; background: linear-gradient(to right, #F0FDFA, #FFF); }
-        .domain-card-7 { border-left: 3px solid #E2001A; background: linear-gradient(to right, #FFF5F5, #FFF); }
+        .image-card .caption { padding: 0.75rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--ink); text-align: center; }
+        .image-card:nth-child(1) { border-top: 3px solid var(--card-1-text); }
+        .image-card:nth-child(2) { border-top: 3px solid var(--card-2-text); }
+        .image-card:nth-child(3) { border-top: 3px solid var(--card-3-text); }
+        .image-card:nth-child(4) { border-top: 3px solid var(--card-4-text); }
 
         /* --- MEDIA & CAREERS --- */
-        .media-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .media-card { background: #FFF; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
-        .media-placeholder { background: linear-gradient(135deg, var(--ink), #1E293B); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); font-size: 2.5rem; }
-        .media-placeholder.audio { background: linear-gradient(135deg, var(--accent), #C94F1C); }
-        .media-info { padding: 1rem; }
-        .media-info h4 { font-size: 1rem; margin-bottom: 0.3rem; }
-        .media-info p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-        .media-badge { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 50px; margin-bottom: 0.5rem; }
-        .media-badge.video { background: #F1F5F9; color: var(--ink); }
-        .media-badge.audio { background: #FFF4ED; color: var(--accent-dark); }
-
-        .careers-card {
-            background: linear-gradient(135deg, var(--ink), #1E293B); color: #FFF; border-radius: var(--radius);
-            padding: 2.5rem 1.5rem; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+        .media-placeholder {
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+            border-radius: var(--radius); height: 180px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; color: white; margin-top: 0.75rem;
         }
-        .careers-card h3 { color: #FFF; font-size: 1.5rem; margin-bottom: 0.8rem; position: relative; z-index: 2; }
-        .careers-card p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 1.5rem; position: relative; z-index: 2; font-size: 0.95rem; }
-        .careers-card .btn { position: relative; z-index: 2; background: #FFF; color: var(--ink); }
+        .media-placeholder i { font-size: 2rem; opacity: 0.8; margin-bottom: 0.5rem; }
+        .media-placeholder span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; opacity: 0.9; text-align: center; padding: 0 1rem; }
+        .audio-player-wrap { background: var(--bg-base); border-radius: var(--radius); padding: 1rem; margin-top: 0.75rem; border: 1px solid var(--border); }
+        .audio-player-wrap audio { width: 100%; height: 36px; }
 
-        /* --- CONTACT & FOOTER --- */
+        .app-cta-section { background: var(--ink); color: white; padding: 3rem 1rem; text-align: center; position: relative; overflow: hidden; }
+        .app-cta-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+        .app-cta-icon { width: 56px; height: 56px; background: rgba(255,255,255,0.1); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; color: var(--accent); }
+        .app-cta-content h2 { font-size: 1.5rem; color: white; margin-bottom: 0.75rem; }
+        .app-cta-content p { color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .app-cta-buttons { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
+        .app-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.5rem; border-radius: 50px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.9rem; text-decoration: none; width: 100%; max-width: 280px; justify-content: center; border: none; cursor: pointer; }
+        .app-btn-primary { background: var(--accent); color: white; }
+        .app-btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+        .app-badge-row { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+        .app-badge-row span { display: flex; align-items: center; gap: 0.4rem; }
+        .app-badge-row i { color: #4ADE80; }
+
+        /* --- CONTACT --- */
         .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
         .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-        .contact-info-item i { color: var(--accent); background: var(--accent-soft); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1rem; flex-shrink: 0; }
-        .contact-info-item h4 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; color: var(--ink); }
+        .contact-info-item i { color: var(--accent); background: var(--accent-soft); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1rem; flex-shrink: 0; }
+        .contact-info-item h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; color: var(--ink); }
         .contact-info-item p, .contact-info-item a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; line-height: 1.5; display: block; }
-        .contact-info-item a:active { color: var(--accent); }
+        .contact-info-item a:hover { color: var(--accent); }
 
-        .contact-form { background: #FFF; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
-        .contact-form h3 { font-size: 1.25rem; margin-bottom: 1rem; }
-        .contact-form input, .contact-form textarea { 
-            width: 100%; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border: 1.5px solid var(--border); 
-            border-radius: var(--radius-sm); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem;
-            background: var(--bg-secondary); color: var(--ink);
-        }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); background: #FFF; }
+        .contact-form { background: white; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .contact-form h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 0.75rem 1rem; margin-bottom: 0.75rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--bg-base); color: var(--ink); }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); background: white; }
         .contact-form textarea { min-height: 120px; resize: vertical; }
         .contact-form .btn { width: 100%; }
 
-        footer { background: var(--ink); color: #FFF; padding: 3rem 1rem 1.5rem; }
+        /* --- FOOTER --- */
+        footer { background: var(--ink); color: white; padding: 3rem 1rem 1.5rem; }
         .footer-inner { max-width: 1200px; margin: 0 auto; }
         .footer-content { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h4 { color: #FFF; margin-bottom: 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; }
-        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.6; }
-        .footer-section a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 0.6rem; font-size: 0.9rem; }
-        .footer-section a:active { color: var(--accent); }
-        .footer-brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
-        .footer-brand img { height: 44px; background: #FFF; padding: 6px; border-radius: var(--radius-sm); }
-        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+        .footer-section h4 { color: white; margin-bottom: 1rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.6; }
+        .footer-section a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 0.5rem; font-size: 0.85rem; }
+        .footer-section a:hover { color: var(--accent); }
+        .footer-brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .footer-brand img { height: 40px; background: white; padding: 4px; border-radius: var(--radius-sm); }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        /* ============================================
-           RESPONSIVE BREAKPOINTS
-           ============================================ */
-        @media (min-width: 480px) {
-            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        /* --- DESKTOP BREAKPOINTS (Expands the compact mobile layout) --- */
+        @media (min-width: 640px) {
+            .nav-container { padding: 0 1.5rem; }
+            .logo img { height: 44px; }
+            .hero-wrapper { padding: 2rem 1.5rem; }
+            .hero-card { padding: 4rem 2rem; }
+            .hero-logo img { height: 70px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .image-grid { grid-template-columns: repeat(2, 1fr); }
             .legal-grid { grid-template-columns: repeat(2, 1fr); }
-            .media-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-logo img { height: 80px; }
+            section, .section-alt { padding: 4rem 1.5rem; }
+            .contact-grid { grid-template-columns: 1fr 1.2fr; }
+            .footer-content { grid-template-columns: 2fr 1fr 1fr; }
+            .app-cta-buttons { flex-direction: row; justify-content: center; }
+            .app-btn { width: auto; }
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             .mobile-menu-btn { display: none; }
             nav.desktop-nav { display: flex; }
-            section, .section-alt { padding: 4rem 2rem; }
-            .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
             .grid-4 { grid-template-columns: repeat(4, 1fr); }
             .image-grid { grid-template-columns: repeat(3, 1fr); }
             .legal-grid { grid-template-columns: repeat(3, 1fr); }
-            .media-grid { grid-template-columns: repeat(3, 1fr); }
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
-            .contact-grid { grid-template-columns: 1fr 1.2fr; gap: 3rem; }
-            .footer-content { grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
-            .hero-card { padding: 3.5rem 2rem; }
-            .logo img { height: 48px; }
+            section, .section-alt { padding: 5rem 2rem; }
+            .card { padding: 1.75rem; }
         }
     </style>
 </head>
@@ -486,6 +543,7 @@
         <div class="nav-container">
             <a href="#" class="logo">
                 <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
+                <span class="logo-text">UFAD</span>
             </a>
             
             <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu">
@@ -493,22 +551,17 @@
             </button>
 
             <div class="mobile-popup-menu" id="mobile-menu">
-                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#objectives" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#media" onclick="closeMenu()"><span class="lang-fr">Médiathèque</span><span class="lang-en">Media</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#careers" onclick="closeMenu()"><span class="lang-fr">Offres</span><span class="lang-en">Careers</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-arrow-right"></i></a>
-                
+                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#media" onclick="closeMenu()"><span class="lang-fr">Médias</span><span class="lang-en">Media</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#careers" onclick="closeMenu()"><span class="lang-fr">Carrières</span><span class="lang-en">Careers</span><i class="fas fa-chevron-right"></i></a>
+                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-chevron-right"></i></a>
+                <div class="divider"></div>
                 <div class="mobile-actions">
-                    <a href="#contact" class="btn" onclick="closeMenu()">
-                        <i class="fas fa-paper-plane"></i> <span class="lang-fr">Nous Contacter</span><span class="lang-en">Contact Us</span>
-                    </a>
-                    <button class="mobile-lang-toggle" onclick="toggleLanguage()">
-                        <i class="fas fa-globe"></i> <span class="lang-fr">Passer en EN</span><span class="lang-en">Switch to FR</span>
-                    </button>
+                    <a href="#contact" class="btn" onclick="closeMenu()"><i class="fas fa-paper-plane"></i> <span class="lang-fr">Nous Contacter</span><span class="lang-en">Contact Us</span></a>
+                    <button class="mobile-lang-toggle" onclick="toggleLanguage()"><i class="fas fa-globe"></i> <span class="lang-fr">Passer en EN</span><span class="lang-en">Switch to FR</span></button>
                 </div>
             </div>
 
@@ -516,11 +569,10 @@
                 <ul>
                     <li><a href="#about" class="lang-fr">À propos</a><a href="#about" class="lang-en">About</a></li>
                     <li><a href="#mission" class="lang-fr">Mission</a><a href="#mission" class="lang-en">Mission</a></li>
-                    <li><a href="#objectives" class="lang-fr">Objectifs</a><a href="#objectives" class="lang-en">Objectives</a></li>
                     <li><a href="#domains" class="lang-fr">Domaines</a><a href="#domains" class="lang-en">Domains</a></li>
                     <li><a href="#activities" class="lang-fr">Activités</a><a href="#activities" class="lang-en">Activities</a></li>
-                    <li><a href="#media" class="lang-fr">Médiathèque</a><a href="#media" class="lang-en">Media</a></li>
-                    <li><a href="#careers" class="lang-fr">Offres</a><a href="#careers" class="lang-en">Careers</a></li>
+                    <li><a href="#media" class="lang-fr">Médias</a><a href="#media" class="lang-en">Media</a></li>
+                    <li><a href="#careers" class="lang-fr">Carrières</a><a href="#careers" class="lang-en">Careers</a></li>
                     <li><a href="#contact" class="lang-fr">Contact</a><a href="#contact" class="lang-en">Contact</a></li>
                     <li><button class="lang-toggle" onclick="toggleLanguage()"><span class="lang-fr">EN</span><span class="lang-en">FR</span></button></li>
                 </ul>
@@ -528,7 +580,7 @@
         </div>
     </header>
 
-    <!-- HERO CARD WITH BLURRY BACKGROUND -->
+    <!-- Hero with Blurry Background -->
     <div class="hero-wrapper">
         <div class="hero-card">
             <div class="hero-content">
@@ -536,24 +588,17 @@
                     <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
                 </div>
                 <div class="hero-fullname">
-                    <span class="word"><span class="c-u">U</span>nion</span>
-                    <span class="word">des</span>
-                    <span class="word"><span class="c-f">F</span>emmes</span>
-                    <span class="word"><span class="c-a">A</span>fricaines</span>
-                    <span class="word">pour</span>
-                    <span class="word">le</span>
-                    <span class="word"><span class="c-d">D</span>éveloppement</span>
+                    <span class="c-u">U</span>nion des <span class="c-f">F</span>emmes <span class="c-a">A</span>fricaines pour le <span class="c-d">D</span>éveloppement
                 </div>
-
                 <div class="hero-badge">
                     <i class="fas fa-circle"></i>
-                    <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC</span>
-                    <span class="lang-en">Humanitarian NGO · North Kivu, DRC</span>
+                    <span class="lang-fr">ONG Humanitaire · RDC, Nord-Kivu</span>
+                    <span class="lang-en">Humanitarian NGO · DRC, North Kivu</span>
                 </div>
                 <h1 class="lang-fr">Autonomiser les femmes, <em>bâtir l'avenir.</em></h1>
                 <h1 class="lang-en">Empowering women, <em>building the future.</em></h1>
-                <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême.</p>
-                <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty.</p>
+                <p class="lang-fr">Lutte contre les inégalités sociales et la pauvreté extrême au Nord-Kivu.</p>
+                <p class="lang-en">Fighting social inequalities and extreme poverty in North Kivu.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Contact</a>
                     <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact</a>
@@ -565,36 +610,26 @@
     </div>
 
     <!-- About -->
-    <section id="about" data-theme="blue">
+    <section id="about">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Qui Sommes-Nous</span>
             <span class="section-eyebrow lang-en">Who We Are</span>
             <h2 class="lang-fr">Organisation à caractère féminin</h2>
             <h2 class="lang-en">Feminine Character Organization</h2>
         </div>
-        <p class="about-intro lang-fr">L'UFAD ONGD est une organisation humanitaire non gouvernementale à « Caractère Féminin », apolitique, créée le 23 Septembre 2015 au Nord-Kivu en RDC.</p>
-        <p class="about-intro lang-en">UFAD ONGD is a non-governmental humanitarian organization with a "Feminine Character", apolitical, created on September 23, 2015, in North Kivu, DRC.</p>
+        <p class="about-intro lang-fr">UFAD ONGD est une organisation humanitaire nationale, non confessionnelle et apolitique, créée le 23 Septembre 2015 pour lutter contre les inégalités et la pauvreté.</p>
+        <p class="about-intro lang-en">UFAD ONGD is a national, non-denominational, and apolitical humanitarian organization, created on September 23, 2015, to fight inequalities and poverty.</p>
         
-        <div class="zone-highlight">
-            <i class="fas fa-map-location-dot"></i>
-            <div>
-                <h4 class="lang-fr">Zone d'Intervention</h4>
-                <h4 class="lang-en">Intervention Zone</h4>
-                <p class="lang-fr">République Démocratique du Congo (RDC), Province du Nord-Kivu.</p>
-                <p class="lang-en">Democratic Republic of Congo (DRC), North Kivu Province.</p>
-            </div>
-        </div>
-
         <div class="legal-card">
             <h4><i class="fas fa-certificate"></i> <span class="lang-fr">Statut Juridique</span><span class="lang-en">Legal Status</span></h4>
             <div class="legal-grid">
                 <div class="legal-item">
                     <strong class="lang-fr">National</strong><strong class="lang-en">National</strong>
-                    F.92/49.994 | No. JUST.SG/20/TK/4385/2022
+                    F.92/49.994<br>No. JUST.SG/20/TK/4385/2022
                 </div>
                 <div class="legal-item">
-                    <strong class="lang-fr">Provincial</strong><strong class="lang-en">Provincial</strong>
-                    N° 01/284/CAB/GP-NK/2019
+                    <strong class="lang-fr">Provincial (Plan)</strong><strong class="lang-en">Provincial (Plan)</strong>
+                    S/No: 77 du 08/05/23
                 </div>
                 <div class="legal-item">
                     <strong class="lang-fr">Justice</strong><strong class="lang-en">Justice</strong>
@@ -604,185 +639,108 @@
                     <strong class="lang-fr">Affaires Sociales</strong><strong class="lang-en">Social Affairs</strong>
                     N° 08/DIVAS/N-K/AS/95/2023
                 </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Genre & Famille</strong><strong class="lang-en">Gender & Family</strong>
-                    N° 12/DIV-PR/GEFAE-NK/2024
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Enreg. Provincial (Plan)</strong><strong class="lang-en">Provincial Reg. (Plan)</strong>
-                    S/No: 77 du 08/05/23
+                <div class="legal-item" style="grid-column: 1 / -1; background: var(--accent-soft); border-color: var(--accent);">
+                    <strong style="color: var(--accent-dark); display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> <span class="lang-fr">Zone d'Intervention</span><span class="lang-en">Intervention Zone</span>
+                    </strong>
+                    <span class="lang-fr" style="font-weight: 600; color: var(--ink); display: block; margin-top: 0.25rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem;">RDC — Particulièrement province du Nord-Kivu</span>
+                    <span class="lang-en" style="font-weight: 600; color: var(--ink); display: block; margin-top: 0.25rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem;">DRC — Particularly North Kivu province</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission & Vision -->
-    <div class="section-alt" id="mission" data-theme="warm">
+    <!-- Mission -->
+    <div class="section-alt" id="mission">
         <div class="inner">
             <div class="section-header">
-                <span class="section-eyebrow lang-fr">Notre Raison d'Être</span>
-                <span class="section-eyebrow lang-en">Our Purpose</span>
+                <span class="section-eyebrow lang-fr">Raison d'Être</span>
+                <span class="section-eyebrow lang-en">Purpose</span>
                 <h2 class="lang-fr">Mission & Vision</h2>
                 <h2 class="lang-en">Mission & Vision</h2>
             </div>
             <div class="mission-grid">
                 <div class="mission-card mission">
                     <div class="m-icon"><i class="fas fa-bullseye"></i></div>
-                    <h3 class="lang-fr">Mission</h3>
-                    <h3 class="lang-en">Mission</h3>
-                    <p class="lang-fr">Assurer l'égalité et l'équité pour un monde inclusif offrant stabilité et paix.</p>
-                    <p class="lang-en">Ensure equality and equity for an inclusive world offering stability and peace.</p>
+                    <h3 class="lang-fr">Mission</h3><h3 class="lang-en">Mission</h3>
+                    <p class="lang-fr">Assurer l'égalité et l'équité pour un monde inclusif, stable et pacifique.</p>
+                    <p class="lang-en">Ensure equality and equity for an inclusive, stable, and peaceful world.</p>
                 </div>
                 <div class="mission-card vision">
                     <div class="m-icon"><i class="fas fa-eye"></i></div>
-                    <h3 class="lang-fr">Vision</h3>
-                    <h3 class="lang-en">Vision</h3>
-                    <p class="lang-fr">Promouvoir les valeurs humanitaires, la solidarité et le respect des droits et de la dignité.</p>
-                    <p class="lang-en">Promote humanitarian values, solidarity, and respect for rights and dignity.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Objectives -->
-    <section id="objectives" data-theme="green">
-        <div class="section-header">
-            <span class="section-eyebrow lang-fr">Cap sur l'Impact</span>
-            <span class="section-eyebrow lang-en">Focus on Impact</span>
-            <h2 class="lang-fr">Nos Objectifs</h2>
-            <h2 class="lang-en">Our Objectives</h2>
-        </div>
-        <div class="grid-2">
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
-                <h3 class="lang-fr">Objectif Global</h3>
-                <h3 class="lang-en">Global Objective</h3>
-                <p class="lang-fr">Créer un monde solidaire où les droits humains, la Femme et l'Enfant sont valorisés.</p>
-                <p class="lang-en">Create a united world where human rights, Women, and Children are valued.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-list-check"></i></div>
-                <h3 class="lang-fr">Objectifs Spécifiques</h3>
-                <h3 class="lang-en">Specific Objectives</h3>
-                <ul>
-                    <li class="lang-fr">Promouvoir les droits humains et lutter contre les inégalités.</li>
-                    <li class="lang-en">Promote human rights and fight inequalities.</li>
-                    <li class="lang-fr">Accès à l'Éducation pour les marginalisés.</li>
-                    <li class="lang-en">Access to Education for the marginalized.</li>
-                    <li class="lang-fr">Centres sociaux d'assistance et encadrement.</li>
-                    <li class="lang-en">Social centers for assistance and guidance.</li>
-                    <li class="lang-fr">Éducation sanitaire (WASH) et métiers professionnels.</li>
-                    <li class="lang-en">Health education (WASH) and professional trades.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Targets -->
-    <div class="section-alt" id="targets" data-theme="lavender">
-        <div class="inner">
-            <div class="section-header">
-                <span class="section-eyebrow lang-fr">Ceux que Nous Servons</span>
-                <span class="section-eyebrow lang-en">Those We Serve</span>
-                <h2 class="lang-fr">Cibles Bénéficiaires</h2>
-                <h2 class="lang-en">Beneficiary Targets</h2>
-            </div>
-            <div class="grid-3">
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-child"></i></div>
-                    <h4 class="lang-fr">Filles Mineures Victimes</h4>
-                    <h4 class="lang-en">Minor Girls Victims</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-user-clock"></i></div>
-                    <h4 class="lang-fr">Personnes du 3ème Âge</h4>
-                    <h4 class="lang-en">Elderly People</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4 class="lang-fr">Victimes de Violences</h4>
-                    <h4 class="lang-en">Survivors of Violence</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-tree"></i></div>
-                    <h4 class="lang-fr">Pygmées</h4>
-                    <h4 class="lang-en">Pygmy Communities</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-wheelchair"></i></div>
-                    <h4 class="lang-fr">Handicapés</h4>
-                    <h4 class="lang-en">People with Disabilities</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h4 class="lang-fr">Albinos</h4>
-                    <h4 class="lang-en">Albinos</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-users-cog"></i></div>
-                    <h4 class="lang-fr">Enfants des Forces Armées</h4>
-                    <h4 class="lang-en">Children of Armed Forces</h4>
+                    <h3 class="lang-fr">Vision</h3><h3 class="lang-en">Vision</h3>
+                    <p class="lang-fr">Promouvoir les valeurs humanitaires, la solidarité et le respect des droits sans discrimination.</p>
+                    <p class="lang-en">Promote humanitarian values, solidarity, and respect for rights without discrimination.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Domains -->
-    <section id="domains" data-theme="teal">
+    <section id="domains">
         <div class="section-header">
-            <span class="section-eyebrow lang-fr">Nos Axes d'Action</span>
-            <span class="section-eyebrow lang-en">Our Action Areas</span>
+            <span class="section-eyebrow lang-fr">Axes d'Action</span>
+            <span class="section-eyebrow lang-en">Action Areas</span>
             <h2 class="lang-fr">Domaines Clés</h2>
             <h2 class="lang-en">Key Domains</h2>
         </div>
         <div class="grid-3">
-            <div class="card domain-card-1">
-                <div class="domain-number">01</div>
-                <h3 class="lang-fr">Sécurité Alimentaire</h3>
-                <h3 class="lang-en">Food Security</h3>
-                <ul><li class="lang-fr">Sécurité Économique</li><li class="lang-fr">Leadership Féminin</li></ul>
+            <div class="card theme-1">
+                <div class="card-icon"><i class="fas fa-wheat-awn"></i></div>
+                <h3 class="lang-fr">Sécurité Alimentaire</h3><h3 class="lang-en">Food Security</h3>
+                <ul><li class="lang-fr">Sécurité Économique</li><li class="lang-en">Economic Security</li></ul>
             </div>
-            <div class="card domain-card-2">
-                <div class="domain-number">02</div>
-                <h3 class="lang-fr">Protection</h3>
-                <h3 class="lang-en">Protection</h3>
-                <ul><li class="lang-fr">Liens familiaux</li><li class="lang-fr">Plaidoyer</li></ul>
+            <div class="card theme-2">
+                <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3 class="lang-fr">Protection</h3><h3 class="lang-en">Protection</h3>
+                <ul><li class="lang-fr">Réunification familiale</li><li class="lang-en">Family reunification</li></ul>
             </div>
-            <div class="card domain-card-3">
-                <div class="domain-number">03</div>
-                <h3 class="lang-fr">Santé & Nutrition</h3>
-                <h3 class="lang-en">Health & Nutrition</h3>
-                <ul><li class="lang-fr">Soutien Psychosocial</li><li class="lang-fr">Santé Reproductive</li></ul>
+            <div class="card theme-3">
+                <div class="card-icon"><i class="fas fa-heart-pulse"></i></div>
+                <h3 class="lang-fr">Santé & Nutrition</h3><h3 class="lang-en">Health & Nutrition</h3>
+                <ul><li class="lang-fr">Soutien Psychosocial (MHPSS)</li><li class="lang-en">Psychosocial Support</li></ul>
             </div>
-            <div class="card domain-card-4">
-                <div class="domain-number">04</div>
-                <h3 class="lang-fr">NFIs & Abris</h3>
-                <h3 class="lang-en">NFIs & Shelter</h3>
-                <ul><li class="lang-fr">Articles Ménagers</li><li class="lang-fr">Abris d'urgence</li></ul>
+            <div class="card theme-4">
+                <div class="card-icon"><i class="fas fa-tent"></i></div>
+                <h3 class="lang-fr">NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3>
+                <ul><li class="lang-fr">Articles Ménagers Essentiels</li><li class="lang-en">Non-Food Items</li></ul>
             </div>
-            <div class="card domain-card-5">
-                <div class="domain-number">05</div>
-                <h3 class="lang-fr">Éducation</h3>
-                <h3 class="lang-en">Education</h3>
-                <ul><li class="lang-fr">Alphabétisation</li><li class="lang-fr">Accès à l'école</li></ul>
+            <div class="card theme-5">
+                <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="lang-fr">Éducation</h3><h3 class="lang-en">Education</h3>
+                <ul><li class="lang-fr">Alphabétisation</li><li class="lang-en">Literacy</li></ul>
             </div>
-            <div class="card domain-card-6">
-                <div class="domain-number">06</div>
-                <h3 class="lang-fr">EHA / WASH</h3>
-                <h3 class="lang-en">WASH</h3>
-                <ul><li class="lang-fr">Eau et Hygiène</li><li class="lang-fr">Assainissement</li></ul>
-            </div>
-            <div class="card domain-card-7">
-                <div class="domain-number">07</div>
-                <h3 class="lang-fr">Environnement</h3>
-                <h3 class="lang-en">Environment</h3>
-                <ul><li class="lang-fr">Protection climatique</li><li class="lang-fr">Développement durable</li></ul>
+            <div class="card theme-6">
+                <div class="card-icon"><i class="fas fa-faucet-drip"></i></div>
+                <h3 class="lang-fr">EHA / WASH</h3><h3 class="lang-en">WASH</h3>
+                <ul><li class="lang-fr">Eau, Hygiène et Assainissement</li><li class="lang-en">Water, Sanitation, Hygiene</li></ul>
             </div>
         </div>
     </section>
 
+    <!-- Targets -->
+    <div class="section-alt" id="targets">
+        <div class="inner">
+            <div class="section-header">
+                <span class="section-eyebrow lang-fr">Bénéficiaires</span>
+                <span class="section-eyebrow lang-en">Beneficiaries</span>
+                <h2 class="lang-fr">Nos Cibles</h2>
+                <h2 class="lang-en">Our Targets</h2>
+            </div>
+            <div class="grid-4">
+                <div class="target-card theme-1"><div class="t-icon"><i class="fas fa-child"></i></div><h4 class="lang-fr">Filles Mineures</h4><h4 class="lang-en">Minor Girls</h4></div>
+                <div class="target-card theme-2"><div class="t-icon"><i class="fas fa-user-clock"></i></div><h4 class="lang-fr">Personnes Âgées</h4><h4 class="lang-en">Elderly</h4></div>
+                <div class="target-card theme-3"><div class="t-icon"><i class="fas fa-shield-alt"></i></div><h4 class="lang-fr">Violences Sexuelles</h4><h4 class="lang-en">GBV Survivors</h4></div>
+                <div class="target-card theme-4"><div class="t-icon"><i class="fas fa-tree"></i></div><h4 class="lang-fr">Pygmées</h4><h4 class="lang-en">Pygmy Communities</h4></div>
+                <div class="target-card theme-5"><div class="t-icon"><i class="fas fa-wheelchair"></i></div><h4 class="lang-fr">Handicapés</h4><h4 class="lang-en">Disabled</h4></div>
+                <div class="target-card theme-6"><div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div><h4 class="lang-fr">Albinos</h4><h4 class="lang-en">Albinos</h4></div>
+                <div class="target-card theme-7" style="grid-column: span 1;"><div class="t-icon"><i class="fas fa-users-cog"></i></div><h4 class="lang-fr">Enfants des Forces Armées</h4><h4 class="lang-en">Children of Armed Forces</h4></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Activities -->
-    <div class="section-alt" id="activities" data-theme="neutral">
+    <div class="section-alt" id="activities" style="background: var(--card-4);">
         <div class="inner">
             <div class="section-header">
                 <span class="section-eyebrow lang-fr">Sur le Terrain</span>
@@ -794,106 +752,116 @@
             <div class="activity-block">
                 <div class="activity-title"><div class="num">1</div><h3 class="lang-fr">Métiers Professionnels</h3><h3 class="lang-en">Professional Trades</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier 1" loading="lazy"></div><div class="caption lang-fr">Formation technique</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier 2" loading="lazy"></div><div class="caption lang-fr">Ateliers pratiques</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier 3" loading="lazy"></div><div class="caption lang-fr">Compétences pro</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier" loading="lazy"></div><div class="caption lang-fr">Formation technique</div><div class="caption lang-en">Technical training</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier" loading="lazy"></div><div class="caption lang-fr">Ateliers pratiques</div><div class="caption lang-en">Practical workshops</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
                 <div class="activity-title"><div class="num">2</div><h3 class="lang-fr">Entrepreneuriat Féminin</h3><h3 class="lang-en">Women's Entrepreneurship</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat" loading="lazy"></div><div class="caption lang-fr">Accompagnement des femmes</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy"></div><div class="caption lang-fr">Activités Génératrices de Revenus</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entre" loading="lazy"></div><div class="caption lang-fr">Activités Génératrices de Revenus</div><div class="caption lang-en">Income-Generating Activities</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entre" loading="lazy"></div><div class="caption lang-fr">Coopératives féminines</div><div class="caption lang-en">Women's cooperatives</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
                 <div class="activity-title"><div class="num">3</div><h3 class="lang-fr">Sécurité Alimentaire</h3><h3 class="lang-en">Food Security</h3></div>
-                <div class="image-grid grid-4">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite 1" loading="lazy"></div><div class="caption lang-fr">Distribution de vivres</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite 2" loading="lazy"></div><div class="caption lang-fr">Jardins communautaires</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite 3" loading="lazy"></div><div class="caption lang-fr">Sécurité des ménages</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite 4" loading="lazy"></div><div class="caption lang-fr">Sensibilisation nutritionnelle</div></div>
+                <div class="image-grid">
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Food" loading="lazy"></div><div class="caption lang-fr">Distribution de vivres</div><div class="caption lang-en">Food distribution</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Food" loading="lazy"></div><div class="caption lang-fr">Jardins communautaires</div><div class="caption lang-en">Community gardens</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Food" loading="lazy"></div><div class="caption lang-fr">Sécurité des ménages</div><div class="caption lang-en">Household security</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
-                <div class="activity-title"><div class="num">4</div><h3 class="lang-fr">Éducation</h3><h3 class="lang-en">Education</h3></div>
+                <div class="activity-title"><div class="num">4</div><h3 class="lang-fr">EHA / WASH</h3><h3 class="lang-en">WASH</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Education" loading="lazy"></div><div class="caption lang-fr">Programmes éducatifs</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/SXff4zK8/activite-s-de-l-e-ducation.jpg" alt="Edu 1" loading="lazy"></div><div class="caption lang-fr">Alphabétisation adultes</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH" loading="lazy"></div><div class="caption lang-fr">Points d'eau</div><div class="caption lang-en">Water points</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/s8Qm77d/Whats-App-Image-2026-11-19-at-11-31-19.jpg" alt="WASH" loading="lazy"></div><div class="caption lang-fr">Hygiène et assainissement</div><div class="caption lang-en">Hygiene and sanitation</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
-                <div class="activity-title"><div class="num">5</div><h3 class="lang-fr">EHA / WASH</h3><h3 class="lang-en">WASH</h3></div>
+                <div class="activity-title"><div class="num">5</div><h3 class="lang-fr">NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH 1" loading="lazy"></div><div class="caption lang-fr">Accès à l'eau potable</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/s8Qm77d/Whats-App-Image-2026-11-19-at-11-31-19.jpg" alt="WASH 2" loading="lazy"></div><div class="caption lang-fr">Hygiène et assainissement</div></div>
-                </div>
-            </div>
-
-            <div class="activity-block">
-                <div class="activity-title"><div class="num">6</div><h3 class="lang-fr">NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3></div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris" loading="lazy"></div><div class="caption lang-fr">Kits et articles ménagers</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/d4HgvV4Q/Whats-App-Image-2026-11-03-at-21-19-32-1.jpg" alt="Abris 1" loading="lazy"></div><div class="caption lang-fr">Abris d'urgence</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/d4HgvV4Q/Whats-App-Image-2026-11-03-at-21-19-32-1.jpg" alt="Shelter" loading="lazy"></div><div class="caption lang-fr">Abris d'urgence</div><div class="caption lang-en">Emergency shelter</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Shelter" loading="lazy"></div><div class="caption lang-fr">Articles ménagers (NFI)</div><div class="caption lang-en">Non-Food Items</div></div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Media -->
-    <section id="media" data-theme="blue">
+    <section id="media">
         <div class="section-header">
-            <span class="section-eyebrow lang-fr">Ressources</span>
-            <span class="section-eyebrow lang-en">Resources</span>
-            <h2 class="lang-fr">Médiathèque</h2>
-            <h2 class="lang-en">Media Library</h2>
+            <span class="section-eyebrow lang-fr">Médiathèque</span>
+            <span class="section-eyebrow lang-en">Media Library</span>
+            <h2 class="lang-fr">Vidéos & Audio</h2>
+            <h2 class="lang-en">Videos & Audio</h2>
         </div>
-        <div class="media-grid">
-            <div class="media-card">
-                <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
-                <div class="media-info">
-                    <span class="media-badge video">Vidéo</span>
-                    <h4 class="lang-fr">Impact de nos actions au Nord-Kivu</h4>
-                    <p class="lang-fr">Découvrez comment vos dons transforment des vies.</p>
+        <div class="grid-2">
+            <div class="card">
+                <h4 class="ui-font" style="margin-bottom: 0.5rem;"><i class="fas fa-video" style="color: var(--accent); margin-right: 0.5rem;"></i> <span class="lang-fr">Vidéos</span><span class="lang-en">Videos</span></h4>
+                <div class="media-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <span class="lang-fr">Lecteur Vidéo (YouTube/Vimeo)</span>
+                    <span class="lang-en">Video Player (YouTube/Vimeo)</span>
                 </div>
             </div>
-            <div class="media-card">
-                <div class="media-placeholder audio"><i class="fas fa-microphone-lines"></i></div>
-                <div class="media-info">
-                    <span class="media-badge audio">Audio</span>
-                    <h4 class="lang-fr">Témoignage : Une bénéficiaire reprend espoir</h4>
-                    <p class="lang-fr">L'histoire de Mama Sarah, entrepreneure soutenue.</p>
+            <div class="card">
+                <h4 class="ui-font" style="margin-bottom: 0.5rem;"><i class="fas fa-microphone-alt" style="color: var(--accent); margin-right: 0.5rem;"></i> <span class="lang-fr">Audio</span><span class="lang-en">Audio</span></h4>
+                <div class="audio-player-wrap">
+                    <audio controls><source src="#" type="audio/mpeg"></audio>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;" class="lang-fr">Campagne de sensibilisation</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;" class="lang-en">Awareness campaign</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Careers -->
-    <div class="section-alt" id="careers" data-theme="warm">
+    <div class="section-alt" id="careers">
         <div class="inner">
             <div class="section-header">
-                <span class="section-eyebrow lang-fr">Rejoignez l'Équipe</span>
-                <span class="section-eyebrow lang-en">Join the Team</span>
-                <h2 class="lang-fr">Offres & Carrières</h2>
-                <h2 class="lang-en">Career Opportunities</h2>
+                <span class="section-eyebrow lang-fr">Carrières</span>
+                <span class="section-eyebrow lang-en">Careers</span>
+                <h2 class="lang-fr">Offres d'Emploi</h2>
+                <h2 class="lang-en">Job Offers</h2>
             </div>
-            <div class="careers-card">
-                <h3 class="lang-fr">Travaillez avec l'UFAD</h3>
-                <h3 class="lang-en">Work with UFAD</h3>
-                <p class="lang-fr">Nous recherchons des personnes passionnées pour renforcer notre impact humanitaire au Nord-Kivu.</p>
-                <p class="lang-en">We are looking for passionate individuals to strengthen our humanitarian impact in North Kivu.</p>
-                <a href="mailto:ufadcoordination5@gmail.com?subject=Candidature%20-%20UFAD" class="btn lang-fr"><i class="fas fa-briefcase"></i> Postuler</a>
-                <a href="mailto:ufadcoordination5@gmail.com?subject=Application%20-%20UFAD" class="btn lang-en"><i class="fas fa-briefcase"></i> Apply</a>
+            <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <i class="fas fa-briefcase" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.75rem;"></i>
+                <h3 class="lang-fr">Aucune offre active</h3>
+                <h3 class="lang-en">No active offers</h3>
+                <p class="lang-fr" style="margin-bottom: 1rem;">Envoyez votre CV à <a href="mailto:ufadcoordination5@gmail.com" style="color: var(--accent); font-weight: 600;">ufadcoordination5@gmail.com</a></p>
+                <p class="lang-en" style="margin-bottom: 1rem;">Send your CV to <a href="mailto:ufadcoordination5@gmail.com" style="color: var(--accent); font-weight: 600;">ufadcoordination5@gmail.com</a></p>
+                <a href="#contact" class="btn"><span class="lang-fr">Candidature Spontanée</span><span class="lang-en">Spontaneous Application</span></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- App CTA -->
+    <div class="app-cta-section" id="portal">
+        <div class="app-cta-content">
+            <div class="app-cta-icon"><i class="fas fa-mobile-screen-button"></i></div>
+            <h2 class="lang-fr">Rejoignez la Communauté UFAD</h2>
+            <h2 class="lang-en">Join the UFAD Community</h2>
+            <p class="lang-fr">Installez notre application pour faire un don ou suivre votre assistance.</p>
+            <p class="lang-en">Install our app to donate or track your assistance.</p>
+            <div class="app-cta-buttons">
+                <a href="login.html" class="app-btn app-btn-primary"><i class="fas fa-download"></i> <span class="lang-fr">Télécharger l'App</span><span class="lang-en">Download App</span></a>
+                <a href="#contact" class="app-btn app-btn-secondary"><i class="fas fa-headset"></i> <span class="lang-fr">Besoin d'aide ?</span><span class="lang-en">Need Help?</span></a>
+            </div>
+            <div class="app-badge-row">
+                <span><i class="fas fa-check-circle"></i> <span class="lang-fr">Gratuit</span><span class="lang-en">Free</span></span>
+                <span><i class="fas fa-check-circle"></i> <span class="lang-fr">Hors ligne</span><span class="lang-en">Offline</span></span>
+                <span><i class="fas fa-check-circle"></i> <span class="lang-fr">Sécurisé</span><span class="lang-en">Secure</span></span>
             </div>
         </div>
     </div>
 
     <!-- Contact -->
-    <section id="contact" data-theme="neutral">
+    <section id="contact">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Contact</span>
             <span class="section-eyebrow lang-en">Contact</span>
@@ -905,39 +873,35 @@
                 <div class="contact-info-item">
                     <i class="fas fa-location-dot"></i>
                     <div>
-                        <h4 class="lang-fr">Siège Social</h4>
-                        <p class="lang-fr">Province du Nord-Kivu, RDC</p>
+                        <h4 class="lang-fr">Siège</h4><h4 class="lang-en">HQ</h4>
+                        <p class="lang-fr">Nord-Kivu, RDC</p><p class="lang-en">North Kivu, DRC</p>
                     </div>
                 </div>
                 <div class="contact-info-item">
                     <i class="fas fa-phone"></i>
                     <div>
-                        <h4 class="lang-fr">Téléphone</h4>
-                        <p>+243 (0) 819 168 700</p>
+                        <h4 class="lang-fr">Téléphone</h4><h4 class="lang-en">Phone</h4>
+                        <p>+243 819 168 700</p>
                         <p>+243 851 972 001</p>
                     </div>
                 </div>
                 <div class="contact-info-item">
                     <i class="fas fa-envelope"></i>
                     <div>
-                        <h4 class="lang-fr">Email</h4>
+                        <h4 class="lang-fr">Email</h4><h4 class="lang-en">Email</h4>
                         <a href="mailto:rdcufad@gmail.com">rdcufad@gmail.com</a>
                         <a href="mailto:ufadcoordination5@gmail.com">ufadcoordination5@gmail.com</a>
                     </div>
                 </div>
             </div>
-
             <div class="contact-form">
                 <h3 class="lang-fr">Envoyez un message</h3>
                 <h3 class="lang-en">Send a message</h3>
-                <form onsubmit="event.preventDefault(); alert('Merci! / Thank you!');">
+                <form onsubmit="event.preventDefault(); alert('Message envoyé! / Message sent!');">
                     <input type="text" placeholder="Nom / Name" required>
                     <input type="email" placeholder="Email" required>
                     <textarea placeholder="Message" required></textarea>
-                    <button type="submit" class="btn">
-                        <span class="lang-fr"><i class="fas fa-paper-plane"></i> Envoyer</span>
-                        <span class="lang-en"><i class="fas fa-paper-plane"></i> Send</span>
-                    </button>
+                    <button type="submit" class="btn"><span class="lang-fr">Envoyer</span><span class="lang-en">Send</span></button>
                 </form>
             </div>
         </div>
@@ -951,20 +915,18 @@
                     <div class="footer-brand">
                         <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
                     </div>
-                    <p class="lang-fr">Union des Femmes Africaines pour le Développement.</p>
-                    <p class="lang-en">Union of African Women for Development.</p>
+                    <p class="lang-fr">Union des Femmes Africaines pour le Développement. RDC.</p>
+                    <p class="lang-en">Union of African Women for Development. DRC.</p>
                 </div>
                 <div class="footer-section">
-                    <h4 class="lang-fr">Liens</h4>
-                    <h4 class="lang-en">Links</h4>
-                    <a href="#about" class="lang-fr">À propos</a>
-                    <a href="#activities" class="lang-fr">Activités</a>
-                    <a href="#contact" class="lang-fr">Contact</a>
+                    <h4 class="lang-fr">Liens</h4><h4 class="lang-en">Links</h4>
+                    <a href="#about">À propos / About</a>
+                    <a href="#activities">Activités / Activities</a>
+                    <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-section">
-                    <h4 class="lang-fr">Légal</h4>
-                    <h4 class="lang-en">Legal</h4>
-                    <a href="#">Politique de confidentialité</a>
+                    <h4 class="lang-fr">Légal</h4><h4 class="lang-en">Legal</h4>
+                    <a href="#">Confidentialité / Privacy</a>
                 </div>
             </div>
             <div class="copyright">
@@ -977,71 +939,39 @@
         function toggleMenu(event) {
             if (event) event.stopPropagation();
             const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
-            const isOpen = menu.classList.toggle('active');
-            btn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+            menu.classList.toggle('active');
         }
-
-        function closeMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
-            menu.classList.remove('active');
-            btn.innerHTML = '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = '';
-        }
-
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('mobile-menu');
             const btn = document.querySelector('.mobile-menu-btn');
             if (menu.classList.contains('active') && !menu.contains(event.target) && !btn.contains(event.target)) {
-                closeMenu();
+                menu.classList.remove('active');
             }
         });
+        function closeMenu() { document.getElementById('mobile-menu').classList.remove('active'); }
+        document.addEventListener('keydown', function(event) { if (event.key === 'Escape') closeMenu(); });
 
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-fr')) {
-                body.classList.remove('lang-fr');
-                body.classList.add('lang-en');
-                document.documentElement.lang = 'en';
+                body.classList.remove('lang-fr'); body.classList.add('lang-en');
+                document.documentElement.lang = 'en'; localStorage.setItem('ufad-lang', 'en');
             } else {
-                body.classList.remove('lang-en');
-                body.classList.add('lang-fr');
-                document.documentElement.lang = 'fr';
+                body.classList.remove('lang-en'); body.classList.add('lang-fr');
+                document.documentElement.lang = 'fr'; localStorage.setItem('ufad-lang', 'fr');
             }
         }
-
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('ufad-lang') === 'en') {
+                document.body.classList.remove('lang-fr'); document.body.classList.add('lang-en');
+                document.documentElement.lang = 'en';
+            }
+        });
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 10) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         }, { passive: true });
-
-        // SCROLL COLOR EFFECTS
-        const sections = document.querySelectorAll('section, .section-alt');
-        const themeColors = {
-            'blue': '#F0F9FF',
-            'warm': '#FFF8F5',
-            'green': '#F0FFF4',
-            'lavender': '#F5F3FF',
-            'teal': '#F0FDFA',
-            'neutral': '#F1F5F9'
-        };
-
-        const observerOptions = { threshold: 0.2, rootMargin: '0px' };
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const theme = entry.target.getAttribute('data-theme') || 'neutral';
-                    if (themeColors[theme]) {
-                        document.body.style.backgroundColor = themeColors[theme];
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => sectionObserver.observe(section));
     </script>
 </body>
 </html>
