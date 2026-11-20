@@ -39,28 +39,32 @@
             --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
             --shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
             --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Dynamic Theme Variable (Updated by JS on scroll) */
+            --theme-accent: var(--accent);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         
-        /* RICH, TEXTURED BACKGROUND (Not empty white) */
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             color: var(--text); 
             line-height: 1.6; 
-            background-color: #F1F5F9;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(232, 100, 44, 0.04) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(0, 85, 255, 0.04) 0px, transparent 50%),
-                radial-gradient(#CBD5E1 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 24px 24px;
+            background-color: #F8FAFC; /* Default neutral */
+            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+            background-size: 24px 24px;
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             width: 100%;
             transition: background-color 0.6s ease;
+        }
+
+        /* Disable fixed background on mobile for performance */
+        @media (max-width: 768px) {
+            body { background-attachment: scroll; }
         }
         
         h1, h2, h3, h4 { 
@@ -75,58 +79,76 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* --- COMPACT, NORMAL HEADER --- */
+        /* --- HEADER WITH VISIBLE CTA BUTTON --- */
         header { 
-            background: rgba(255, 255, 255, 0.9); 
+            background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            border-bottom: 3px solid var(--theme-accent); /* DYNAMIC THEME BORDER */
             position: sticky; 
             top: 0; 
             z-index: 1000;
-            transition: var(--transition);
+            transition: border-color 0.6s ease, background 0.3s ease;
         }
         header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
         }
         .nav-container { 
             max-width: 1280px; 
             margin: 0 auto; 
-            padding: 0.5rem 1rem; /* COMPACT PADDING */
+            padding: 0.6rem 1rem; 
             display: flex; 
             align-items: center; 
             justify-content: space-between;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
-        .logo { 
-            display: flex; 
-            align-items: center; 
-            text-decoration: none; 
-            flex-shrink: 0;
-        }
-        .logo img { height: 40px; width: auto; } /* SMALL, NORMAL LOGO */
+        .logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+        .logo img { height: 42px; width: auto; } 
         
         .mobile-menu-btn { 
             display: flex; 
-            background: transparent; 
+            background: var(--bg-secondary); 
             color: var(--ink);
             border: 1px solid var(--border); 
-            padding: 0; 
             border-radius: var(--radius-sm); 
             cursor: pointer; 
-            font-size: 1.1rem; 
+            font-size: 1.2rem; 
             align-items: center;
             justify-content: center;
-            width: 38px; height: 38px; /* COMPACT BUTTON */
+            width: 42px; height: 42px; 
             flex-shrink: 0;
             transition: var(--transition);
             z-index: 1002;
         }
-        .mobile-menu-btn:active { background: var(--bg-secondary); }
+        .mobile-menu-btn:active { background: var(--border); }
 
-        nav.desktop-nav { display: none; } /* Hidden on mobile by default */
+        /* VISIBLE HEADER CTA BUTTON */
+        .header-cta {
+            display: none; /* Hidden on small mobile, shown on desktop/tablet */
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--theme-accent);
+            color: #FFF;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(232, 100, 44, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .header-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(232, 100, 44, 0.4); }
+        .header-cta i { font-size: 0.9rem; }
+
+        @media (min-width: 768px) {
+            .header-cta { display: inline-flex; }
+        }
+
+        nav.desktop-nav { display: none; } 
         nav.desktop-nav ul { display: flex; gap: 0.2rem; align-items: center; list-style: none; }
         nav.desktop-nav a { 
             text-decoration: none; 
@@ -138,10 +160,10 @@
             padding: 0.5rem 0.8rem;
             border-radius: var(--radius-sm);
         }
-        nav.desktop-nav a:hover { color: var(--accent); background: var(--accent-soft); }
+        nav.desktop-nav a:hover { color: var(--theme-accent); background: var(--accent-soft); }
         
         .lang-toggle { 
-            background: var(--bg-primary); 
+            background: var(--bg-secondary); 
             color: var(--ink); 
             border: 1px solid var(--border); 
             padding: 0.4rem 0.9rem; 
@@ -155,47 +177,48 @@
         }
         .lang-toggle:hover { background: var(--ink); color: #FFF; }
 
-        /* --- MOBILE MENU (Compact & Clean) --- */
+        /* --- MOBILE MENU (Bold, Clear, Visible) --- */
         .mobile-popup-menu {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(16px);
-            padding: 4rem 1.5rem 1.5rem;
+            backdrop-filter: blur(20px);
+            padding: 5rem 1.5rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 0.5rem;
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
+            transform: translateY(20px);
             transition: var(--transition);
             overflow-y: auto;
         }
         .mobile-popup-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .mobile-popup-menu a {
+        .mobile-popup-menu a.menu-link {
             text-decoration: none;
             color: var(--ink);
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             font-weight: 700;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            padding: 0.9rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .mobile-popup-menu a:active { color: var(--accent); }
-        .mobile-popup-menu .mobile-actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
-        .mobile-popup-menu .btn { width: 100%; padding: 0.9rem; font-size: 0.95rem; justify-content: center; border-radius: var(--radius); }
+        .mobile-popup-menu a.menu-link:active { color: var(--theme-accent); }
+        
+        .mobile-popup-menu .mobile-actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        .mobile-popup-menu .btn { width: 100%; padding: 1rem; font-size: 1rem; justify-content: center; border-radius: var(--radius); }
         .mobile-lang-toggle {
             background: var(--bg-secondary);
             color: var(--ink);
             border: 1px solid var(--border);
-            padding: 0.9rem;
+            padding: 1rem;
             border-radius: var(--radius);
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -204,37 +227,45 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* --- HERO CARD WITH BLURRY BACKGROUND --- */
+        /* --- HERO CARD WITH REAL BLURRY IMAGE --- */
         .hero-wrapper { padding: 1.5rem 1rem; max-width: 1280px; margin: 0 auto; }
         .hero-card { 
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             border-radius: var(--radius-lg);
-            padding: 2.5rem 1.25rem; 
+            padding: 3rem 1.5rem; 
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-hover);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
-        /* BLURRY BACKGROUND IMAGE EFFECT */
+        /* REAL BLURRY IMAGE BACKGROUND */
         .hero-card::before {
             content: '';
             position: absolute;
-            inset: -20px;
-            background: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1000&q=80') center/cover;
-            filter: blur(30px) brightness(1.2);
-            opacity: 0.5;
+            inset: -30px;
+            /* Using a real UFAD field image */
+            background: url('https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg') center/cover;
+            filter: blur(20px) brightness(0.6);
+            z-index: 0;
+        }
+        /* Overlay to ensure text readability over the blurry image */
+        .hero-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.85));
             z-index: 0;
         }
         .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
 
         .hero-logo {
             display: inline-flex;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 1rem 1.5rem;
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow);
             border: 1px solid var(--border);
             margin-bottom: 1.2rem;
         }
@@ -242,7 +273,7 @@
 
         .hero-fullname {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-size: clamp(1.4rem, 4.5vw, 2.2rem);
             font-weight: 700;
             color: var(--ink);
             line-height: 1.3;
@@ -258,113 +289,117 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid var(--border);
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 50px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             margin-bottom: 1.2rem;
             color: var(--ink-soft);
+            box-shadow: var(--shadow-sm);
         }
-        .hero-badge i { color: var(--accent); font-size: 0.4rem; }
+        .hero-badge i { color: var(--theme-accent); font-size: 0.5rem; }
         
-        .hero-card h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); margin-bottom: 0.8rem; }
-        .hero-card h1 em { font-style: italic; color: var(--accent); }
-        .hero-card p { font-size: 1rem; max-width: 550px; margin: 0 auto 1.5rem; color: var(--ink-soft); font-weight: 500; }
+        .hero-card h1 { font-size: clamp(1.6rem, 5vw, 2.8rem); margin-bottom: 0.8rem; }
+        .hero-card h1 em { font-style: italic; color: var(--theme-accent); }
+        .hero-card p { font-size: 1.05rem; max-width: 550px; margin: 0 auto 1.5rem; color: var(--ink-soft); font-weight: 500; }
         
         .hero-buttons { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
         .btn { 
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-            background: var(--accent); color: #FFF; padding: 0.85rem 1.5rem; border-radius: 50px; 
+            background: var(--theme-accent); color: #FFF; padding: 0.9rem 1.8rem; border-radius: 50px; 
             text-decoration: none; font-weight: 700; transition: var(--transition); border: none; 
-            cursor: pointer; font-size: 0.9rem; font-family: 'Plus Jakarta Sans', sans-serif;
-            min-height: 46px; box-shadow: 0 4px 12px rgba(232, 100, 44, 0.25);
+            cursor: pointer; font-size: 0.95rem; font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 48px; box-shadow: 0 4px 12px rgba(232, 100, 44, 0.25);
         }
         .btn:active { transform: scale(0.97); }
-        .btn-outline { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); box-shadow: none; }
+        .btn-outline { background: rgba(255,255,255,0.9); border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
         .btn-outline:active { background: var(--ink); color: #FFF; }
 
-        /* --- COMPACT SECTIONS & GRIDS --- */
-        section, .section-alt { padding: 3rem 1rem; transition: background-color 0.6s ease; } /* TIGHTER PADDING */
+        /* --- SECTIONS & GRIDS --- */
+        section, .section-alt { padding: 4rem 1rem; transition: background-color 0.6s ease; } 
         section { max-width: 1200px; margin: 0 auto; }
-        .section-alt { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(5px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .section-alt { border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .section-alt > .inner { max-width: 1200px; margin: 0 auto; }
         
-        .section-header { text-align: center; margin-bottom: 2rem; } /* TIGHTER MARGIN */
+        .section-header { text-align: center; margin-bottom: 2.5rem; } 
         .section-eyebrow {
-            display: inline-block; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+            display: inline-block; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--theme-accent); margin-bottom: 0.6rem;
+            transition: color 0.6s ease;
         }
-        .section-header h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 0.6rem; }
-        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 0.95rem; }
+        .section-header h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1rem; }
         
-        .grid-2, .grid-3, .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1rem; } /* TIGHTER GAP */
+        .grid-2, .grid-3, .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; } 
         
         .card { 
             background: var(--bg-primary); 
-            padding: 1.25rem; /* COMPACT INTERNAL PADDING */
+            padding: 1.5rem; 
             border-radius: var(--radius); 
             box-shadow: var(--shadow-sm); 
             border: 1px solid var(--border);
+            border-top: 4px solid var(--theme-accent); /* THEMED CARD TOP BORDER */
             transition: var(--transition); 
         }
-        .card:active { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
         .card-icon {
-            width: 44px; height: 44px; background: var(--accent-soft); border-radius: var(--radius-sm);
-            display: flex; align-items: center; justify-content: center; margin-bottom: 0.8rem;
-            color: var(--accent); font-size: 1.1rem;
+            width: 48px; height: 48px; background: var(--accent-soft); border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+            color: var(--theme-accent); font-size: 1.2rem; transition: color 0.6s ease, background 0.6s ease;
         }
-        .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-        .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
         .card ul { list-style: none; padding-left: 0; }
-        .card li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .card li { position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-muted); }
         .card li::before { 
-            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--accent); 
-            position: absolute; left: 0; top: 3px; font-size: 0.7rem; 
+            content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--theme-accent); 
+            position: absolute; left: 0; top: 4px; font-size: 0.75rem; transition: color 0.6s ease;
         }
 
         /* --- ABOUT & LEGAL --- */
-        .about-intro { max-width: 800px; margin: 0 auto 1.5rem; text-align: center; font-size: 1rem; color: var(--ink-soft); line-height: 1.7; }
+        .about-intro { max-width: 800px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; color: var(--ink-soft); line-height: 1.7; }
         
         .zone-highlight {
             max-width: 800px; margin: 0 auto 2rem; background: #FFF; border: 1px solid #BAE6FD;
-            border-left: 3px solid var(--logo-blue); border-radius: var(--radius);
-            padding: 1.2rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--logo-blue); border-radius: var(--radius);
+            padding: 1.5rem; display: flex; align-items: center; gap: 1rem; box-shadow: var(--shadow-sm);
         }
-        .zone-highlight i { font-size: 1.5rem; color: var(--logo-blue); flex-shrink: 0; }
-        .zone-highlight h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.2rem; font-weight: 800; }
-        .zone-highlight p { font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0; line-height: 1.4; }
+        .zone-highlight i { font-size: 1.8rem; color: var(--logo-blue); flex-shrink: 0; }
+        .zone-highlight h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.3rem; font-weight: 800; }
+        .zone-highlight p { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin: 0; line-height: 1.4; }
 
-        .legal-card { background: #FFF; border-radius: var(--radius); padding: 1.5rem 1.25rem; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        .legal-card h4 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-        .legal-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+        .legal-card { background: #FFF; border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+        .legal-card h4 { font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .legal-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
         .legal-item {
             background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-sm);
-            font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--border);
+            font-size: 0.9rem; color: var(--text-muted); border: 1px solid var(--border);
         }
-        .legal-item strong { display: block; color: var(--ink); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.3rem; font-weight: 800; }
+        .legal-item strong { display: block; color: var(--ink); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.3rem; font-weight: 800; }
 
         /* --- MISSION & TARGETS --- */
-        .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .mission-card { padding: 2rem 1.5rem; border-radius: var(--radius); }
+        .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+        .mission-card { padding: 2.5rem 1.5rem; border-radius: var(--radius); }
         .mission-card.mission { background: var(--ink); color: #FFF; }
-        .mission-card.vision { background: var(--accent); color: #FFF; }
-        .mission-card .m-icon { font-size: 2rem; margin-bottom: 0.8rem; opacity: 0.9; }
-        .mission-card h3 { color: #FFF; font-size: 1.3rem; margin-bottom: 0.6rem; }
-        .mission-card p { color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.6; }
+        .mission-card.vision { background: var(--theme-accent); color: #FFF; transition: background 0.6s ease; }
+        .mission-card .m-icon { font-size: 2.2rem; margin-bottom: 1rem; opacity: 0.9; }
+        .mission-card h3 { color: #FFF; font-size: 1.4rem; margin-bottom: 0.6rem; }
+        .mission-card p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.6; }
 
         .target-card {
             background: #FFF; padding: 1.5rem 1rem; border-radius: var(--radius);
             text-align: center; border: 1px solid var(--border); transition: var(--transition);
         }
+        .target-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
         .target-card .t-icon {
-            width: 48px; height: 48px; margin: 0 auto 0.8rem; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+            width: 52px; height: 52px; margin: 0 auto 1rem; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
         }
-        .target-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+        .target-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
 
         /* UNIQUE TARGET CARD COLORS */
         .target-card:nth-child(1) { background: #FFF5F5; border-color: #FED7D7; } .target-card:nth-child(1) .t-icon { background: #FED7D7; color: #C53030; }
@@ -376,79 +411,87 @@
         .target-card:nth-child(7) { background: #F0FDFA; border-color: #B2F5EA; } .target-card:nth-child(7) .t-icon { background: #B2F5EA; color: #285E61; }
 
         /* --- DOMAINS & ACTIVITIES --- */
-        .domain-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--accent); opacity: 0.1; line-height: 1; margin-bottom: 0.3rem; }
-        .activity-block { margin-bottom: 2.5rem; } /* TIGHTER MARGIN */
+        .domain-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--theme-accent); opacity: 0.15; line-height: 1; margin-bottom: 0.3rem; transition: color 0.6s ease; }
+        .activity-block { margin-bottom: 3rem; } 
         .activity-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
         .activity-title .num {
-            width: 36px; height: 36px; background: var(--ink); color: #FFF; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0;
+            width: 40px; height: 40px; background: var(--theme-accent); color: #FFF; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;
+            transition: background 0.6s ease;
         }
-        .activity-title h3 { font-size: 1.25rem; margin: 0; }
+        .activity-title h3 { font-size: 1.3rem; margin: 0; }
         
-        .image-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .image-card { background: #FFF; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-        .image-card .img-wrap { overflow: hidden; aspect-ratio: 16/10; } /* SHORTER IMAGES ON MOBILE */
-        .image-card img { width: 100%; height: 100%; object-fit: cover; }
-        .image-card .caption { padding: 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--ink); text-align: center; background: #FFF; }
+        .image-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+        .image-card { 
+            background: #FFF; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); 
+            border: 1px solid var(--border);
+            border-bottom: 4px solid var(--theme-accent); /* THEMED PICTURE BORDER */
+            transition: border-color 0.6s ease, transform 0.3s ease;
+        }
+        .image-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .image-card .img-wrap { overflow: hidden; aspect-ratio: 16/10; } 
+        .image-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .image-card:hover img { transform: scale(1.05); }
+        .image-card .caption { padding: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--ink); text-align: center; background: #FFF; }
 
-        /* UNIQUE DOMAIN CARD COLORS */
-        .domain-card-1 { border-left: 3px solid #E8642C; background: linear-gradient(to right, #FFF4ED, #FFF); }
-        .domain-card-2 { border-left: 3px solid #0055FF; background: linear-gradient(to right, #F0F4FF, #FFF); }
-        .domain-card-3 { border-left: 3px solid #4CA100; background: linear-gradient(to right, #F0FFF4, #FFF); }
-        .domain-card-4 { border-left: 3px solid #805AD5; background: linear-gradient(to right, #F5F3FF, #FFF); }
-        .domain-card-5 { border-left: 3px solid #D69E2E; background: linear-gradient(to right, #FFFBF0, #FFF); }
-        .domain-card-6 { border-left: 3px solid #319795; background: linear-gradient(to right, #F0FDFA, #FFF); }
-        .domain-card-7 { border-left: 3px solid #E2001A; background: linear-gradient(to right, #FFF5F5, #FFF); }
+        /* UNIQUE DOMAIN CARD COLORS (Overriding default theme border for variety) */
+        .domain-card-1 { border-top: 4px solid #E8642C; background: linear-gradient(to bottom, #FFF4ED, #FFF); }
+        .domain-card-2 { border-top: 4px solid #0055FF; background: linear-gradient(to bottom, #F0F4FF, #FFF); }
+        .domain-card-3 { border-top: 4px solid #4CA100; background: linear-gradient(to bottom, #F0FFF4, #FFF); }
+        .domain-card-4 { border-top: 4px solid #805AD5; background: linear-gradient(to bottom, #F5F3FF, #FFF); }
+        .domain-card-5 { border-top: 4px solid #D69E2E; background: linear-gradient(to bottom, #FFFBF0, #FFF); }
+        .domain-card-6 { border-top: 4px solid #319795; background: linear-gradient(to bottom, #F0FDFA, #FFF); }
+        .domain-card-7 { border-top: 4px solid #E2001A; background: linear-gradient(to bottom, #FFF5F5, #FFF); }
 
         /* --- MEDIA & CAREERS --- */
-        .media-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .media-card { background: #FFF; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
-        .media-placeholder { background: linear-gradient(135deg, var(--ink), #1E293B); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); font-size: 2.5rem; }
-        .media-placeholder.audio { background: linear-gradient(135deg, var(--accent), #C94F1C); }
-        .media-info { padding: 1rem; }
-        .media-info h4 { font-size: 1rem; margin-bottom: 0.3rem; }
-        .media-info p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
-        .media-badge { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 50px; margin-bottom: 0.5rem; }
+        .media-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+        .media-card { background: #FFF; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; border-bottom: 4px solid var(--theme-accent); transition: border-color 0.6s ease; }
+        .media-placeholder { background: linear-gradient(135deg, var(--ink), #1E293B); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); font-size: 3rem; }
+        .media-placeholder.audio { background: linear-gradient(135deg, var(--theme-accent), #C94F1C); transition: background 0.6s ease; }
+        .media-info { padding: 1.25rem; }
+        .media-info h4 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .media-info p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+        .media-badge { display: inline-block; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 50px; margin-bottom: 0.6rem; }
         .media-badge.video { background: #F1F5F9; color: var(--ink); }
         .media-badge.audio { background: #FFF4ED; color: var(--accent-dark); }
 
         .careers-card {
             background: linear-gradient(135deg, var(--ink), #1E293B); color: #FFF; border-radius: var(--radius);
-            padding: 2.5rem 1.5rem; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem 1.5rem; text-align: center; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);
         }
-        .careers-card h3 { color: #FFF; font-size: 1.5rem; margin-bottom: 0.8rem; position: relative; z-index: 2; }
-        .careers-card p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 1.5rem; position: relative; z-index: 2; font-size: 0.95rem; }
+        .careers-card h3 { color: #FFF; font-size: 1.6rem; margin-bottom: 0.8rem; position: relative; z-index: 2; }
+        .careers-card p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 1.5rem; position: relative; z-index: 2; font-size: 1rem; }
         .careers-card .btn { position: relative; z-index: 2; background: #FFF; color: var(--ink); }
 
         /* --- CONTACT & FOOTER --- */
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
         .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
-        .contact-info-item i { color: var(--accent); background: var(--accent-soft); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1rem; flex-shrink: 0; }
-        .contact-info-item h4 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; color: var(--ink); }
-        .contact-info-item p, .contact-info-item a { color: var(--text-muted); font-size: 0.9rem; text-decoration: none; line-height: 1.5; display: block; }
-        .contact-info-item a:active { color: var(--accent); }
+        .contact-info-item i { color: var(--theme-accent); background: var(--accent-soft); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1.1rem; flex-shrink: 0; transition: color 0.6s ease, background 0.6s ease; }
+        .contact-info-item h4 { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; color: var(--ink); }
+        .contact-info-item p, .contact-info-item a { color: var(--text-muted); font-size: 0.95rem; text-decoration: none; line-height: 1.5; display: block; }
+        .contact-info-item a:active { color: var(--theme-accent); }
 
-        .contact-form { background: #FFF; padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
-        .contact-form h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+        .contact-form { background: #FFF; padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .contact-form h3 { font-size: 1.3rem; margin-bottom: 1.2rem; }
         .contact-form input, .contact-form textarea { 
-            width: 100%; padding: 0.8rem 1rem; margin-bottom: 0.8rem; border: 1.5px solid var(--border); 
-            border-radius: var(--radius-sm); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem;
-            background: var(--bg-secondary); color: var(--ink);
+            width: 100%; padding: 0.9rem 1rem; margin-bottom: 1rem; border: 1.5px solid var(--border); 
+            border-radius: var(--radius-sm); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;
+            background: var(--bg-secondary); color: var(--ink); transition: var(--transition);
         }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); background: #FFF; }
-        .contact-form textarea { min-height: 120px; resize: vertical; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--theme-accent); background: #FFF; box-shadow: 0 0 0 3px var(--accent-soft); }
+        .contact-form textarea { min-height: 140px; resize: vertical; }
         .contact-form .btn { width: 100%; }
 
         footer { background: var(--ink); color: #FFF; padding: 3rem 1rem 1.5rem; }
         .footer-inner { max-width: 1200px; margin: 0 auto; }
         .footer-content { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h4 { color: #FFF; margin-bottom: 1rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; }
-        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.6; }
-        .footer-section a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 0.6rem; font-size: 0.9rem; }
-        .footer-section a:active { color: var(--accent); }
-        .footer-brand { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
-        .footer-brand img { height: 44px; background: #FFF; padding: 6px; border-radius: var(--radius-sm); }
-        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+        .footer-section h4 { color: #FFF; margin-bottom: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; }
+        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.6; }
+        .footer-section a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 0.6rem; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-section a:hover { color: #FFF; }
+        .footer-brand { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+        .footer-brand img { height: 48px; background: #FFF; padding: 6px; border-radius: var(--radius-sm); }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
 
         /* ============================================
            RESPONSIVE BREAKPOINTS
@@ -464,7 +507,7 @@
         @media (min-width: 768px) {
             .mobile-menu-btn { display: none; }
             nav.desktop-nav { display: flex; }
-            section, .section-alt { padding: 4rem 2rem; }
+            section, .section-alt { padding: 5rem 2rem; }
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
             .grid-4 { grid-template-columns: repeat(4, 1fr); }
@@ -474,61 +517,64 @@
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-grid { grid-template-columns: 1fr 1.2fr; gap: 3rem; }
             .footer-content { grid-template-columns: 2fr 1fr 1fr; gap: 2rem; }
-            .hero-card { padding: 3.5rem 2rem; }
+            .hero-card { padding: 4rem 2rem; }
             .logo img { height: 48px; }
         }
     </style>
 </head>
 <body class="lang-fr">
 
-    <!-- Compact Header -->
+    <!-- Compact Header with Visible CTA -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
                 <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
             </a>
             
-            <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <div class="mobile-popup-menu" id="mobile-menu">
-                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#objectives" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#media" onclick="closeMenu()"><span class="lang-fr">Médiathèque</span><span class="lang-en">Media</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#careers" onclick="closeMenu()"><span class="lang-fr">Offres</span><span class="lang-en">Careers</span><i class="fas fa-arrow-right"></i></a>
-                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-arrow-right"></i></a>
-                
-                <div class="mobile-actions">
-                    <a href="#contact" class="btn" onclick="closeMenu()">
-                        <i class="fas fa-paper-plane"></i> <span class="lang-fr">Nous Contacter</span><span class="lang-en">Contact Us</span>
-                    </a>
-                    <button class="mobile-lang-toggle" onclick="toggleLanguage()">
-                        <i class="fas fa-globe"></i> <span class="lang-fr">Passer en EN</span><span class="lang-en">Switch to FR</span>
-                    </button>
-                </div>
-            </div>
-
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="#about" class="lang-fr">À propos</a><a href="#about" class="lang-en">About</a></li>
                     <li><a href="#mission" class="lang-fr">Mission</a><a href="#mission" class="lang-en">Mission</a></li>
-                    <li><a href="#objectives" class="lang-fr">Objectifs</a><a href="#objectives" class="lang-en">Objectives</a></li>
                     <li><a href="#domains" class="lang-fr">Domaines</a><a href="#domains" class="lang-en">Domains</a></li>
                     <li><a href="#activities" class="lang-fr">Activités</a><a href="#activities" class="lang-en">Activities</a></li>
-                    <li><a href="#media" class="lang-fr">Médiathèque</a><a href="#media" class="lang-en">Media</a></li>
-                    <li><a href="#careers" class="lang-fr">Offres</a><a href="#careers" class="lang-en">Careers</a></li>
                     <li><a href="#contact" class="lang-fr">Contact</a><a href="#contact" class="lang-en">Contact</a></li>
                     <li><button class="lang-toggle" onclick="toggleLanguage()"><span class="lang-fr">EN</span><span class="lang-en">FR</span></button></li>
                 </ul>
             </nav>
+
+            <!-- VISIBLE HEADER BUTTON TO FILL GAP -->
+            <a href="#contact" class="header-cta">
+                <i class="fas fa-heart"></i> 
+                <span class="lang-fr">Faire un Don</span>
+                <span class="lang-en">Donate</span>
+            </a>
+
+            <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Toggle menu" aria-expanded="false" id="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- HERO CARD WITH BLURRY BACKGROUND -->
+    <!-- Mobile Popup Menu (Now Bold and Clear) -->
+    <div class="mobile-popup-menu" id="mobile-menu">
+        <a href="#about" class="menu-link" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#mission" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#objectives" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#domains" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#activities" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#contact" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-arrow-right"></i></a>
+        
+        <div class="mobile-actions">
+            <a href="#contact" class="btn" onclick="closeMenu()">
+                <i class="fas fa-heart"></i> <span class="lang-fr">Faire un Don</span><span class="lang-en">Donate Now</span>
+            </a>
+            <button class="mobile-lang-toggle" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i> <span class="lang-fr">Passer en Anglais</span><span class="lang-en">Switch to French</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- HERO CARD WITH REAL BLURRY IMAGE -->
     <div class="hero-wrapper">
         <div class="hero-card">
             <div class="hero-content">
@@ -555,10 +601,10 @@
                 <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême.</p>
                 <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Contact</a>
-                    <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact</a>
-                    <a href="#activities" class="btn btn-outline lang-fr"><i class="fas fa-images"></i> Actions</a>
-                    <a href="#activities" class="btn btn-outline lang-en"><i class="fas fa-images"></i> Actions</a>
+                    <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Nous Contacter</a>
+                    <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact Us</a>
+                    <a href="#activities" class="btn btn-outline lang-fr"><i class="fas fa-images"></i> Nos Actions</a>
+                    <a href="#activities" class="btn btn-outline lang-en"><i class="fas fa-images"></i> Our Actions</a>
                 </div>
             </div>
         </div>
@@ -588,30 +634,12 @@
         <div class="legal-card">
             <h4><i class="fas fa-certificate"></i> <span class="lang-fr">Statut Juridique</span><span class="lang-en">Legal Status</span></h4>
             <div class="legal-grid">
-                <div class="legal-item">
-                    <strong class="lang-fr">National</strong><strong class="lang-en">National</strong>
-                    F.92/49.994 | No. JUST.SG/20/TK/4385/2022
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Provincial</strong><strong class="lang-en">Provincial</strong>
-                    N° 01/284/CAB/GP-NK/2019
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Justice</strong><strong class="lang-en">Justice</strong>
-                    JUST.112/778/NK/2023
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Affaires Sociales</strong><strong class="lang-en">Social Affairs</strong>
-                    N° 08/DIVAS/N-K/AS/95/2023
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Genre & Famille</strong><strong class="lang-en">Gender & Family</strong>
-                    N° 12/DIV-PR/GEFAE-NK/2024
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Enreg. Provincial (Plan)</strong><strong class="lang-en">Provincial Reg. (Plan)</strong>
-                    S/No: 77 du 08/05/23
-                </div>
+                <div class="legal-item"><strong class="lang-fr">National</strong><strong class="lang-en">National</strong>F.92/49.994 | No. JUST.SG/20/TK/4385/2022</div>
+                <div class="legal-item"><strong class="lang-fr">Provincial</strong><strong class="lang-en">Provincial</strong>N° 01/284/CAB/GP-NK/2019</div>
+                <div class="legal-item"><strong class="lang-fr">Justice</strong><strong class="lang-en">Justice</strong>JUST.112/778/NK/2023</div>
+                <div class="legal-item"><strong class="lang-fr">Affaires Sociales</strong><strong class="lang-en">Social Affairs</strong>N° 08/DIVAS/N-K/AS/95/2023</div>
+                <div class="legal-item"><strong class="lang-fr">Genre & Famille</strong><strong class="lang-en">Gender & Family</strong>N° 12/DIV-PR/GEFAE-NK/2024</div>
+                <div class="legal-item"><strong class="lang-fr">Enreg. Provincial (Plan)</strong><strong class="lang-en">Provincial Reg. (Plan)</strong>S/No: 77 du 08/05/23</div>
             </div>
         </div>
     </section>
@@ -628,15 +656,13 @@
             <div class="mission-grid">
                 <div class="mission-card mission">
                     <div class="m-icon"><i class="fas fa-bullseye"></i></div>
-                    <h3 class="lang-fr">Mission</h3>
-                    <h3 class="lang-en">Mission</h3>
+                    <h3 class="lang-fr">Mission</h3><h3 class="lang-en">Mission</h3>
                     <p class="lang-fr">Assurer l'égalité et l'équité pour un monde inclusif offrant stabilité et paix.</p>
                     <p class="lang-en">Ensure equality and equity for an inclusive world offering stability and peace.</p>
                 </div>
                 <div class="mission-card vision">
                     <div class="m-icon"><i class="fas fa-eye"></i></div>
-                    <h3 class="lang-fr">Vision</h3>
-                    <h3 class="lang-en">Vision</h3>
+                    <h3 class="lang-fr">Vision</h3><h3 class="lang-en">Vision</h3>
                     <p class="lang-fr">Promouvoir les valeurs humanitaires, la solidarité et le respect des droits et de la dignité.</p>
                     <p class="lang-en">Promote humanitarian values, solidarity, and respect for rights and dignity.</p>
                 </div>
@@ -655,15 +681,13 @@
         <div class="grid-2">
             <div class="card">
                 <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
-                <h3 class="lang-fr">Objectif Global</h3>
-                <h3 class="lang-en">Global Objective</h3>
+                <h3 class="lang-fr">Objectif Global</h3><h3 class="lang-en">Global Objective</h3>
                 <p class="lang-fr">Créer un monde solidaire où les droits humains, la Femme et l'Enfant sont valorisés.</p>
                 <p class="lang-en">Create a united world where human rights, Women, and Children are valued.</p>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-list-check"></i></div>
-                <h3 class="lang-fr">Objectifs Spécifiques</h3>
-                <h3 class="lang-en">Specific Objectives</h3>
+                <h3 class="lang-fr">Objectifs Spécifiques</h3><h3 class="lang-en">Specific Objectives</h3>
                 <ul>
                     <li class="lang-fr">Promouvoir les droits humains et lutter contre les inégalités.</li>
                     <li class="lang-en">Promote human rights and fight inequalities.</li>
@@ -688,41 +712,13 @@
                 <h2 class="lang-en">Beneficiary Targets</h2>
             </div>
             <div class="grid-3">
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-child"></i></div>
-                    <h4 class="lang-fr">Filles Mineures Victimes</h4>
-                    <h4 class="lang-en">Minor Girls Victims</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-user-clock"></i></div>
-                    <h4 class="lang-fr">Personnes du 3ème Âge</h4>
-                    <h4 class="lang-en">Elderly People</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4 class="lang-fr">Victimes de Violences</h4>
-                    <h4 class="lang-en">Survivors of Violence</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-tree"></i></div>
-                    <h4 class="lang-fr">Pygmées</h4>
-                    <h4 class="lang-en">Pygmy Communities</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-wheelchair"></i></div>
-                    <h4 class="lang-fr">Handicapés</h4>
-                    <h4 class="lang-en">People with Disabilities</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h4 class="lang-fr">Albinos</h4>
-                    <h4 class="lang-en">Albinos</h4>
-                </div>
-                <div class="target-card">
-                    <div class="t-icon"><i class="fas fa-users-cog"></i></div>
-                    <h4 class="lang-fr">Enfants des Forces Armées</h4>
-                    <h4 class="lang-en">Children of Armed Forces</h4>
-                </div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-child"></i></div><h4 class="lang-fr">Filles Mineures Victimes</h4><h4 class="lang-en">Minor Girls Victims</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-user-clock"></i></div><h4 class="lang-fr">Personnes du 3ème Âge</h4><h4 class="lang-en">Elderly People</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-shield-alt"></i></div><h4 class="lang-fr">Victimes de Violences</h4><h4 class="lang-en">Survivors of Violence</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-tree"></i></div><h4 class="lang-fr">Pygmées</h4><h4 class="lang-en">Pygmy Communities</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-wheelchair"></i></div><h4 class="lang-fr">Handicapés</h4><h4 class="lang-en">People with Disabilities</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div><h4 class="lang-fr">Albinos</h4><h4 class="lang-en">Albinos</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-users-cog"></i></div><h4 class="lang-fr">Enfants des Forces Armées</h4><h4 class="lang-en">Children of Armed Forces</h4></div>
             </div>
         </div>
     </div>
@@ -736,48 +732,13 @@
             <h2 class="lang-en">Key Domains</h2>
         </div>
         <div class="grid-3">
-            <div class="card domain-card-1">
-                <div class="domain-number">01</div>
-                <h3 class="lang-fr">Sécurité Alimentaire</h3>
-                <h3 class="lang-en">Food Security</h3>
-                <ul><li class="lang-fr">Sécurité Économique</li><li class="lang-fr">Leadership Féminin</li></ul>
-            </div>
-            <div class="card domain-card-2">
-                <div class="domain-number">02</div>
-                <h3 class="lang-fr">Protection</h3>
-                <h3 class="lang-en">Protection</h3>
-                <ul><li class="lang-fr">Liens familiaux</li><li class="lang-fr">Plaidoyer</li></ul>
-            </div>
-            <div class="card domain-card-3">
-                <div class="domain-number">03</div>
-                <h3 class="lang-fr">Santé & Nutrition</h3>
-                <h3 class="lang-en">Health & Nutrition</h3>
-                <ul><li class="lang-fr">Soutien Psychosocial</li><li class="lang-fr">Santé Reproductive</li></ul>
-            </div>
-            <div class="card domain-card-4">
-                <div class="domain-number">04</div>
-                <h3 class="lang-fr">NFIs & Abris</h3>
-                <h3 class="lang-en">NFIs & Shelter</h3>
-                <ul><li class="lang-fr">Articles Ménagers</li><li class="lang-fr">Abris d'urgence</li></ul>
-            </div>
-            <div class="card domain-card-5">
-                <div class="domain-number">05</div>
-                <h3 class="lang-fr">Éducation</h3>
-                <h3 class="lang-en">Education</h3>
-                <ul><li class="lang-fr">Alphabétisation</li><li class="lang-fr">Accès à l'école</li></ul>
-            </div>
-            <div class="card domain-card-6">
-                <div class="domain-number">06</div>
-                <h3 class="lang-fr">EHA / WASH</h3>
-                <h3 class="lang-en">WASH</h3>
-                <ul><li class="lang-fr">Eau et Hygiène</li><li class="lang-fr">Assainissement</li></ul>
-            </div>
-            <div class="card domain-card-7">
-                <div class="domain-number">07</div>
-                <h3 class="lang-fr">Environnement</h3>
-                <h3 class="lang-en">Environment</h3>
-                <ul><li class="lang-fr">Protection climatique</li><li class="lang-fr">Développement durable</li></ul>
-            </div>
+            <div class="card domain-card-1"><div class="domain-number">01</div><h3 class="lang-fr">Sécurité Alimentaire</h3><h3 class="lang-en">Food Security</h3><ul><li class="lang-fr">Sécurité Économique</li><li class="lang-fr">Leadership Féminin</li></ul></div>
+            <div class="card domain-card-2"><div class="domain-number">02</div><h3 class="lang-fr">Protection</h3><h3 class="lang-en">Protection</h3><ul><li class="lang-fr">Liens familiaux</li><li class="lang-fr">Plaidoyer</li></ul></div>
+            <div class="card domain-card-3"><div class="domain-number">03</div><h3 class="lang-fr">Santé & Nutrition</h3><h3 class="lang-en">Health & Nutrition</h3><ul><li class="lang-fr">Soutien Psychosocial</li><li class="lang-fr">Santé Reproductive</li></ul></div>
+            <div class="card domain-card-4"><div class="domain-number">04</div><h3 class="lang-fr">NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3><ul><li class="lang-fr">Articles Ménagers</li><li class="lang-fr">Abris d'urgence</li></ul></div>
+            <div class="card domain-card-5"><div class="domain-number">05</div><h3 class="lang-fr">Éducation</h3><h3 class="lang-en">Education</h3><ul><li class="lang-fr">Alphabétisation</li><li class="lang-fr">Accès à l'école</li></ul></div>
+            <div class="card domain-card-6"><div class="domain-number">06</div><h3 class="lang-fr">EHA / WASH</h3><h3 class="lang-en">WASH</h3><ul><li class="lang-fr">Eau et Hygiène</li><li class="lang-fr">Assainissement</li></ul></div>
+            <div class="card domain-card-7"><div class="domain-number">07</div><h3 class="lang-fr">Environnement</h3><h3 class="lang-en">Environment</h3><ul><li class="lang-fr">Protection climatique</li><li class="lang-fr">Développement durable</li></ul></div>
         </div>
     </section>
 
@@ -794,106 +755,34 @@
             <div class="activity-block">
                 <div class="activity-title"><div class="num">1</div><h3 class="lang-fr">Métiers Professionnels</h3><h3 class="lang-en">Professional Trades</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier 1" loading="lazy"></div><div class="caption lang-fr">Formation technique</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier 2" loading="lazy"></div><div class="caption lang-fr">Ateliers pratiques</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier 3" loading="lazy"></div><div class="caption lang-fr">Compétences pro</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Formation technique</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Ateliers pratiques</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Compétences pro</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
                 <div class="activity-title"><div class="num">2</div><h3 class="lang-fr">Entrepreneuriat Féminin</h3><h3 class="lang-en">Women's Entrepreneurship</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat" loading="lazy"></div><div class="caption lang-fr">Accompagnement des femmes</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy"></div><div class="caption lang-fr">Activités Génératrices de Revenus</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Accompagnement des femmes</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Activités Génératrices de Revenus</div></div>
                 </div>
             </div>
 
             <div class="activity-block">
                 <div class="activity-title"><div class="num">3</div><h3 class="lang-fr">Sécurité Alimentaire</h3><h3 class="lang-en">Food Security</h3></div>
                 <div class="image-grid grid-4">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite 1" loading="lazy"></div><div class="caption lang-fr">Distribution de vivres</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite 2" loading="lazy"></div><div class="caption lang-fr">Jardins communautaires</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite 3" loading="lazy"></div><div class="caption lang-fr">Sécurité des ménages</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite 4" loading="lazy"></div><div class="caption lang-fr">Sensibilisation nutritionnelle</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Distribution de vivres</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Jardins communautaires</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Sécurité des ménages</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite 4" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Sensibilisation nutritionnelle</div></div>
                 </div>
-            </div>
-
-            <div class="activity-block">
-                <div class="activity-title"><div class="num">4</div><h3 class="lang-fr">Éducation</h3><h3 class="lang-en">Education</h3></div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Education" loading="lazy"></div><div class="caption lang-fr">Programmes éducatifs</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/SXff4zK8/activite-s-de-l-e-ducation.jpg" alt="Edu 1" loading="lazy"></div><div class="caption lang-fr">Alphabétisation adultes</div></div>
-                </div>
-            </div>
-
-            <div class="activity-block">
-                <div class="activity-title"><div class="num">5</div><h3 class="lang-fr">EHA / WASH</h3><h3 class="lang-en">WASH</h3></div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH 1" loading="lazy"></div><div class="caption lang-fr">Accès à l'eau potable</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/s8Qm77d/Whats-App-Image-2026-11-19-at-11-31-19.jpg" alt="WASH 2" loading="lazy"></div><div class="caption lang-fr">Hygiène et assainissement</div></div>
-                </div>
-            </div>
-
-            <div class="activity-block">
-                <div class="activity-title"><div class="num">6</div><h3 class="lang-fr">NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3></div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris" loading="lazy"></div><div class="caption lang-fr">Kits et articles ménagers</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/d4HgvV4Q/Whats-App-Image-2026-11-03-at-21-19-32-1.jpg" alt="Abris 1" loading="lazy"></div><div class="caption lang-fr">Abris d'urgence</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Media -->
-    <section id="media" data-theme="blue">
-        <div class="section-header">
-            <span class="section-eyebrow lang-fr">Ressources</span>
-            <span class="section-eyebrow lang-en">Resources</span>
-            <h2 class="lang-fr">Médiathèque</h2>
-            <h2 class="lang-en">Media Library</h2>
-        </div>
-        <div class="media-grid">
-            <div class="media-card">
-                <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
-                <div class="media-info">
-                    <span class="media-badge video">Vidéo</span>
-                    <h4 class="lang-fr">Impact de nos actions au Nord-Kivu</h4>
-                    <p class="lang-fr">Découvrez comment vos dons transforment des vies.</p>
-                </div>
-            </div>
-            <div class="media-card">
-                <div class="media-placeholder audio"><i class="fas fa-microphone-lines"></i></div>
-                <div class="media-info">
-                    <span class="media-badge audio">Audio</span>
-                    <h4 class="lang-fr">Témoignage : Une bénéficiaire reprend espoir</h4>
-                    <p class="lang-fr">L'histoire de Mama Sarah, entrepreneure soutenue.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Careers -->
-    <div class="section-alt" id="careers" data-theme="warm">
-        <div class="inner">
-            <div class="section-header">
-                <span class="section-eyebrow lang-fr">Rejoignez l'Équipe</span>
-                <span class="section-eyebrow lang-en">Join the Team</span>
-                <h2 class="lang-fr">Offres & Carrières</h2>
-                <h2 class="lang-en">Career Opportunities</h2>
-            </div>
-            <div class="careers-card">
-                <h3 class="lang-fr">Travaillez avec l'UFAD</h3>
-                <h3 class="lang-en">Work with UFAD</h3>
-                <p class="lang-fr">Nous recherchons des personnes passionnées pour renforcer notre impact humanitaire au Nord-Kivu.</p>
-                <p class="lang-en">We are looking for passionate individuals to strengthen our humanitarian impact in North Kivu.</p>
-                <a href="mailto:ufadcoordination5@gmail.com?subject=Candidature%20-%20UFAD" class="btn lang-fr"><i class="fas fa-briefcase"></i> Postuler</a>
-                <a href="mailto:ufadcoordination5@gmail.com?subject=Application%20-%20UFAD" class="btn lang-en"><i class="fas fa-briefcase"></i> Apply</a>
             </div>
         </div>
     </div>
 
     <!-- Contact -->
-    <section id="contact" data-theme="neutral">
+    <section id="contact" data-theme="blue">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Contact</span>
             <span class="section-eyebrow lang-en">Contact</span>
@@ -930,10 +819,11 @@
             <div class="contact-form">
                 <h3 class="lang-fr">Envoyez un message</h3>
                 <h3 class="lang-en">Send a message</h3>
-                <form onsubmit="event.preventDefault(); alert('Merci! / Thank you!');">
-                    <input type="text" placeholder="Nom / Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" required></textarea>
+                <!-- Added Formspree example for real functionality -->
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="text" name="name" placeholder="Nom / Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" placeholder="Message" required></textarea>
                     <button type="submit" class="btn">
                         <span class="lang-fr"><i class="fas fa-paper-plane"></i> Envoyer</span>
                         <span class="lang-en"><i class="fas fa-paper-plane"></i> Send</span>
@@ -955,15 +845,13 @@
                     <p class="lang-en">Union of African Women for Development.</p>
                 </div>
                 <div class="footer-section">
-                    <h4 class="lang-fr">Liens</h4>
-                    <h4 class="lang-en">Links</h4>
+                    <h4 class="lang-fr">Liens</h4><h4 class="lang-en">Links</h4>
                     <a href="#about" class="lang-fr">À propos</a>
                     <a href="#activities" class="lang-fr">Activités</a>
                     <a href="#contact" class="lang-fr">Contact</a>
                 </div>
                 <div class="footer-section">
-                    <h4 class="lang-fr">Légal</h4>
-                    <h4 class="lang-en">Legal</h4>
+                    <h4 class="lang-fr">Légal</h4><h4 class="lang-en">Legal</h4>
                     <a href="#">Politique de confidentialité</a>
                 </div>
             </div>
@@ -977,23 +865,25 @@
         function toggleMenu(event) {
             if (event) event.stopPropagation();
             const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
+            const btn = document.getElementById('menu-btn');
             const isOpen = menu.classList.toggle('active');
             btn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            btn.setAttribute('aria-expanded', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         }
 
         function closeMenu() {
             const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
+            const btn = document.getElementById('menu-btn');
             menu.classList.remove('active');
             btn.innerHTML = '<i class="fas fa-bars"></i>';
+            btn.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         }
 
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
+            const btn = document.getElementById('menu-btn');
             if (menu.classList.contains('active') && !menu.contains(event.target) && !btn.contains(event.target)) {
                 closeMenu();
             }
@@ -1018,25 +908,27 @@
             else header.classList.remove('scrolled');
         }, { passive: true });
 
-        // SCROLL COLOR EFFECTS
+        // ENHANCED SCROLL COLOR EFFECTS (Highly Visible)
         const sections = document.querySelectorAll('section, .section-alt');
         const themeColors = {
-            'blue': '#F0F9FF',
-            'warm': '#FFF8F5',
-            'green': '#F0FFF4',
-            'lavender': '#F5F3FF',
-            'teal': '#F0FDFA',
-            'neutral': '#F1F5F9'
+            'blue': { bg: '#EFF6FF', accent: '#2563EB' },       // Clear Blue
+            'warm': { bg: '#FFF7ED', accent: '#EA580C' },       // Clear Orange/Warm
+            'green': { bg: '#F0FDF4', accent: '#16A34A' },      // Clear Green
+            'lavender': { bg: '#F5F3FF', accent: '#7C3AED' },   // Clear Purple
+            'teal': { bg: '#F0FDFA', accent: '#0D9488' },       // Clear Teal
+            'neutral': { bg: '#F8FAFC', accent: '#475569' }     // Neutral Slate
         };
 
-        const observerOptions = { threshold: 0.2, rootMargin: '0px' };
+        const observerOptions = { threshold: 0.3, rootMargin: '-50px 0px -50px 0px' };
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const theme = entry.target.getAttribute('data-theme') || 'neutral';
-                    if (themeColors[theme]) {
-                        document.body.style.backgroundColor = themeColors[theme];
-                    }
+                    const colors = themeColors[theme] || themeColors['neutral'];
+                    
+                    // Smoothly transition both background and accent color
+                    document.body.style.backgroundColor = colors.bg;
+                    document.body.style.setProperty('--theme-accent', colors.accent);
                 }
             });
         }, observerOptions);
