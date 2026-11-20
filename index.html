@@ -5,79 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="description" content="UFAD - Union des Femmes Africaines pour le Développement. ONG humanitaire en RDC, Nord-Kivu.">
     <meta name="theme-color" content="#0B2A4A">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="UFAD | Union des Femmes Africaines pour le Développement">
-    <meta property="og:description" content="ONG humanitaire en RDC, Nord-Kivu. Autonomiser les femmes, protéger les vulnérables, bâtir l'avenir.">
-    <meta property="og:image" content="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png">
-    <meta property="og:url" content="https://www.ufad.org">
-    <meta name="twitter:card" content="summary_large_image">
-
     <title>UFAD | Union des Femmes Africaines pour le Développement</title>
     
-    <!-- Premium Font Stack: Playfair Display (Headings), Plus Jakarta Sans (UI), DM Sans (Body) -->
+    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            /* Core Palette */
-            --ink: #0B2A4A;
-            --ink-soft: #2C4A6E;
-            --accent: #E8642C;
-            --accent-dark: #C94F1C;
+            /* Premium Base Colors */
+            --ink: #0F172A;          /* Deep slate for text/headings (more modern than pure black) */
+            --ink-soft: #475569;     /* Muted slate for secondary text */
+            --accent: #E8642C;       /* Warm orange accent */
             --accent-soft: #FFF4ED;
+            --accent-dark: #C94F1C;
             
-            /* Premium Section Backgrounds (Subtle & Harmonious) */
-            --bg-white: #FFFFFF;
-            --bg-slate: #F8FAFC;
-            --bg-sky: #F0F9FF;
-            --bg-green: #F0FDF4;
-            --bg-purple: #FAF5FF;
-            --bg-warm: #FFF7ED;
-            --bg-teal: #F0FDFA;
-
-            /* Premium Card Color Themes (7 Unique Soft Tints) */
-            --c1-bg: #FFF5F5; --c1-border: #FED7D7; --c1-accent: #E53E3E; /* Rose */
-            --c2-bg: #EBF8FF; --c2-border: #BEE3F8; --c2-accent: #3182CE; /* Sky Blue */
-            --c3-bg: #F0FFF4; --c3-border: #C6F6D5; --c3-accent: #38A169; /* Mint Green */
-            --c4-bg: #FFFFF0; --c4-border: #FEFCBF; --c4-accent: #D69E2E; /* Warm Amber */
-            --c5-bg: #FAF5FF; --c5-border: #E9D8FD; --c5-accent: #805AD5; /* Soft Purple */
-            --c6-bg: #E6FFFA; --c6-border: #B2F5EA; --c6-accent: #319795; /* Teal */
-            --c7-bg: #FFF5F7; --c7-border: #FED7E2; --c7-accent: #D53F8C; /* Blush Pink */
-
-            /* UI Variables */
-            --border: #E2E8F0;
+            /* Base Backgrounds */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC; /* Very subtle cool gray/white */
+            --bg-warm: #F0F9FF;      /* Soft sky blue */
+            
+            --border: #E2E8F0;       /* Refined, lighter border */
             --text: #334155;
             --text-muted: #64748B;
+            
+            /* Logo Colors */
+            --logo-red: #E2001A; 
+            --logo-blue: #0055FF;
+            --logo-green: #4CA100;
+            
+            /* Premium Spacing & Effects */
             --radius-sm: 8px;
             --radius: 12px;
             --radius-lg: 20px;
-            --shadow-sm: 0 1px 3px rgba(11, 42, 74, 0.04);
-            --shadow: 0 4px 20px rgba(11, 42, 74, 0.06);
-            --shadow-lg: 0 12px 40px rgba(11, 42, 74, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+            --shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+            --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.1);
+            --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.12);
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { 
-            scroll-behavior: smooth; 
-            -webkit-text-size-adjust: 100%; 
-            scroll-padding-top: 100px; /* Prevents header from covering anchored sections */
-        }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         
         body { 
-            font-family: 'DM Sans', sans-serif; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
             color: var(--text); 
             line-height: 1.7; 
-            background: var(--bg-white);
+            background: var(--bg-secondary); 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            width: 100%;
+            transition: background-color 0.6s ease;
         }
         
         h1, h2, h3, h4 { 
@@ -86,44 +70,28 @@
             line-height: 1.25; 
             font-weight: 700;
             letter-spacing: -0.02em;
+            word-wrap: break-word;
         }
-
-        /* Premium UI Font for buttons, labels, and small text */
-        .ui-font { font-family: 'Plus Jakarta Sans', sans-serif; }
 
         img { max-width: 100%; height: auto; display: block; }
 
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* --- SCROLL REVEAL ANIMATION --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-
-        /* --- HEADER --- */
+        /* --- HEADER: Premium Glassmorphism --- */
         header { 
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.85); 
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
             position: sticky; 
             top: 0; 
             z-index: 1000;
             transition: var(--transition);
         }
         header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 20px rgba(11, 42, 74, 0.06);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 30px rgba(15, 23, 42, 0.05);
         }
         .nav-container { 
             max-width: 1280px; 
@@ -139,7 +107,8 @@
             display: flex; 
             align-items: center; 
             text-decoration: none; 
-            background: var(--bg-white);
+            flex-shrink: 0;
+            background: var(--bg-primary);
             padding: 0.5rem 1rem;
             border-radius: var(--radius);
             border: 1px solid var(--border);
@@ -149,114 +118,147 @@
         .logo img { height: 48px; width: auto; }
         
         .mobile-menu-btn { 
-            display: none; 
-            background: var(--bg-white); 
+            display: flex; 
+            background: transparent; 
             color: var(--ink);
             border: 1px solid var(--border); 
-            padding: 0.6rem 1rem; 
+            padding: 0.7rem; 
             border-radius: var(--radius-sm); 
             cursor: pointer; 
-            font-size: 0.9rem; 
-            font-weight: 600;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem; 
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            width: 44px; height: 44px;
+            flex-shrink: 0;
             transition: var(--transition);
             z-index: 1002;
         }
-        .mobile-menu-btn:active { transform: scale(0.96); }
+        .mobile-menu-btn:hover { background: var(--bg-warm); border-color: var(--ink-soft); }
 
-        nav.desktop-nav ul { display: flex; gap: 0.25rem; align-items: center; list-style: none; flex-wrap: wrap; }
+        nav.desktop-nav { display: flex; align-items: center; }
+        nav.desktop-nav ul { display: flex; gap: 0.25rem; align-items: center; list-style: none; flex-wrap: wrap; justify-content: flex-end; }
         nav.desktop-nav a { 
             text-decoration: none; 
             color: var(--ink-soft); 
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 600; 
             font-size: 0.85rem; 
             transition: var(--transition);
-            padding: 0.5rem 0.9rem;
+            white-space: nowrap;
+            padding: 0.6rem 1rem;
             border-radius: var(--radius-sm);
         }
         nav.desktop-nav a:hover { color: var(--accent); background: var(--accent-soft); }
         
         .lang-toggle { 
-            background: var(--bg-white); 
+            background: var(--bg-primary); 
             color: var(--ink); 
             border: 1px solid var(--border); 
-            padding: 0.5rem 1rem; 
+            padding: 0.5rem 1.2rem; 
             border-radius: 50px; 
             cursor: pointer; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700; 
             font-size: 0.8rem; 
             transition: var(--transition);
+            flex-shrink: 0;
+            margin-left: 0.8rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .lang-toggle:hover { background: var(--ink); color: var(--bg-white); border-color: var(--ink); }
+        .lang-toggle:hover { background: var(--ink); color: var(--bg-primary); border-color: var(--ink); }
 
-        /* Mobile Menu */
+        /* --- PREMIUM MOBILE FULL-SCREEN MENU --- */
         .mobile-popup-menu {
-            position: absolute;
-            top: calc(100% + 12px);
-            right: 1.5rem;
-            width: 280px;
-            max-height: 80vh;
-            overflow-y: auto;
-            background: var(--bg-white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border);
-            padding: 1rem;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 5rem 2rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 0.5rem;
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px) scale(0.98);
+            transform: translateY(20px);
             transition: var(--transition);
+            overflow-y: auto;
         }
-        .mobile-popup-menu.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .mobile-popup-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
         .mobile-popup-menu a {
             text-decoration: none;
             color: var(--ink);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition);
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
         }
-        .mobile-popup-menu a:hover { background: var(--accent-soft); color: var(--accent); }
-        .mobile-popup-menu .divider { height: 1px; background: var(--border); margin: 0.75rem 0; }
-        .mobile-popup-menu .mobile-actions { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.5rem; }
-        .mobile-popup-menu .btn { width: 100%; padding: 0.85rem; font-size: 0.9rem; justify-content: center; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .mobile-popup-menu .btn-outline { border: 1.5px solid var(--border); color: var(--ink); background: transparent; }
+        .mobile-popup-menu.active a {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Staggered animation for mobile links */
+        .mobile-popup-menu.active a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-popup-menu.active a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-popup-menu.active a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-popup-menu.active a:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-popup-menu.active a:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-popup-menu.active a:nth-child(6) { transition-delay: 0.35s; }
+        .mobile-popup-menu.active a:nth-child(7) { transition-delay: 0.4s; }
+        .mobile-popup-menu.active a:nth-child(8) { transition-delay: 0.45s; }
+        .mobile-popup-menu.active a:nth-child(9) { transition-delay: 0.5s; }
+
+        .mobile-popup-menu a:hover { color: var(--accent); }
+        .mobile-popup-menu .mobile-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .mobile-popup-menu .btn { 
+            width: 100%; 
+            padding: 1rem; 
+            font-size: 1rem; 
+            justify-content: center; 
+            border-radius: var(--radius);
+        }
         .mobile-lang-toggle {
-            background: var(--bg-slate);
+            background: var(--bg-warm);
             color: var(--ink);
             border: 1px solid var(--border);
-            padding: 0.85rem;
-            border-radius: var(--radius-sm);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding: 1rem;
+            border-radius: var(--radius);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
             transition: var(--transition);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* --- HERO SECTION --- */
-        .hero-wrapper { padding: 2rem 1.25rem; max-width: 1280px; margin: 0 auto; }
+        .hero-wrapper {
+            padding: 2rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
         .hero-card { 
-            background: linear-gradient(145deg, var(--bg-sky) 0%, var(--bg-white) 100%);
+            background: linear-gradient(160deg, #FFFFFF 0%, #F0F9FF 100%);
             border-radius: var(--radius-lg);
-            padding: 3.5rem 1.5rem; 
+            padding: 3rem 1.5rem; 
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -273,13 +275,14 @@
         }
         .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
 
+        .hero-logo-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; }
         .hero-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg-white);
-            padding: 1.25rem 2rem;
-            border-radius: var(--radius);
+            background: var(--bg-primary);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             margin-bottom: 1.5rem;
@@ -288,16 +291,18 @@
 
         .hero-fullname {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-size: clamp(1.4rem, 4vw, 2.4rem);
             font-weight: 700;
             color: var(--ink);
+            letter-spacing: 0.5px;
             line-height: 1.3;
-            margin-bottom: 1.5rem;
+            max-width: 800px;
         }
-        .hero-fullname .c-u { color: #E2001A; }
-        .hero-fullname .c-f { color: #0055FF; }
-        .hero-fullname .c-a { color: #4CA100; }
-        .hero-fullname .c-d { color: #0055FF; }
+        .hero-fullname .c-u { color: var(--logo-red); }
+        .hero-fullname .c-f { color: var(--logo-blue); }
+        .hero-fullname .c-a { color: var(--logo-green); }
+        .hero-fullname .c-d { color: var(--logo-blue); }
+        .hero-fullname span.word { margin: 0 0.15em; white-space: nowrap; }
 
         .hero-badge {
             display: inline-flex;
@@ -306,12 +311,11 @@
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(8px);
             border: 1px solid var(--border);
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
             color: var(--ink-soft);
@@ -319,16 +323,20 @@
         .hero-badge i { color: var(--accent); font-size: 0.5rem; }
         
         .hero-card h1 { 
-            font-size: clamp(1.8rem, 5vw, 2.8rem); 
+            color: var(--ink); 
+            font-size: clamp(1.8rem, 5vw, 3.2rem); 
             margin-bottom: 1.2rem; 
+            font-weight: 700;
         }
-        .hero-card h1 em { font-style: normal; color: var(--accent); }
+        .hero-card h1 em { font-style: italic; color: var(--accent); }
+        
         .hero-card p { 
-            font-size: clamp(1rem, 2.5vw, 1.1rem); 
+            font-size: clamp(1rem, 2.5vw, 1.15rem); 
             max-width: 600px; 
-            margin: 0 auto 2rem; 
-            color: var(--text-muted); 
-            line-height: 1.7;
+            margin: 0 auto 2.5rem; 
+            color: var(--ink-soft); 
+            font-weight: 500;
+            line-height: 1.8;
         }
         
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
@@ -336,58 +344,67 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             background: var(--accent); 
-            color: var(--bg-white); 
-            padding: 0.9rem 2rem; 
+            color: #FFFFFF; 
+            padding: 1rem 2rem; 
             border-radius: 50px; 
             text-decoration: none; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600; 
+            font-weight: 700; 
             transition: var(--transition); 
             border: none; 
             cursor: pointer; 
             font-size: 0.95rem;
-            min-height: 48px; /* Premium touch target */
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: 0.3px;
+            min-height: 52px;
+            box-shadow: 0 4px 15px rgba(232, 100, 44, 0.25);
         }
-        .btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232, 100, 44, 0.25); }
-        .btn:active { transform: translateY(0); }
-        .btn-outline { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); }
-        .btn-outline:hover { background: var(--ink); color: var(--bg-white); border-color: var(--ink); }
+        .btn:hover { 
+            background: var(--accent-dark); 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 25px rgba(232, 100, 44, 0.35); 
+        }
+        .btn:active { transform: translateY(-1px); }
+        .btn-outline { 
+            background: transparent; 
+            border: 2px solid var(--ink); 
+            color: var(--ink);
+            box-shadow: none;
+        }
+        .btn-outline:hover { 
+            background: var(--ink); 
+            color: #FFFFFF; 
+            border-color: var(--ink);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
 
-        /* --- SECTIONS & THEMES --- */
-        section, .section-alt { padding: 5rem 1.25rem; }
+        /* --- SECTIONS --- */
+        section, .section-alt { padding: 5rem 1.5rem; transition: background-color 0.6s ease; }
         section { max-width: 1200px; margin: 0 auto; }
-        .section-alt { max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        
+        .section-alt { 
+            background: var(--bg-primary); 
+            max-width: 100%; 
+            border-top: 1px solid var(--border); 
+            border-bottom: 1px solid var(--border); 
+        }
         .section-alt > .inner { max-width: 1200px; margin: 0 auto; }
         
-        /* Distinct Section Backgrounds */
-        #about { background: var(--bg-white); }
-        #mission { background: var(--bg-slate); }
-        #objectives { background: var(--bg-sky); }
-        #targets { background: var(--bg-green); }
-        #domains { background: var(--bg-purple); }
-        #activities { background: var(--bg-warm); }
-        #media { background: var(--bg-white); }
-        #careers { background: var(--bg-teal); }
-        #contact { background: var(--bg-white); }
-
-        .section-header { text-align: center; margin-bottom: 3.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
         .section-eyebrow {
             display: inline-block;
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 0.8rem;
-            background: var(--accent-soft);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .section-header h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1rem; }
-        .section-header p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; }
+        .section-header h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 1rem; }
+        .section-header p { color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7; }
         
         /* --- GRIDS & CARDS --- */
         .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
@@ -395,38 +412,43 @@
         .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         
         .card { 
-            background: var(--bg-white); 
+            background: var(--bg-primary); 
             padding: 2rem; 
             border-radius: var(--radius); 
             box-shadow: var(--shadow-sm); 
             border: 1px solid var(--border);
             transition: var(--transition); 
             position: relative;
-            height: 100%;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .section-alt .card { background: var(--bg-secondary); }
         
+        .card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: var(--shadow-hover); 
+            border-color: rgba(232, 100, 44, 0.2);
+        }
         .card-icon {
-            width: 48px; height: 48px;
-            border-radius: var(--radius-sm);
+            width: 52px; height: 52px;
+            background: var(--accent-soft);
+            border-radius: var(--radius);
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 1.2rem;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            background: var(--accent-soft);
             color: var(--accent);
+            font-size: 1.3rem;
+            transition: var(--transition);
         }
-        .card:hover .card-icon { transform: scale(1.05); }
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
-        .card ul { list-style: none; padding-left: 0; margin-top: 1rem; }
+        .card:hover .card-icon { background: var(--accent); color: #FFFFFF; transform: scale(1.05); }
+        .card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--ink); }
+        .card h4 { font-size: 1rem; margin-bottom: 0.7rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+        .card ul { list-style: none; padding-left: 0; }
         .card li { 
             position: relative; 
-            padding-left: 1.5rem; 
-            margin-bottom: 0.6rem; 
-            font-size: 0.9rem; 
+            padding-left: 1.8rem; 
+            margin-bottom: 0.8rem; 
+            font-size: 0.95rem; 
             color: var(--text-muted); 
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .card li::before { 
             content: "\f00c"; 
@@ -438,199 +460,271 @@
             font-size: 0.75rem; 
         }
 
-        /* --- UNIQUE CARD THEMES (Targets & Domains) --- */
-        .target-card, #domains .card { transition: var(--transition); }
-        .target-card:hover, #domains .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-        
-        .target-card .t-icon, #domains .card .card-icon {
-            width: 50px; height: 50px;
-            margin: 0 auto 1.2rem;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
-            background: var(--bg-white);
-            box-shadow: var(--shadow-sm);
-        }
-        #domains .card .card-icon { margin: 0 0 1.2rem 0; border-radius: var(--radius-sm); }
-
-        /* Apply 7 unique colors */
-        :is(.target-card, #domains .card):nth-child(1) { background: var(--c1-bg); border-color: var(--c1-border); }
-        :is(.target-card, #domains .card):nth-child(1) :is(.t-icon, .card-icon) { color: var(--c1-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(2) { background: var(--c2-bg); border-color: var(--c2-border); }
-        :is(.target-card, #domains .card):nth-child(2) :is(.t-icon, .card-icon) { color: var(--c2-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(3) { background: var(--c3-bg); border-color: var(--c3-border); }
-        :is(.target-card, #domains .card):nth-child(3) :is(.t-icon, .card-icon) { color: var(--c3-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(4) { background: var(--c4-bg); border-color: var(--c4-border); }
-        :is(.target-card, #domains .card):nth-child(4) :is(.t-icon, .card-icon) { color: var(--c4-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(5) { background: var(--c5-bg); border-color: var(--c5-border); }
-        :is(.target-card, #domains .card):nth-child(5) :is(.t-icon, .card-icon) { color: var(--c5-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(6) { background: var(--c6-bg); border-color: var(--c6-border); }
-        :is(.target-card, #domains .card):nth-child(6) :is(.t-icon, .card-icon) { color: var(--c6-accent); }
-        
-        :is(.target-card, #domains .card):nth-child(7) { background: var(--c7-bg); border-color: var(--c7-border); }
-        :is(.target-card, #domains .card):nth-child(7) :is(.t-icon, .card-icon) { color: var(--c7-accent); }
-
-        .target-card h4, #domains .card h3 { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            font-size: 0.95rem; 
-            font-weight: 700; 
-            color: var(--ink); 
-            line-height: 1.4; 
-            text-align: center;
-        }
-        #domains .card h3 { text-align: left; margin-bottom: 0.5rem; }
-        #domains .domain-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            opacity: 0.15;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
         /* --- ABOUT & LEGAL --- */
         .about-intro {
             max-width: 800px;
-            margin: 0 auto 3rem;
+            margin: 0 auto 2rem;
             text-align: center;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--ink-soft);
             line-height: 1.8;
         }
+        
+        .zone-highlight {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            background: linear-gradient(135deg, #F0F9FF 0%, #FFFFFF 100%);
+            border: 1px solid #BAE6FD;
+            border-left: 4px solid var(--logo-blue);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .zone-highlight i { font-size: 2rem; color: var(--logo-blue); flex-shrink: 0; }
+        .zone-highlight h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ink-soft);
+            margin-bottom: 0.3rem;
+            font-weight: 800;
+        }
+        .zone-highlight p { font-size: 1.15rem; font-weight: 700; color: var(--ink); margin: 0; line-height: 1.4; }
+
         .legal-card {
-            background: var(--bg-white);
+            background: var(--bg-primary);
             border-radius: var(--radius-lg);
             padding: 2.5rem 2rem;
             border: 1px solid var(--border);
             box-shadow: var(--shadow);
         }
         .legal-card h4 {
-            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
+            color: var(--ink);
             display: flex;
             align-items: center;
             gap: 0.6rem;
         }
-        .legal-card h4 i { color: var(--accent); }
+        .legal-card h4 i { color: var(--accent); font-size: 1.1rem; }
         .legal-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
         .legal-item {
-            background: var(--bg-slate);
+            background: var(--bg-secondary);
             padding: 1.2rem;
             border-radius: var(--radius);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            border: 1px solid transparent;
+            border: 1px solid var(--border);
+            word-break: break-word;
             transition: var(--transition);
         }
-        .legal-item:hover { border-color: var(--accent); background: var(--bg-white); }
+        .legal-item:hover { border-color: var(--accent); background: var(--bg-primary); transform: translateY(-2px); }
         .legal-item strong {
             display: block;
             color: var(--ink);
-            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             margin-bottom: 0.4rem;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
         }
 
-        /* --- MISSION & VISION --- */
+        /* --- MISSION & TARGETS --- */
         .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         .mission-card {
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem;
             border-radius: var(--radius-lg);
             position: relative;
             overflow: hidden;
         }
-        .mission-card.mission { background: var(--ink); color: var(--bg-white); }
-        .mission-card.vision { background: var(--accent); color: var(--bg-white); }
-        .mission-card .m-icon { font-size: 2rem; margin-bottom: 1.2rem; opacity: 0.9; }
-        .mission-card h3 { color: var(--bg-white); font-size: 1.5rem; margin-bottom: 1rem; }
-        .mission-card p { color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.7; }
+        .mission-card.mission { background: var(--ink); color: #FFFFFF; }
+        .mission-card.vision { background: var(--accent); color: #FFFFFF; }
+        .mission-card .m-icon { font-size: 2.5rem; margin-bottom: 1.2rem; opacity: 0.9; }
+        .mission-card h3 { color: #FFFFFF; font-size: 1.6rem; margin-bottom: 1rem; }
+        .mission-card p { color: rgba(255,255,255,0.9); font-size: 1.05rem; line-height: 1.8; }
 
-        /* --- ACTIVITIES & IMAGES --- */
-        .activity-block { margin-bottom: 4rem; }
+        .target-card {
+            background: var(--bg-primary);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .target-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .target-card .t-icon {
+            width: 56px; height: 56px;
+            margin: 0 auto 1.2rem;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+        .target-card:hover .t-icon { transform: scale(1.1); }
+        .target-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+
+        /* UNIQUE TARGET CARD COLORS */
+        .target-card:nth-child(1) { background: #FFF5F5; border-color: #FED7D7; }
+        .target-card:nth-child(1) .t-icon { background: #FED7D7; color: #C53030; }
+        .target-card:nth-child(2) { background: #F0F4FF; border-color: #C3DAFE; }
+        .target-card:nth-child(2) .t-icon { background: #C3DAFE; color: #3182CE; }
+        .target-card:nth-child(3) { background: #F0FFF4; border-color: #C6F6D5; }
+        .target-card:nth-child(3) .t-icon { background: #C6F6D5; color: #2F855A; }
+        .target-card:nth-child(4) { background: #FFFBF0; border-color: #FEEBC8; }
+        .target-card:nth-child(4) .t-icon { background: #FEEBC8; color: #C05621; }
+        .target-card:nth-child(5) { background: #F5F3FF; border-color: #E9D8FD; }
+        .target-card:nth-child(5) .t-icon { background: #E9D8FD; color: #6B46C1; }
+        .target-card:nth-child(6) { background: #FFF0F5; border-color: #FED7E2; }
+        .target-card:nth-child(6) .t-icon { background: #FED7E2; color: #B83280; }
+        .target-card:nth-child(7) { background: #F0FDFA; border-color: #B2F5EA; }
+        .target-card:nth-child(7) .t-icon { background: #B2F5EA; color: #285E61; }
+
+        /* --- DOMAINS & ACTIVITIES --- */
+        .domain-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.1;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .activity-block { margin-bottom: 5rem; }
         .activity-block:last-child { margin-bottom: 0; }
-        .activity-title { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .activity-title { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
         .activity-title .num {
-            width: 40px; height: 40px;
+            width: 44px; height: 44px;
             background: var(--ink);
-            color: var(--bg-white);
+            color: #FFFFFF;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
+            box-shadow: var(--shadow);
         }
-        .activity-title h3 { font-size: 1.3rem; margin: 0; }
+        .activity-title h3 { font-size: 1.5rem; margin: 0; color: var(--ink); }
         
-        .image-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+        .image-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         .image-card { 
-            background: var(--bg-white); 
+            background: var(--bg-primary); 
             border-radius: var(--radius); 
             overflow: hidden; 
             box-shadow: var(--shadow-sm); 
             transition: var(--transition); 
             border: 1px solid var(--border);
         }
-        .image-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-        .image-card .img-wrap { overflow: hidden; height: 220px; position: relative; }
-        .image-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .image-card:hover img { transform: scale(1.04); }
+        .image-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: transparent; }
+        .image-card .img-wrap { overflow: hidden; aspect-ratio: 4/3; }
+        .image-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .image-card:hover img { transform: scale(1.05); }
         .image-card .caption { 
             padding: 1.2rem; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.85rem; 
+            font-size: 0.95rem; 
             font-weight: 600; 
             color: var(--ink); 
             text-align: center;
-            background: var(--bg-white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-primary);
         }
-        /* Subtle colored top border for image cards based on nth-child */
-        .image-card:nth-child(1) { border-top: 3px solid var(--c1-accent); }
-        .image-card:nth-child(2) { border-top: 3px solid var(--c2-accent); }
-        .image-card:nth-child(3) { border-top: 3px solid var(--c3-accent); }
-        .image-card:nth-child(4) { border-top: 3px solid var(--c4-accent); }
 
-        /* --- MEDIA SECTION --- */
-        .media-placeholder {
-            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+        /* UNIQUE DOMAIN CARD COLORS */
+        .domain-card-1 { border-left: 4px solid #E8642C; background: linear-gradient(to right, #FFF4ED, #FFFFFF); }
+        .domain-card-1 .card-icon { background: #FFF4ED; color: #E8642C; }
+        .domain-card-2 { border-left: 4px solid #0055FF; background: linear-gradient(to right, #F0F4FF, #FFFFFF); }
+        .domain-card-2 .card-icon { background: #F0F4FF; color: #0055FF; }
+        .domain-card-3 { border-left: 4px solid #4CA100; background: linear-gradient(to right, #F0FFF4, #FFFFFF); }
+        .domain-card-3 .card-icon { background: #F0FFF4; color: #4CA100; }
+        .domain-card-4 { border-left: 4px solid #805AD5; background: linear-gradient(to right, #F5F3FF, #FFFFFF); }
+        .domain-card-4 .card-icon { background: #F5F3FF; color: #805AD5; }
+        .domain-card-5 { border-left: 4px solid #D69E2E; background: linear-gradient(to right, #FFFBF0, #FFFFFF); }
+        .domain-card-5 .card-icon { background: #FFFBF0; color: #D69E2E; }
+        .domain-card-6 { border-left: 4px solid #319795; background: linear-gradient(to right, #F0FDFA, #FFFFFF); }
+        .domain-card-6 .card-icon { background: #F0FDFA; color: #319795; }
+        .domain-card-7 { border-left: 4px solid #E2001A; background: linear-gradient(to right, #FFF5F5, #FFFFFF); }
+        .domain-card-7 .card-icon { background: #FFF5F5; color: #E2001A; }
+
+        /* --- MEDIA (VIDEO/AUDIO) --- */
+        .media-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        .media-card {
+            background: var(--bg-primary);
             border-radius: var(--radius);
-            height: 220px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .media-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-6px); }
+        .media-placeholder {
+            background: linear-gradient(135deg, var(--ink) 0%, #1E293B 100%);
+            aspect-ratio: 16/9;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: white;
-            margin-top: 1rem;
-            cursor: pointer;
+            color: rgba(255,255,255,0.8);
+            font-size: 3rem;
+            position: relative;
+        }
+        .media-placeholder.audio { background: linear-gradient(135deg, var(--accent) 0%, #C94F1C 100%); }
+        .media-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.1);
             transition: var(--transition);
-            border: 1px solid var(--border);
         }
-        .media-placeholder:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-        .media-placeholder i { font-size: 2.5rem; opacity: 0.8; margin-bottom: 0.75rem; }
-        .media-placeholder span { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 500; opacity: 0.9; text-align: center; padding: 0 1rem; }
-        
-        .audio-player-wrap {
-            background: var(--bg-slate);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            margin-top: 1rem;
-            border: 1px solid var(--border);
+        .media-card:hover .media-placeholder::after { background: rgba(0,0,0,0); }
+        .media-info { padding: 1.5rem; }
+        .media-info h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--ink); }
+        .media-info p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+        .media-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
         }
-        .audio-player-wrap audio { width: 100%; height: 40px; }
+        .media-badge.video { background: #F1F5F9; color: var(--ink); }
+        .media-badge.audio { background: #FFF4ED; color: var(--accent-dark); }
+
+        /* --- CAREERS / OFFRES --- */
+        .careers-card {
+            background: linear-gradient(135deg, var(--ink) 0%, #1E293B 100%);
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .careers-card::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(232, 100, 44, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .careers-card h3 { color: #FFFFFF; font-size: 2rem; margin-bottom: 1rem; position: relative; z-index: 2; }
+        .careers-card p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2.5rem; position: relative; z-index: 2; font-size: 1.1rem; line-height: 1.7; }
+        .careers-card .btn { position: relative; z-index: 2; background: #FFFFFF; color: var(--ink); }
+        .careers-card .btn:hover { background: var(--accent); color: #FFFFFF; }
 
         /* --- APP CTA --- */
         .app-cta-section {
             background: var(--ink);
-            color: var(--bg-white);
-            padding: 5rem 1.25rem;
+            color: #FFFFFF;
+            padding: 5rem 1.5rem;
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -640,29 +734,28 @@
             position: absolute;
             top: -100px; right: -100px;
             width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(232, 100, 44, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(232, 100, 44, 0.2) 0%, transparent 70%);
             border-radius: 50%;
         }
         .app-cta-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
         .app-cta-icon {
-            width: 72px; height: 72px;
+            width: 80px; height: 80px;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: var(--radius-lg);
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--accent);
         }
-        .app-cta-content h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--bg-white); margin-bottom: 1rem; }
-        .app-cta-content p { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 550px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .app-cta-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); color: #FFFFFF; margin-bottom: 1rem; }
+        .app-cta-content p { color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 550px; margin: 0 auto 2.5rem; line-height: 1.7; }
         .app-cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .app-btn {
             display: inline-flex; align-items: center; gap: 0.7rem;
             padding: 1rem 2rem;
             border-radius: 50px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
             text-decoration: none;
             transition: var(--transition);
@@ -670,39 +763,40 @@
             justify-content: center;
             border: none;
             cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .app-btn-primary { background: var(--accent); color: var(--bg-white); box-shadow: 0 8px 20px rgba(232, 100, 44, 0.3); }
-        .app-btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
-        .app-btn-secondary { background: rgba(255,255,255,0.08); color: var(--bg-white); border: 1px solid rgba(255,255,255,0.2); }
-        .app-btn-secondary:hover { background: var(--bg-white); color: var(--ink); transform: translateY(-2px); }
-        .app-badge-row { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+        .app-btn-primary { background: var(--accent); color: #FFFFFF; box-shadow: 0 8px 20px rgba(232, 100, 44, 0.3); }
+        .app-btn-primary:hover { background: var(--accent-dark); transform: translateY(-3px); box-shadow: 0 12px 25px rgba(232, 100, 44, 0.4); }
+        .app-btn-secondary { background: rgba(255,255,255,0.08); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); }
+        .app-btn-secondary:hover { background: #FFFFFF; color: var(--ink); transform: translateY(-3px); }
+        .app-badge-row { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; font-size: 0.85rem; color: rgba(255,255,255,0.6); }
         .app-badge-row span { display: flex; align-items: center; gap: 0.5rem; }
         .app-badge-row i { color: #4ADE80; }
 
         /* --- CONTACT --- */
         .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
-        .contact-info-item { display: flex; gap: 1.2rem; margin-bottom: 2rem; align-items: flex-start; }
+        .contact-info-item { display: flex; gap: 1.2rem; margin-bottom: 2.5rem; align-items: flex-start; }
         .contact-info-item i { 
             color: var(--accent); 
             background: var(--accent-soft);
-            width: 48px; height: 48px; 
+            width: 52px; height: 52px; 
             display: flex; align-items: center; justify-content: center;
-            border-radius: var(--radius-sm);
-            font-size: 1.1rem; 
+            border-radius: var(--radius);
+            font-size: 1.2rem; 
             flex-shrink: 0;
         }
         .contact-info-item h4 { 
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.7rem; 
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin-bottom: 0.4rem;
             color: var(--ink);
         }
         .contact-info-item p, .contact-info-item a { 
             color: var(--text-muted); 
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             text-decoration: none; 
             line-height: 1.6;
             display: block;
@@ -712,83 +806,83 @@
         .contact-info-item a:hover { color: var(--accent); }
 
         .contact-form { 
-            background: var(--bg-white); 
-            padding: 2rem; 
+            background: var(--bg-primary); 
+            padding: 2.5rem; 
             border-radius: var(--radius-lg); 
             box-shadow: var(--shadow); 
             border: 1px solid var(--border);
         }
-        .contact-form h3 { font-size: 1.3rem; margin-bottom: 1.5rem; }
+        .contact-form h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--ink); }
         .contact-form input, .contact-form textarea { 
             width: 100%; 
-            padding: 0.9rem 1.2rem; 
-            margin-bottom: 1rem; 
+            padding: 1rem 1.2rem; 
+            margin-bottom: 1.2rem; 
             border: 1.5px solid var(--border); 
             border-radius: var(--radius-sm); 
-            font-family: 'DM Sans', sans-serif; 
-            font-size: 0.95rem;
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-size: 1rem;
             transition: var(--transition);
-            background: var(--bg-slate);
+            background: var(--bg-secondary);
             color: var(--ink);
         }
         .contact-form input:focus, .contact-form textarea:focus { 
             outline: none; 
             border-color: var(--accent); 
-            background: var(--bg-white);
+            background: var(--bg-primary);
             box-shadow: 0 0 0 4px rgba(232, 100, 44, 0.1); 
         }
-        .contact-form textarea { min-height: 140px; resize: vertical; }
+        .contact-form textarea { min-height: 150px; resize: vertical; }
         .contact-form .btn { width: 100%; margin-top: 0.5rem; }
 
         /* --- FOOTER --- */
-        footer { background: var(--ink); color: var(--bg-white); padding: 4rem 1.25rem 2rem; }
+        footer { background: var(--ink); color: #FFFFFF; padding: 5rem 1.5rem 2rem; }
         .footer-inner { max-width: 1200px; margin: 0 auto; }
-        .footer-content { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+        .footer-content { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-bottom: 3rem; }
         .footer-section h4 { 
-            color: var(--bg-white); 
-            margin-bottom: 1.2rem; 
+            color: #FFFFFF; 
+            margin-bottom: 1.5rem; 
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
+            letter-spacing: 2px;
+            font-weight: 800;
         }
-        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; }
+        .footer-section p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.8; }
         .footer-section a { 
             color: rgba(255,255,255,0.6); 
             text-decoration: none; 
             display: block; 
-            margin-bottom: 0.7rem; 
+            margin-bottom: 0.8rem; 
             transition: var(--transition);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
-        .footer-section a:hover { color: var(--accent); transform: translateX(4px); }
-        .footer-brand { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
-        .footer-brand img { height: 48px; background: var(--bg-white); padding: 6px; border-radius: var(--radius-sm); }
+        .footer-section a:hover { color: var(--accent); transform: translateX(6px); }
+        .footer-brand { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+        .footer-brand img { height: 52px; background: #FFFFFF; padding: 8px; border-radius: var(--radius-sm); }
         .copyright { 
             border-top: 1px solid rgba(255,255,255,0.1); 
-            padding-top: 2rem; 
+            padding-top: 2.5rem; 
             text-align: center; 
             color: rgba(255,255,255,0.4); 
-            font-size: 0.85rem; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem; 
         }
 
         /* ============================================
-           RESPONSIVE BREAKPOINTS (Mobile First)
+           RESPONSIVE BREAKPOINTS (Mobile-First Optimized)
            ============================================ */
         @media (min-width: 480px) {
             .grid-3 { grid-template-columns: repeat(2, 1fr); }
             .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .image-grid { grid-template-columns: repeat(2, 1fr); }
             .legal-grid { grid-template-columns: repeat(2, 1fr); }
+            .media-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-logo img { height: 90px; }
         }
 
         @media (min-width: 640px) {
             section, .section-alt { padding: 6rem 2rem; }
             .nav-container { padding: 1rem 2rem; }
-            .logo img { height: 56px; }
+            .logo img { height: 52px; }
             .hero-wrapper { padding: 3rem 2rem; }
             .hero-card { padding: 5rem 3rem; }
             .hero-logo img { height: 100px; }
@@ -796,40 +890,33 @@
             .mission-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-grid { grid-template-columns: 1fr 1.2fr; gap: 4rem; }
             .footer-content { grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
-            .contact-form { padding: 2.5rem; }
+            .contact-form { padding: 3rem; }
             .legal-card { padding: 2.5rem; }
             .app-cta-section { padding: 6rem 2rem; }
         }
 
         @media (min-width: 1024px) {
+            .mobile-menu-btn { display: none; }
             .nav-container { padding: 1rem 2.5rem; }
             section, .section-alt { padding: 7rem 2.5rem; }
-            .section-header { margin-bottom: 4rem; }
+            .section-header { margin-bottom: 4.5rem; }
             .grid-3 { grid-template-columns: repeat(3, 1fr); }
             .grid-4 { grid-template-columns: repeat(4, 1fr); }
             .image-grid { grid-template-columns: repeat(3, 1fr); }
             .legal-grid { grid-template-columns: repeat(3, 1fr); }
-            .card { padding: 2.25rem; }
-            .contact-form { padding: 3rem; }
+            .media-grid { grid-template-columns: repeat(3, 1fr); }
+            .card { padding: 2.5rem; }
+            .contact-form { padding: 3.5rem; }
             .hero-card { padding: 6rem 4rem; }
             .hero-logo img { height: 110px; }
-            .logo img { height: 60px; }
-            .mobile-menu-btn { display: none; }
-            nav.desktop-nav { display: flex; }
-        }
-
-        @media (max-width: 1023px) {
-            .mobile-menu-btn { display: inline-flex; }
-            nav.desktop-nav { display: none; }
-            .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
-            .hero-buttons .btn { width: 100%; }
+            .logo img { height: 56px; }
         }
 
         @media (max-width: 400px) {
-            .mobile-menu-btn { padding: 0.6rem 0.8rem; }
-            .mobile-menu-btn .btn-label { display: none; }
-            .hero-card { padding: 3rem 1.25rem; }
+            .hero-card { padding: 2.5rem 1.2rem; }
             .contact-form { padding: 1.5rem; }
+            .zone-highlight { flex-direction: column; text-align: center; }
+            .activity-title { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
         }
     </style>
 </head>
@@ -843,20 +930,20 @@
             </a>
             
             <button class="mobile-menu-btn" onclick="toggleMenu(event)" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-                <i class="fas fa-bars"></i> <span class="btn-label ui-font">Menu</span>
+                <i class="fas fa-bars"></i>
             </button>
 
+            <!-- Premium Full-Screen Mobile Menu -->
             <div class="mobile-popup-menu" id="mobile-menu">
-                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#media" onclick="closeMenu()"><span class="lang-fr">Médias</span><span class="lang-en">Media</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#careers" onclick="closeMenu()"><span class="lang-fr">Carrières</span><span class="lang-en">Careers</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#portal" onclick="closeMenu()"><span class="lang-fr">Portail</span><span class="lang-en">Portal</span><i class="fas fa-chevron-right"></i></a>
-                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-chevron-right"></i></a>
-                
-                <div class="divider"></div>
+                <a href="#about" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#mission" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#objectives" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#domains" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#activities" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#media" onclick="closeMenu()"><span class="lang-fr">Médiathèque</span><span class="lang-en">Media</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#careers" onclick="closeMenu()"><span class="lang-fr">Offres & Carrières</span><span class="lang-en">Careers</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#portal" onclick="closeMenu()"><span class="lang-fr">Portail</span><span class="lang-en">Portal</span><i class="fas fa-arrow-right"></i></a>
+                <a href="#contact" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-arrow-right"></i></a>
                 
                 <div class="mobile-actions">
                     <a href="#contact" class="btn" onclick="closeMenu()">
@@ -871,18 +958,20 @@
                 </div>
             </div>
 
+            <!-- Desktop Navigation -->
             <nav class="desktop-nav">
                 <ul>
                     <li><a href="#about" class="lang-fr">À propos</a><a href="#about" class="lang-en">About</a></li>
                     <li><a href="#mission" class="lang-fr">Mission</a><a href="#mission" class="lang-en">Mission</a></li>
+                    <li><a href="#objectives" class="lang-fr">Objectifs</a><a href="#objectives" class="lang-en">Objectives</a></li>
                     <li><a href="#domains" class="lang-fr">Domaines</a><a href="#domains" class="lang-en">Domains</a></li>
                     <li><a href="#activities" class="lang-fr">Activités</a><a href="#activities" class="lang-en">Activities</a></li>
-                    <li><a href="#media" class="lang-fr">Médias</a><a href="#media" class="lang-en">Media</a></li>
-                    <li><a href="#careers" class="lang-fr">Carrières</a><a href="#careers" class="lang-en">Careers</a></li>
+                    <li><a href="#media" class="lang-fr">Médiathèque</a><a href="#media" class="lang-en">Media</a></li>
+                    <li><a href="#careers" class="lang-fr">Offres</a><a href="#careers" class="lang-en">Careers</a></li>
                     <li><a href="#portal" class="lang-fr">Portail</a><a href="#portal" class="lang-en">Portal</a></li>
                     <li><a href="#contact" class="lang-fr">Contact</a><a href="#contact" class="lang-en">Contact</a></li>
                     <li>
-                        <button class="lang-toggle ui-font" onclick="toggleLanguage()" aria-label="Toggle language">
+                        <button class="lang-toggle" onclick="toggleLanguage()">
                             <span class="lang-fr">EN</span>
                             <span class="lang-en">FR</span>
                         </button>
@@ -894,24 +983,32 @@
 
     <!-- HERO CARD -->
     <div class="hero-wrapper">
-        <div class="hero-card reveal">
+        <div class="hero-card">
             <div class="hero-content">
-                <div class="hero-logo">
-                    <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
-                </div>
-                <div class="hero-fullname">
-                    <span class="c-u">U</span>nion des <span class="c-f">F</span>emmes <span class="c-a">A</span>fricaines pour le <span class="c-d">D</span>éveloppement
+                <div class="hero-logo-container">
+                    <div class="hero-logo">
+                        <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
+                    </div>
+                    <div class="hero-fullname">
+                        <span class="word"><span class="c-u">U</span>nion</span>
+                        <span class="word">des</span>
+                        <span class="word"><span class="c-f">F</span>emmes</span>
+                        <span class="word"><span class="c-a">A</span>fricaines</span>
+                        <span class="word">pour</span>
+                        <span class="word">le</span>
+                        <span class="word"><span class="c-d">D</span>éveloppement</span>
+                    </div>
                 </div>
 
                 <div class="hero-badge">
                     <i class="fas fa-circle"></i>
-                    <span class="lang-fr">ONG Humanitaire · RDC, Nord-Kivu · Depuis 2015</span>
-                    <span class="lang-en">Humanitarian NGO · DRC, North Kivu · Since 2015</span>
+                    <span class="lang-fr">ONG Humanitaire · Nord-Kivu, RDC · Depuis 2015</span>
+                    <span class="lang-en">Humanitarian NGO · North Kivu, DRC · Since 2015</span>
                 </div>
                 <h1 class="lang-fr">Autonomiser les femmes, protéger les vulnérables, <em>bâtir l'avenir.</em></h1>
                 <h1 class="lang-en">Empowering women, protecting the vulnerable, <em>building the future.</em></h1>
-                <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême, avec une action ciblée dans la province du Nord-Kivu.</p>
-                <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty, with targeted action in the North Kivu province.</p>
+                <p class="lang-fr">ONG humanitaire nationale en RDC, dédiée à la lutte contre les inégalités sociales et la pauvreté extrême au Nord-Kivu.</p>
+                <p class="lang-en">National humanitarian NGO in DRC, dedicated to fighting social inequalities and extreme poverty in North Kivu.</p>
                 <div class="hero-buttons">
                     <a href="#contact" class="btn lang-fr"><i class="fas fa-paper-plane"></i> Nous Contacter</a>
                     <a href="#contact" class="btn lang-en"><i class="fas fa-paper-plane"></i> Contact Us</a>
@@ -923,17 +1020,27 @@
     </div>
 
     <!-- About -->
-    <section id="about">
-        <div class="section-header reveal">
+    <section id="about" data-theme="blue">
+        <div class="section-header">
             <span class="section-eyebrow lang-fr">Qui Sommes-Nous</span>
             <span class="section-eyebrow lang-en">Who We Are</span>
             <h2 class="lang-fr">Une organisation à caractère féminin</h2>
             <h2 class="lang-en">An organization with a feminine character</h2>
         </div>
-        <p class="about-intro lang-fr reveal">L'UFAD ONGD est une organisation nationale humanitaire non gouvernementale à « Caractère Féminin », non confessionnelle et apolitique, créée le 23 Septembre 2015. UFAD se consacre à lutter contre les inégalités sociales, réduire la souffrance et mettre fin à la pauvreté extrême.</p>
-        <p class="about-intro lang-en reveal">UFAD ONGD is a national, non-governmental humanitarian organization with a "Feminine Character", non-denominational and apolitical, created on September 23, 2015. UFAD is dedicated to fighting social inequalities, reducing suffering, and ending extreme poverty.</p>
+        <p class="about-intro lang-fr">L'UFAD ONGD est une organisation nationale humanitaire non gouvernementale à « Caractère Féminin », non confessionnelle et apolitique, créée le 23 Septembre 2015 dans la Province du Nord-Kivu en RDC. UFAD se consacre à lutter contre les inégalités sociales, réduire la souffrance et mettre fin à la pauvreté extrême.</p>
+        <p class="about-intro lang-en">UFAD ONGD is a national, non-governmental humanitarian organization with a "Feminine Character", non-denominational and apolitical, created on September 23, 2015, in the North Kivu Province of DRC. UFAD is dedicated to fighting social inequalities, reducing suffering, and ending extreme poverty.</p>
         
-        <div class="legal-card reveal">
+        <div class="zone-highlight">
+            <i class="fas fa-map-location-dot"></i>
+            <div>
+                <h4 class="lang-fr">Zones d'Intervention</h4>
+                <h4 class="lang-en">Intervention Zones</h4>
+                <p class="lang-fr">République Démocratique du Congo (RDC), et particulièrement dans la province du Nord-Kivu.</p>
+                <p class="lang-en">Democratic Republic of Congo (DRC), particularly in the province of North Kivu.</p>
+            </div>
+        </div>
+
+        <div class="legal-card">
             <h4><i class="fas fa-certificate"></i> <span class="lang-fr">Statut Juridique & Enregistrements</span><span class="lang-en">Legal Status & Registrations</span></h4>
             <div class="legal-grid">
                 <div class="legal-item">
@@ -945,11 +1052,6 @@
                     <strong class="lang-fr">Autorisation Provinciale</strong>
                     <strong class="lang-en">Provincial Authorization</strong>
                     N° 01/284/CAB/GP-NK/2019
-                </div>
-                <div class="legal-item">
-                    <strong class="lang-fr">Enregistrement Provincial (Plan)</strong>
-                    <strong class="lang-en">Provincial Registration (Plan)</strong>
-                    S/No: 77 du 08/05/23
                 </div>
                 <div class="legal-item">
                     <strong class="lang-fr">Justice Provinciale</strong>
@@ -966,47 +1068,43 @@
                     <strong class="lang-en">Gender, Family & Children</strong>
                     N° 12/DIV-PR/GEFAE-NK/2024
                 </div>
-                <div class="legal-item" style="grid-column: 1 / -1; background: var(--accent-soft); border-color: var(--accent);">
-                    <strong style="color: var(--accent-dark); display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-map-marker-alt"></i> 
-                        <span class="lang-fr">Zone d'Intervention Principale</span>
-                        <span class="lang-en">Main Intervention Zone</span>
-                    </strong>
-                    <span class="lang-fr" style="font-weight: 600; color: var(--ink); display: block; margin-top: 0.5rem; font-family: 'Plus Jakarta Sans', sans-serif;">République Démocratique du Congo (RDC) — Particulièrement dans la province du Nord-Kivu</span>
-                    <span class="lang-en" style="font-weight: 600; color: var(--ink); display: block; margin-top: 0.5rem; font-family: 'Plus Jakarta Sans', sans-serif;">Democratic Republic of Congo (DRC) — Particularly in the North Kivu province</span>
+                <div class="legal-item">
+                    <strong class="lang-fr">Enregistrement Provincial (Plan)</strong>
+                    <strong class="lang-en">Provincial Registration (Plan)</strong>
+                    S/No: 77 du 08/05/23
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Mission & Vision -->
-    <div class="section-alt" id="mission">
+    <div class="section-alt" id="mission" data-theme="warm">
         <div class="inner">
-            <div class="section-header reveal">
+            <div class="section-header">
                 <span class="section-eyebrow lang-fr">Notre Raison d'Être</span>
                 <span class="section-eyebrow lang-en">Our Purpose</span>
                 <h2 class="lang-fr">Mission & Vision</h2>
                 <h2 class="lang-en">Mission & Vision</h2>
             </div>
             <div class="mission-grid">
-                <div class="mission-card mission reveal reveal-delay-1">
+                <div class="mission-card mission">
                     <div class="m-icon"><i class="fas fa-bullseye"></i></div>
                     <h3 class="lang-fr">Mission</h3>
                     <h3 class="lang-en">Mission</h3>
                     <p class="lang-fr">Assurer l'égalité et l'équité pour un monde inclusif offrant la stabilité et la paix pour l'harmonie des peuples.</p>
                     <p class="lang-en">Ensure equality and equity for an inclusive world offering stability and peace for the harmony of peoples.</p>
                 </div>
-                <div class="mission-card vision reveal reveal-delay-2">
+                <div class="mission-card vision">
                     <div class="m-icon"><i class="fas fa-eye"></i></div>
                     <h3 class="lang-fr">Vision</h3>
                     <h3 class="lang-en">Vision</h3>
-                    <p class="lang-fr">Une organisation où les valeurs humanitaires, morales et civiques sont promues dans la solidarité, le développement sans discrimination et dans le respect des droits et de la dignité.</p>
+                    <p class="lang-fr">Une organisation où les valeurs humanitaires, morales et civiques sont promues dans la solidarité, le développement sans discrimination aucune et dans le respect des droits et la dignité de la population.</p>
                     <p class="lang-en">An organization where humanitarian, moral, and civic values are promoted in solidarity, development without discrimination, and respect for rights and dignity.</p>
                     <div style="margin-top: 1.5rem; display: flex; gap: 0.8rem; align-items: flex-start;">
-                        <span style="color: var(--bg-white); font-size: 1.2rem; line-height: 1; margin-top: 2px; flex-shrink: 0;">●</span>
+                        <span style="color: #FFFFFF; font-size: 1.2rem; line-height: 1; margin-top: 2px; flex-shrink: 0;">●</span>
                         <div>
-                            <p class="lang-fr" style="font-weight: 600; color: var(--bg-white); margin: 0; line-height: 1.6; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;">UFAD vise à Promouvoir l'égalité des Genres, Garantir les Droits des Femmes, la protection de l'enfant et des personnes à risques d'exclusion sociale.</p>
-                            <p class="lang-en" style="font-weight: 600; color: var(--bg-white); margin: 0; line-height: 1.6; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;">UFAD aims to Promote Gender Equality, Guarantee Women's Rights, protect Children and People at Risk of social exclusion.</p>
+                            <p class="lang-fr" style="font-weight: 600; color: #FFFFFF; margin: 0; line-height: 1.6;">UFAD vise à Promouvoir l'égalité des Genres, Garantir les Droits des Femmes, la protection de l'enfant et des personnes à risques d'exclusion sociale dans la communauté.</p>
+                            <p class="lang-en" style="font-weight: 600; color: #FFFFFF; margin: 0; line-height: 1.6;">UFAD aims to Promote Gender Equality, Guarantee Women's Rights, protect Children and People at Risk of social exclusion in the Community.</p>
                         </div>
                     </div>
                 </div>
@@ -1014,16 +1112,105 @@
         </div>
     </div>
 
+    <!-- Objectives -->
+    <section id="objectives" data-theme="green">
+        <div class="section-header">
+            <span class="section-eyebrow lang-fr">Cap sur l'Impact</span>
+            <span class="section-eyebrow lang-en">Focus on Impact</span>
+            <h2 class="lang-fr">Nos Objectifs</h2>
+            <h2 class="lang-en">Our Objectives</h2>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
+                <h3 class="lang-fr">Objectif Global</h3>
+                <h3 class="lang-en">Global Objective</h3>
+                <p class="lang-fr">Créer un monde solidaire où les droits humains sont respectés ainsi que la valorisation de la Femme et de l'Enfant.</p>
+                <p class="lang-en">Create a united world where human rights are respected, as well as the valorization of Women and Children.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-list-check"></i></div>
+                <h3 class="lang-fr">Objectifs Spécifiques</h3>
+                <h3 class="lang-en">Specific Objectives</h3>
+                <ul>
+                    <li class="lang-fr">Défendre et promouvoir les droits humains et lutter contre les inégalités sociales.</li>
+                    <li class="lang-en">Defend and promote human rights and fight against social inequalities.</li>
+                    <li class="lang-fr">Promouvoir l'accès à l'Éducation des personnes marginalisées.</li>
+                    <li class="lang-en">Promote access to Education for marginalized people.</li>
+                    <li class="lang-fr">Lutter pour la bonne gouvernance et l'accès aux droits par les peuples.</li>
+                    <li class="lang-en">Fight for good governance and access to rights by the people.</li>
+                    <li class="lang-fr">Créer des centres sociaux pour assistance et encadrement.</li>
+                    <li class="lang-en">Create social centers for assistance and guidance.</li>
+                    <li class="lang-fr">Promouvoir l'éducation sanitaire (WASH) et lutter contre les maladies.</li>
+                    <li class="lang-en">Promote health education (WASH) and disease control.</li>
+                    <li class="lang-fr">Apprendre aux jeunes les métiers professionnels.</li>
+                    <li class="lang-en">Teach youth professional trades.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Targets -->
+    <div class="section-alt" id="targets" data-theme="lavender">
+        <div class="inner">
+            <div class="section-header">
+                <span class="section-eyebrow lang-fr">Ceux que Nous Servons</span>
+                <span class="section-eyebrow lang-en">Those We Serve</span>
+                <h2 class="lang-fr">Nos Cibles Bénéficiaires</h2>
+                <h2 class="lang-en">Our Beneficiary Targets</h2>
+                <p class="lang-fr">Personnes à risque d'exclusion sociale dans la communauté.</p>
+                <p class="lang-en">Persons at risk of social exclusion in the community.</p>
+            </div>
+            <div class="grid-3">
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-child"></i></div>
+                    <h4 class="lang-fr">Filles Mineures Victimes des Grossesses précoces</h4>
+                    <h4 class="lang-en">Minor Girls Victims of Early Pregnancies</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-user-clock"></i></div>
+                    <h4 class="lang-fr">Personnes du 3ème Âge</h4>
+                    <h4 class="lang-en">Elderly People</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4 class="lang-fr">Victimes de Violences Sexuelles</h4>
+                    <h4 class="lang-en">Survivors of Sexual Violence</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-tree"></i></div>
+                    <h4 class="lang-fr">Pygmées</h4>
+                    <h4 class="lang-en">Pygmy Communities</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-wheelchair"></i></div>
+                    <h4 class="lang-fr">Handicapés</h4>
+                    <h4 class="lang-en">People with Disabilities</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4 class="lang-fr">Albinos</h4>
+                    <h4 class="lang-en">Albinos</h4>
+                </div>
+                <div class="target-card">
+                    <div class="t-icon"><i class="fas fa-users-cog"></i></div>
+                    <h4 class="lang-fr">Enfants Associés / Sortis des Forces Armées</h4>
+                    <h4 class="lang-en">Children Associated / Released from Armed Forces</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Domains -->
-    <section id="domains">
-        <div class="section-header reveal">
+    <section id="domains" data-theme="teal">
+        <div class="section-header">
             <span class="section-eyebrow lang-fr">Nos Axes d'Action</span>
             <span class="section-eyebrow lang-en">Our Action Areas</span>
             <h2 class="lang-fr">Domaines d'Intervention Clés</h2>
             <h2 class="lang-en">Key Areas of Intervention</h2>
         </div>
         <div class="grid-3">
-            <div class="card reveal reveal-delay-1">
+            <div class="card domain-card-1">
                 <div class="domain-number">01</div>
                 <h3 class="lang-fr">Sécurité Alimentaire</h3>
                 <h3 class="lang-en">Food Security</h3>
@@ -1034,29 +1221,29 @@
                     <li class="lang-en">Entrepreneurship and Women's Leadership</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-2">
+            <div class="card domain-card-2">
                 <div class="domain-number">02</div>
                 <h3 class="lang-fr">Protection</h3>
                 <h3 class="lang-en">Protection</h3>
                 <ul>
-                    <li class="lang-fr">Réunification et liens familiaux</li>
-                    <li class="lang-en">Reunification and family ties</li>
+                    <li class="lang-fr">Réunification et Rétablissement dans les liens familiaux</li>
+                    <li class="lang-en">Reunification and Restoration within family ties</li>
                     <li class="lang-fr">Alertes d'Incidents et Plaidoyer</li>
                     <li class="lang-en">Incident Alerts and Advocacy</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-3">
+            <div class="card domain-card-3">
                 <div class="domain-number">03</div>
                 <h3 class="lang-fr">Santé & Nutrition</h3>
                 <h3 class="lang-en">Health & Nutrition</h3>
                 <ul>
-                    <li class="lang-fr">Santé Mentale et Soutien Psychosocial</li>
-                    <li class="lang-en">Mental Health and Psychosocial Support</li>
-                    <li class="lang-fr">Santé Sexuelle et Reproductive</li>
-                    <li class="lang-en">Sexual and Reproductive Health</li>
+                    <li class="lang-fr">Santé Mentale et Soutien Psychosocial (MHPSS)</li>
+                    <li class="lang-en">Mental Health and Psychosocial Support (MHPSS)</li>
+                    <li class="lang-fr">Santé Sexuelle et Reproductive (SSR)</li>
+                    <li class="lang-en">Sexual and Reproductive Health (SRH)</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-1">
+            <div class="card domain-card-4">
                 <div class="domain-number">04</div>
                 <h3 class="lang-fr">AMEs / NFIs & Abris</h3>
                 <h3 class="lang-en">NFIs & Shelter</h3>
@@ -1067,7 +1254,7 @@
                     <li class="lang-en">Emergency and transitional shelter</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-2">
+            <div class="card domain-card-5">
                 <div class="domain-number">05</div>
                 <h3 class="lang-fr">Éducation</h3>
                 <h3 class="lang-en">Education</h3>
@@ -1076,7 +1263,7 @@
                     <li class="lang-en">Access to education and Literacy</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-3">
+            <div class="card domain-card-6">
                 <div class="domain-number">06</div>
                 <h3 class="lang-fr">EHA / WASH</h3>
                 <h3 class="lang-en">WASH</h3>
@@ -1085,251 +1272,291 @@
                     <li class="lang-en">Water, Sanitation and Hygiene</li>
                 </ul>
             </div>
-            <div class="card reveal reveal-delay-1">
+            <div class="card domain-card-7">
                 <div class="domain-number">07</div>
-                <h3 class="lang-fr">Environnement & Développement</h3>
-                <h3 class="lang-en">Environment & Development</h3>
+                <h3 class="lang-fr">Environnement & Développement Durable</h3>
+                <h3 class="lang-en">Environment & Sustainable Development</h3>
                 <ul>
-                    <li class="lang-fr">Protection environnementale</li>
-                    <li class="lang-en">Environmental protection</li>
+                    <li class="lang-fr">Protection environnementale et actions climatiques</li>
+                    <li class="lang-en">Environmental protection and climate actions</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Targets -->
-    <div class="section-alt" id="targets">
-        <div class="inner">
-            <div class="section-header reveal">
-                <span class="section-eyebrow lang-fr">Ceux que Nous Servons</span>
-                <span class="section-eyebrow lang-en">Those We Serve</span>
-                <h2 class="lang-fr">Nos Cibles Bénéficiaires</h2>
-                <h2 class="lang-en">Our Beneficiary Targets</h2>
-                <p class="lang-fr">Personnes à risque d'exclusion sociale dans la communauté.</p>
-                <p class="lang-en">Persons at risk of social exclusion in the community.</p>
-            </div>
-            <div class="grid-4">
-                <div class="target-card reveal reveal-delay-1">
-                    <div class="t-icon"><i class="fas fa-child"></i></div>
-                    <h4 class="lang-fr">Filles Mineures Victimes de Grossesses précoces</h4>
-                    <h4 class="lang-en">Minor Girls Victims of Early Pregnancies</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-2">
-                    <div class="t-icon"><i class="fas fa-user-clock"></i></div>
-                    <h4 class="lang-fr">Personnes du 3ème Âge</h4>
-                    <h4 class="lang-en">Elderly People</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-3">
-                    <div class="t-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4 class="lang-fr">Victimes de Violences Sexuelles</h4>
-                    <h4 class="lang-en">Survivors of Sexual Violence</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-1">
-                    <div class="t-icon"><i class="fas fa-tree"></i></div>
-                    <h4 class="lang-fr">Pygmées</h4>
-                    <h4 class="lang-en">Pygmy Communities</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-2">
-                    <div class="t-icon"><i class="fas fa-wheelchair"></i></div>
-                    <h4 class="lang-fr">Personnes Handicapées</h4>
-                    <h4 class="lang-en">People with Disabilities</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-3">
-                    <div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h4 class="lang-fr">Personnes Albinos</h4>
-                    <h4 class="lang-en">Albinos</h4>
-                </div>
-                <div class="target-card reveal reveal-delay-1" style="grid-column: span 1;">
-                    <div class="t-icon"><i class="fas fa-users-cog"></i></div>
-                    <h4 class="lang-fr">Enfants Associés aux Forces Armées</h4>
-                    <h4 class="lang-en">Children Associated with Armed Forces</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Activities -->
-    <div class="section-alt" id="activities" style="background: var(--bg-warm);">
+    <div class="section-alt" id="activities" data-theme="neutral">
         <div class="inner">
-            <div class="section-header reveal">
+            <div class="section-header">
                 <span class="section-eyebrow lang-fr">Sur le Terrain</span>
                 <span class="section-eyebrow lang-en">On the Ground</span>
                 <h2 class="lang-fr">Nos Activités en Images</h2>
                 <h2 class="lang-en">Our Activities in Pictures</h2>
+                <p class="lang-fr">Découvrez nos actions concrètes sur le terrain au Nord-Kivu.</p>
+                <p class="lang-en">Discover our concrete field actions in North Kivu.</p>
             </div>
 
             <!-- Activity 1 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">1</div>
                     <h3 class="lang-fr">Métiers Professionnels</h3>
                     <h3 class="lang-en">Professional Trades</h3>
                 </div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier Pro 1" loading="lazy"></div><div class="caption lang-fr">Formation technique et artisanale</div><div class="caption lang-en">Technical and craft training</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier Pro 2" loading="lazy"></div><div class="caption lang-fr">Ateliers pratiques pour les jeunes</div><div class="caption lang-en">Practical workshops for youth</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier Pro 3" loading="lazy"></div><div class="caption lang-fr">Acquisition de compétences</div><div class="caption lang-en">Professional skills acquisition</div></div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier Pro 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Formation technique et artisanale</div>
+                        <div class="caption lang-en">Technical and craft training</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier Pro 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Ateliers pratiques pour les jeunes</div>
+                        <div class="caption lang-en">Practical workshops for youth</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier Pro 3" loading="lazy"></div>
+                        <div class="caption lang-fr">Acquisition de compétences professionnelles</div>
+                        <div class="caption lang-en">Professional skills acquisition</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Activity 2 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">2</div>
                     <h3 class="lang-fr">Entrepreneuriat & Leadership Féminin</h3>
                     <h3 class="lang-en">Entrepreneurship & Women's Leadership</h3>
                 </div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy"></div><div class="caption lang-fr">Soutien aux Activités Génératrices de Revenus</div><div class="caption lang-en">Support for Income-Generating Activities</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/tpsJ3D20/Entre-Preneuriat-et-Leadership-Fe-minin3.jpg" alt="Entrepreneuriat 3" loading="lazy"></div><div class="caption lang-fr">Accompagnement des coopératives féminines</div><div class="caption lang-en">Support for women's cooperatives</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat 4" loading="lazy"></div><div class="caption lang-fr">Renforcement des capacités des femmes</div><div class="caption lang-en">Capacity building for women</div></div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat Nouveau" loading="lazy"></div>
+                        <div class="caption lang-fr">Formation et accompagnement des femmes</div>
+                        <div class="caption lang-en">Training and support for women</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Soutien aux Activités Génératrices de Revenus (AGR)</div>
+                        <div class="caption lang-en">Support for Income-Generating Activities (IGA)</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/tpsJ3D20/Entre-Preneuriat-et-Leadership-Fe-minin3.jpg" alt="Entrepreneuriat 3" loading="lazy"></div>
+                        <div class="caption lang-fr">Accompagnement des coopératives féminines</div>
+                        <div class="caption lang-en">Support for women's cooperatives</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Activity 3 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">3</div>
                     <h3 class="lang-fr">Sécurité Alimentaire</h3>
                     <h3 class="lang-en">Food Security</h3>
                 </div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite 1" loading="lazy"></div><div class="caption lang-fr">Distribution de vivres et kits alimentaires</div><div class="caption lang-en">Food and kit distribution</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite 2" loading="lazy"></div><div class="caption lang-fr">Appui aux jardins communautaires</div><div class="caption lang-en">Support for community gardens</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite 3" loading="lazy"></div><div class="caption lang-fr">Sécurité alimentaire des ménages</div><div class="caption lang-en">Household food security</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite 4" loading="lazy"></div><div class="caption lang-fr">Activités agricoles et résilience</div><div class="caption lang-en">Agricultural activities and resilience</div></div>
+                <div class="image-grid grid-4">
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Distribution de vivres et kits alimentaires</div>
+                        <div class="caption lang-en">Food and kit distribution</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Appui aux jardins communautaires</div>
+                        <div class="caption lang-en">Support for community gardens</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite 3" loading="lazy"></div>
+                        <div class="caption lang-fr">Renforcement de la sécurité alimentaire</div>
+                        <div class="caption lang-en">Strengthening household food security</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite 4" loading="lazy"></div>
+                        <div class="caption lang-fr">Sensibilisation nutritionnelle</div>
+                        <div class="caption lang-en">Nutritional awareness</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Activity 4 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">4</div>
                     <h3 class="lang-fr">Environnement & Développement Durable</h3>
                     <h3 class="lang-en">Environment & Sustainable Development</h3>
                 </div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg" alt="Env 1" loading="lazy"></div><div class="caption lang-fr">Campagnes de reboisement</div><div class="caption lang-en">Reforestation campaigns</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/Q3qJQF8V/environnement-et-De-veloppement-durable2.jpg" alt="Env 2" loading="lazy"></div><div class="caption lang-fr">Sensibilisation environnementale</div><div class="caption lang-en">Environmental awareness</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/XfQJcxF0/environnement-et-De-veloppement-durable3.jpg" alt="Env 3" loading="lazy"></div><div class="caption lang-fr">Actions climatiques locales</div><div class="caption lang-en">Local climate actions</div></div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg" alt="Env 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Campagnes de reboisement communautaire</div>
+                        <div class="caption lang-en">Community reforestation campaigns</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/Q3qJQF8V/environnement-et-De-veloppement-durable2.jpg" alt="Env 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Sensibilisation à la protection de l'environnement</div>
+                        <div class="caption lang-en">Environmental protection awareness</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/XfQJcxF0/environnement-et-De-veloppement-durable3.jpg" alt="Env 3" loading="lazy"></div>
+                        <div class="caption lang-fr">Actions climatiques locales et durables</div>
+                        <div class="caption lang-en">Local and sustainable climate actions</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Activity 5 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">5</div>
                     <h3 class="lang-fr">Éducation</h3>
                     <h3 class="lang-en">Education</h3>
                 </div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/SXff4zK8/activite-s-de-l-e-ducation.jpg" alt="Edu 1" loading="lazy"></div><div class="caption lang-fr">Alphabétisation pour adultes</div><div class="caption lang-en">Adult literacy classes</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/8Lc9VFtR/activite-s-de-l-e-ducation2.jpg" alt="Edu 2" loading="lazy"></div><div class="caption lang-fr">Soutien scolaire et fournitures</div><div class="caption lang-en">Educational support and supplies</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/Rkqkyh0W/activite-s-de-l-e-ducation3.jpg" alt="Edu 3" loading="lazy"></div><div class="caption lang-fr">Promotion de l'éducation des filles</div><div class="caption lang-en">Promoting girls' education</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Edu 4" loading="lazy"></div><div class="caption lang-fr">Cadres d'apprentissage inclusifs</div><div class="caption lang-en">Inclusive learning environments</div></div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Education Nouveau" loading="lazy"></div>
+                        <div class="caption lang-fr">Programmes éducatifs et soutien scolaire</div>
+                        <div class="caption lang-en">Educational programs and school support</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/SXff4zK8/activite-s-de-l-e-ducation.jpg" alt="Edu 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Classes d'alphabétisation pour adultes</div>
+                        <div class="caption lang-en">Adult literacy classes</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/8Lc9VFtR/activite-s-de-l-e-ducation2.jpg" alt="Edu 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Soutien scolaire et fournitures pour les enfants</div>
+                        <div class="caption lang-en">Educational support and supplies for children</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Activity 6 -->
-            <div class="activity-block reveal">
+            <div class="activity-block">
                 <div class="activity-title">
                     <div class="num">6</div>
-                    <h3 class="lang-fr">AMEs / NFIs & Abris</h3>
-                    <h3 class="lang-en">NFIs & Shelter</h3>
-                </div>
-                <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/d4HgvV4Q/Whats-App-Image-2026-11-03-at-21-19-32-1.jpg" alt="Abris 1" loading="lazy"></div><div class="caption lang-fr">Distribution d'abris d'urgence</div><div class="caption lang-en">Emergency shelter distribution</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/398hbSkq/Whats-App-Image-2026-11-03-at-21-19-32.jpg" alt="Abris 2" loading="lazy"></div><div class="caption lang-fr">Abris de transition pour déplacés</div><div class="caption lang-en">Transitional shelter for displaced</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris 3" loading="lazy"></div><div class="caption lang-fr">Articles ménagers essentiels (NFI)</div><div class="caption lang-en">Essential Non-Food Items (NFI)</div></div>
-                </div>
-            </div>
-
-            <!-- Activity 7 -->
-            <div class="activity-block reveal">
-                <div class="activity-title">
-                    <div class="num">7</div>
                     <h3 class="lang-fr">EHA / WASH</h3>
                     <h3 class="lang-en">WASH</h3>
                 </div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH 1" loading="lazy"></div><div class="caption lang-fr">Points d'eau et assainissement</div><div class="caption lang-en">Water points and sanitation</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/s8Qm77d/Whats-App-Image-2026-11-19-at-11-31-19.jpg" alt="WASH 2" loading="lazy"></div><div class="caption lang-fr">Sensibilisation à l'hygiène</div><div class="caption lang-en">Hygiene awareness</div></div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Accès à l'eau potable et infrastructures</div>
+                        <div class="caption lang-en">Access to clean water and infrastructure</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/s8Qm77d/Whats-App-Image-2026-11-19-at-11-31-19.jpg" alt="WASH 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Sensibilisation à l'hygiène et assainissement</div>
+                        <div class="caption lang-en">Hygiene and sanitation awareness</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 7 -->
+            <div class="activity-block">
+                <div class="activity-title">
+                    <div class="num">7</div>
+                    <h3 class="lang-fr">AMEs / NFIs & Abris</h3>
+                    <h3 class="lang-en">NFIs & Shelter</h3>
+                </div>
+                <div class="image-grid">
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris Nouveau" loading="lazy"></div>
+                        <div class="caption lang-fr">Distribution d'articles ménagers et kits</div>
+                        <div class="caption lang-en">Distribution of household items and kits</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/d4HgvV4Q/Whats-App-Image-2026-11-03-at-21-19-32-1.jpg" alt="Abris 1" loading="lazy"></div>
+                        <div class="caption lang-fr">Distribution d'abris d'urgence</div>
+                        <div class="caption lang-en">Emergency shelter distribution</div>
+                    </div>
+                    <div class="image-card">
+                        <div class="img-wrap"><img src="https://i.ibb.co/398hbSkq/Whats-App-Image-2026-11-03-at-21-19-32.jpg" alt="Abris 2" loading="lazy"></div>
+                        <div class="caption lang-fr">Installation d'abris de transition pour les déplacés</div>
+                        <div class="caption lang-en">Transitional shelter installation for displaced persons</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Media Section -->
-    <section id="media">
-        <div class="section-header reveal">
-            <span class="section-eyebrow lang-fr">Médiathèque</span>
-            <span class="section-eyebrow lang-en">Media Library</span>
-            <h2 class="lang-fr">Vidéos & Audio</h2>
-            <h2 class="lang-en">Videos & Audio</h2>
+    <!-- Médiathèque -->
+    <section id="media" data-theme="blue">
+        <div class="section-header">
+            <span class="section-eyebrow lang-fr">Ressources Multimédias</span>
+            <span class="section-eyebrow lang-en">Multimedia Resources</span>
+            <h2 class="lang-fr">Médiathèque : Vidéos & Audio</h2>
+            <h2 class="lang-en">Media Library: Videos & Audio</h2>
+            <p class="lang-fr">Suivez nos témoignages, reportages et sensibilisations sur le terrain.</p>
+            <p class="lang-en">Follow our testimonials, reports, and awareness campaigns from the field.</p>
         </div>
-        <div class="grid-2">
-            <div class="card reveal reveal-delay-1">
-                <h4 class="lang-fr ui-font"><i class="fas fa-video" style="color: var(--accent); margin-right: 0.5rem;"></i> Vidéos & Reportages</h4>
-                <h4 class="lang-en ui-font"><i class="fas fa-video" style="color: var(--accent); margin-right: 0.5rem;"></i> Videos & Reports</h4>
-                <div class="media-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                    <span class="lang-fr">Lecteur Vidéo (Intégration YouTube/Vimeo)</span>
-                    <span class="lang-en">Video Player (YouTube/Vimeo integration)</span>
+        <div class="media-grid">
+            <div class="media-card">
+                <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
+                <div class="media-info">
+                    <span class="media-badge video">Vidéo</span>
+                    <h4 class="lang-fr">Reportage : Impact de nos actions au Nord-Kivu</h4>
+                    <h4 class="lang-en">Report: Impact of our actions in North Kivu</h4>
+                    <p class="lang-fr">Découvrez comment vos dons transforment des vies.</p>
+                    <p class="lang-en">Discover how your donations transform lives.</p>
                 </div>
             </div>
-            <div class="card reveal reveal-delay-2">
-                <h4 class="lang-fr ui-font"><i class="fas fa-microphone-alt" style="color: var(--accent); margin-right: 0.5rem;"></i> Podcasts & Radio</h4>
-                <h4 class="lang-en ui-font"><i class="fas fa-microphone-alt" style="color: var(--accent); margin-right: 0.5rem;"></i> Podcasts & Radio</h4>
-                <div class="audio-player-wrap">
-                    <audio controls>
-                        <source src="#" type="audio/mpeg">
-                        <span class="lang-fr">Votre navigateur ne supporte pas l'audio.</span>
-                        <span class="lang-en">Your browser does not support audio.</span>
-                    </audio>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.8rem; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif;" class="lang-fr">Exemple : Campagne de sensibilisation sur les droits des femmes</p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.8rem; text-align: center; font-family: 'Plus Jakarta Sans', sans-serif;" class="lang-en">Example: Awareness campaign on women's rights</p>
+            <div class="media-card">
+                <div class="media-placeholder audio"><i class="fas fa-microphone-lines"></i></div>
+                <div class="media-info">
+                    <span class="media-badge audio">Audio</span>
+                    <h4 class="lang-fr">Témoignage : Une bénéficiaire reprend espoir</h4>
+                    <h4 class="lang-en">Testimonial: A beneficiary regains hope</h4>
+                    <p class="lang-fr">Écoutez l'histoire de Mama Sarah, entrepreneure soutenue par l'UFAD.</p>
+                    <p class="lang-en">Listen to the story of Mama Sarah, an entrepreneur supported by UFAD.</p>
+                </div>
+            </div>
+            <div class="media-card">
+                <div class="media-placeholder"><i class="fas fa-video"></i></div>
+                <div class="media-info">
+                    <span class="media-badge video">Vidéo</span>
+                    <h4 class="lang-fr">Sensibilisation : L'importance de l'hygiène (WASH)</h4>
+                    <h4 class="lang-en">Awareness: The importance of hygiene (WASH)</h4>
+                    <p class="lang-fr">Campagne de sensibilisation dans les écoles du Nord-Kivu.</p>
+                    <p class="lang-en">Awareness campaign in North Kivu schools.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Careers Section -->
-    <div class="section-alt" id="careers">
+    <!-- Offres & Carrières -->
+    <div class="section-alt" id="careers" data-theme="warm">
         <div class="inner">
-            <div class="section-header reveal">
-                <span class="section-eyebrow lang-fr">Rejoignez l'équipe</span>
+            <div class="section-header">
+                <span class="section-eyebrow lang-fr">Rejoignez l'Équipe</span>
                 <span class="section-eyebrow lang-en">Join the Team</span>
-                <h2 class="lang-fr">Offres d'Emploi & Opportunités</h2>
-                <h2 class="lang-en">Job Offers & Opportunities</h2>
+                <h2 class="lang-fr">Offres & Carrières</h2>
+                <h2 class="lang-en">Career Opportunities</h2>
             </div>
-            <div class="card reveal" style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <i class="fas fa-briefcase" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
-                <h3 class="lang-fr">Aucune offre active pour le moment</h3>
-                <h3 class="lang-en">No active offers at the moment</h3>
-                <p class="lang-fr" style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">Nous recrutons régulièrement des talents passionnés. Envoyez votre CV à <a href="mailto:ufadcoordination5@gmail.com" style="color: var(--accent); font-weight: 600;">ufadcoordination5@gmail.com</a></p>
-                <p class="lang-en" style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">We regularly recruit passionate talents. Send your CV to <a href="mailto:ufadcoordination5@gmail.com" style="color: var(--accent); font-weight: 600;">ufadcoordination5@gmail.com</a></p>
-                <a href="#contact" class="btn">
-                    <span class="lang-fr"><i class="fas fa-paper-plane"></i> Candidature Spontanée</span>
-                    <span class="lang-en"><i class="fas fa-paper-plane"></i> Spontaneous Application</span>
-                </a>
+            <div class="careers-card">
+                <h3 class="lang-fr">Travaillez avec l'UFAD</h3>
+                <h3 class="lang-en">Work with UFAD</h3>
+                <p class="lang-fr">Nous recherchons des personnes passionnées et dévouées pour renforcer notre impact humanitaire au Nord-Kivu. Consultez nos offres d'emploi actuelles ou soumettez une candidature spontanée.</p>
+                <p class="lang-en">We are looking for passionate and dedicated individuals to strengthen our humanitarian impact in North Kivu. Check our current job openings or submit a spontaneous application.</p>
+                <a href="mailto:ufadcoordination5@gmail.com?subject=Candidature%20Spontanée%20-%20UFAD" class="btn lang-fr"><i class="fas fa-briefcase"></i> Voir les Offres / Postuler</a>
+                <a href="mailto:ufadcoordination5@gmail.com?subject=Spontaneous%20Application%20-%20UFAD" class="btn lang-en"><i class="fas fa-briefcase"></i> View Openings / Apply</a>
             </div>
         </div>
     </div>
 
     <!-- APP CTA -->
     <div class="app-cta-section" id="portal">
-        <div class="app-cta-content reveal">
+        <div class="app-cta-content">
             <div class="app-cta-icon"><i class="fas fa-mobile-screen-button"></i></div>
             <h2 class="lang-fr">Rejoignez la Communauté UFAD</h2>
             <h2 class="lang-en">Join the UFAD Community</h2>
-            <p class="lang-fr">Installez notre application pour faire un don, suivre votre demande d'assistance ou gérer votre dossier.</p>
-            <p class="lang-en">Install our app to make a donation, track your assistance request, or manage your file.</p>
-            
+            <p class="lang-fr">Installez notre application sur votre téléphone pour faire un don, suivre votre demande d'assistance ou gérer votre dossier.</p>
+            <p class="lang-en">Install our app on your phone to make a donation, track your assistance request, or manage your file.</p>
             <div class="app-cta-buttons">
                 <a href="login.html" class="app-btn app-btn-primary">
                     <i class="fas fa-download"></i>
-                    <span class="lang-fr">Télécharger l'App / Portail</span>
-                    <span class="lang-en">Download App / Portal</span>
+                    <span class="lang-fr">Télécharger l'App / Ouvrir le Portail</span>
+                    <span class="lang-en">Download App / Open Portal</span>
                 </a>
                 <a href="#contact" class="app-btn app-btn-secondary">
                     <i class="fas fa-headset"></i>
@@ -1337,7 +1564,6 @@
                     <span class="lang-en">Need Help?</span>
                 </a>
             </div>
-
             <div class="app-badge-row">
                 <span><i class="fas fa-check-circle"></i> <span class="lang-fr">Installation gratuite</span><span class="lang-en">Free Install</span></span>
                 <span><i class="fas fa-check-circle"></i> <span class="lang-fr">Fonctionne hors ligne</span><span class="lang-en">Works Offline</span></span>
@@ -1347,22 +1573,22 @@
     </div>
 
     <!-- Contact -->
-    <section id="contact">
-        <div class="section-header reveal">
+    <section id="contact" data-theme="neutral">
+        <div class="section-header">
             <span class="section-eyebrow lang-fr">Restons en Contact</span>
             <span class="section-eyebrow lang-en">Let's Stay in Touch</span>
             <h2 class="lang-fr">Contactez-Nous</h2>
             <h2 class="lang-en">Contact Us</h2>
         </div>
         <div class="contact-grid">
-            <div class="reveal reveal-delay-1">
+            <div>
                 <div class="contact-info-item">
                     <i class="fas fa-location-dot"></i>
                     <div>
                         <h4 class="lang-fr">Siège Social</h4>
                         <h4 class="lang-en">Headquarters</h4>
-                        <p class="lang-fr">Province du Nord-Kivu, RDC</p>
-                        <p class="lang-en">North Kivu Province, DRC</p>
+                        <p class="lang-fr">Province du Nord-Kivu, République Démocratique du Congo (RDC)</p>
+                        <p class="lang-en">North Kivu Province, Democratic Republic of Congo (DRC)</p>
                     </div>
                 </div>
                 <div class="contact-info-item">
@@ -1372,6 +1598,7 @@
                         <h4 class="lang-en">Phone</h4>
                         <p>+243 (0) 819 168 700</p>
                         <p>+243 851 972 001</p>
+                        <p>+243 811 997 327</p>
                     </div>
                 </div>
                 <div class="contact-info-item">
@@ -1381,15 +1608,17 @@
                         <h4 class="lang-en">Email</h4>
                         <a href="mailto:rdcufad@gmail.com">rdcufad@gmail.com</a>
                         <a href="mailto:ufadcoordination5@gmail.com">ufadcoordination5@gmail.com</a>
-                        <p class="lang-fr" style="font-size: 0.85rem; margin-top: 0.6rem; font-style: italic; color: var(--text-muted);"><strong>Plaintes / suggestions :</strong> <a href="mailto:ufadplaintesetsuggestions@gmail.com" style="display:inline; color:var(--accent); font-weight: 600;">ufadplaintesetsuggestions@gmail.com</a></p>
+                        <a href="mailto:infos@ufad.org">infos@ufad.org</a>
+                        <p class="lang-fr" style="font-size: 0.85rem; margin-top: 0.6rem; font-style: italic; color: var(--text-muted);"><strong>Plaintes / suggestions :</strong> <a href="mailto:ufadplaintesetsuggestions@gmail.com" style="display:inline; color:var(--accent); font-weight: 700;">ufadplaintesetsuggestions@gmail.com</a></p>
+                        <p class="lang-en" style="font-size: 0.85rem; margin-top: 0.6rem; font-style: italic; color: var(--text-muted);"><strong>Complaints / suggestions:</strong> <a href="mailto:ufadplaintesetsuggestions@gmail.com" style="display:inline; color:var(--accent); font-weight: 700;">ufadplaintesetsuggestions@gmail.com</a></p>
                     </div>
                 </div>
             </div>
 
-            <div class="contact-form reveal reveal-delay-2">
+            <div class="contact-form">
                 <h3 class="lang-fr">Envoyez-nous un message</h3>
                 <h3 class="lang-en">Send us a message</h3>
-                <form onsubmit="event.preventDefault(); alert('Merci pour votre message! Nous vous contacterons bientôt.');">
+                <form onsubmit="event.preventDefault(); alert('Merci pour votre message! Nous vous contacterons bientôt. / Thank you for your message! We will contact you soon.');">
                     <input type="text" placeholder="Nom / Name" required>
                     <input type="email" placeholder="Email" required>
                     <input type="text" placeholder="Sujet / Subject" required>
@@ -1411,17 +1640,24 @@
                     <div class="footer-brand">
                         <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
                     </div>
-                    <p class="lang-fr">Union des Femmes Africaines pour le Développement. Ensemble pour un monde solidaire et inclusif en RDC.</p>
-                    <p class="lang-en">Union of African Women for Development. Together for a solidary and inclusive world in DRC.</p>
+                    <p class="lang-fr">Union des Femmes Africaines pour le Développement. Ensemble pour un monde solidaire et inclusif.</p>
+                    <p class="lang-en">Union of African Women for Development. Together for a solidary and inclusive world.</p>
                 </div>
                 <div class="footer-section">
                     <h4 class="lang-fr">Liens Rapides</h4>
                     <h4 class="lang-en">Quick Links</h4>
                     <a href="#about" class="lang-fr">À propos</a>
+                    <a href="#about" class="lang-en">About</a>
                     <a href="#domains" class="lang-fr">Domaines Clés</a>
+                    <a href="#domains" class="lang-en">Key Domains</a>
                     <a href="#activities" class="lang-fr">Activités</a>
-                    <a href="#media" class="lang-fr">Médias</a>
-                    <a href="#careers" class="lang-fr">Carrières</a>
+                    <a href="#activities" class="lang-en">Activities</a>
+                    <a href="#media" class="lang-fr">Médiathèque</a>
+                    <a href="#media" class="lang-en">Media</a>
+                    <a href="#careers" class="lang-fr">Offres & Carrières</a>
+                    <a href="#careers" class="lang-en">Careers</a>
+                    <a href="login.html" class="lang-fr">Portail</a>
+                    <a href="login.html" class="lang-en">Portal</a>
                 </div>
                 <div class="footer-section">
                     <h4 class="lang-fr">Légal</h4>
@@ -1438,86 +1674,86 @@
 
     <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
+        // Premium Mobile Menu Toggle
         function toggleMenu(event) {
             if (event) event.stopPropagation();
             const menu = document.getElementById('mobile-menu');
             const btn = document.querySelector('.mobile-menu-btn');
             const isOpen = menu.classList.toggle('active');
+            btn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            menu.classList.remove('active');
+            btn.innerHTML = '<i class="fas fa-bars"></i>';
+            btn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
         }
 
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('mobile-menu');
             const btn = document.querySelector('.mobile-menu-btn');
             if (menu.classList.contains('active') && !menu.contains(event.target) && !btn.contains(event.target)) {
-                menu.classList.remove('active');
-                btn.setAttribute('aria-expanded', 'false');
+                closeMenu();
             }
         });
-
-        function closeMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const btn = document.querySelector('.mobile-menu-btn');
-            menu.classList.remove('active');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-        }
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') closeMenu();
         });
 
-        // Language Toggle with LocalStorage
+        // Language Toggle
         function toggleLanguage() {
             const body = document.body;
             if (body.classList.contains('lang-fr')) {
                 body.classList.remove('lang-fr');
                 body.classList.add('lang-en');
                 document.documentElement.lang = 'en';
-                localStorage.setItem('ufad-lang', 'en');
             } else {
                 body.classList.remove('lang-en');
                 body.classList.add('lang-fr');
                 document.documentElement.lang = 'fr';
-                localStorage.setItem('ufad-lang', 'fr');
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('ufad-lang');
-            if (savedLang === 'en') {
-                document.body.classList.remove('lang-fr');
-                document.body.classList.add('lang-en');
-                document.documentElement.lang = 'en';
-            }
-        });
-
-        // Header shadow on scroll
+        // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 10) header.classList.add('scrolled');
             else header.classList.remove('scrolled');
         }, { passive: true });
 
-        // Premium Scroll Reveal Animation
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+        // PREMIUM: Scroll-driven Section Theming
+        const sections = document.querySelectorAll('section, .section-alt');
+        const themeColors = {
+            'blue': { bg: '#F0F9FF', accent: '#0055FF' },
+            'warm': { bg: '#FFF8F5', accent: '#E8642C' },
+            'green': { bg: '#F0FFF4', accent: '#4CA100' },
+            'lavender': { bg: '#F5F3FF', accent: '#6366F1' },
+            'teal': { bg: '#F0FDFA', accent: '#0D9488' },
+            'neutral': { bg: '#FAFAFA', accent: '#0F172A' }
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
+        const observerOptions = { threshold: 0.3, rootMargin: '0px' };
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Only animate once
+                    const theme = entry.target.getAttribute('data-theme') || 'neutral';
+                    const colors = themeColors[theme];
+                    if (colors) {
+                        document.body.style.backgroundColor = colors.bg;
+                        // Optional: subtly shift accent color globally if desired
+                        // document.documentElement.style.setProperty('--accent', colors.accent);
+                    }
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
+        sections.forEach(section => sectionObserver.observe(section));
     </script>
 </body>
 </html>
