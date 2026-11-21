@@ -61,7 +61,9 @@
             transition: background-color 0.6s ease;
         }
 
-        @media (max-width: 768px) { body { background-attachment: scroll; } }
+        @media (max-width: 768px) {
+            body { background-attachment: scroll; }
+        }
         
         h1, h2, h3, h4 { 
             font-family: 'Playfair Display', serif; 
@@ -75,7 +77,6 @@
         body.lang-fr .lang-en { display: none !important; }
         body.lang-en .lang-fr { display: none !important; }
 
-        /* --- HEADER --- */
         header { 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(12px);
@@ -139,7 +140,9 @@
         .header-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(232, 100, 44, 0.4); }
         .header-cta i { font-size: 0.9rem; }
 
-        @media (min-width: 768px) { .header-cta { display: inline-flex; } }
+        @media (min-width: 768px) {
+            .header-cta { display: inline-flex; }
+        }
 
         nav.desktop-nav { display: none; } 
         nav.desktop-nav ul { display: flex; gap: 0.2rem; align-items: center; list-style: none; }
@@ -170,7 +173,6 @@
         }
         .lang-toggle:hover { background: var(--ink); color: #FFF; }
 
-        /* --- MOBILE MENU --- */
         .mobile-popup-menu {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -201,6 +203,7 @@
             justify-content: space-between;
         }
         .mobile-popup-menu a.menu-link:active { color: var(--theme-accent); }
+        
         .mobile-popup-menu .mobile-actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
         .mobile-popup-menu .btn { width: 100%; padding: 1rem; font-size: 1rem; justify-content: center; border-radius: var(--radius); }
         .mobile-lang-toggle {
@@ -219,7 +222,6 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        /* --- HERO --- */
         .hero-wrapper { padding: 1.5rem 1rem; max-width: 1280px; margin: 0 auto; }
         .hero-card { 
             background: rgba(255, 255, 255, 0.85);
@@ -308,7 +310,6 @@
         .btn-outline { background: rgba(255,255,255,0.9); border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
         .btn-outline:active { background: var(--ink); color: #FFF; }
 
-        /* --- SECTIONS & GRIDS --- */
         section, .section-alt { padding: 4rem 1rem; transition: background-color 0.6s ease; } 
         section { max-width: 1200px; margin: 0 auto; }
         .section-alt { border-top: 1px solid rgba(0,0,0,0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
@@ -349,7 +350,6 @@
             position: absolute; left: 0; top: 4px; font-size: 0.75rem; transition: color 0.6s ease;
         }
 
-        /* --- ABOUT & LEGAL --- */
         .about-intro { max-width: 800px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; color: var(--ink-soft); line-height: 1.7; }
         
         .zone-highlight {
@@ -370,7 +370,6 @@
         }
         .legal-item strong { display: block; color: var(--ink); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.3rem; font-weight: 800; }
 
-        /* --- MISSION & TARGETS --- */
         .mission-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
         .mission-card { padding: 2.5rem 1.5rem; border-radius: var(--radius); }
         .mission-card.mission { background: var(--ink); color: #FFF; }
@@ -398,7 +397,6 @@
         .target-card:nth-child(6) { background: #FFF0F5; border-color: #FED7E2; } .target-card:nth-child(6) .t-icon { background: #FED7E2; color: #B83280; }
         .target-card:nth-child(7) { background: #F0FDFA; border-color: #B2F5EA; } .target-card:nth-child(7) .t-icon { background: #B2F5EA; color: #285E61; }
 
-        /* --- DOMAINS & ACTIVITIES --- */
         .domain-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--theme-accent); opacity: 0.15; line-height: 1; margin-bottom: 0.3rem; transition: color 0.6s ease; }
         .activity-block { margin-bottom: 3rem; } 
         .activity-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
@@ -430,7 +428,6 @@
         .domain-card-6 { border-top: 4px solid #319795; background: linear-gradient(to bottom, #F0FDFA, #FFF); }
         .domain-card-7 { border-top: 4px solid #E2001A; background: linear-gradient(to bottom, #FFF5F5, #FFF); }
 
-        /* --- MEDIA & CAREERS --- */
         .media-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
         .media-card { background: #FFF; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; border-bottom: 4px solid var(--theme-accent); transition: border-color 0.6s ease; }
         .media-placeholder { background: linear-gradient(135deg, var(--ink), #1E293B); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); font-size: 3rem; }
@@ -450,7 +447,6 @@
         .careers-card p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 1.5rem; position: relative; z-index: 2; font-size: 1rem; }
         .careers-card .btn { position: relative; z-index: 2; background: #FFF; color: var(--ink); }
 
-        /* --- CONTACT & FOOTER --- */
         .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
         .contact-info-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
         .contact-info-item i { color: var(--theme-accent); background: var(--accent-soft); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1.1rem; flex-shrink: 0; transition: color 0.6s ease, background 0.6s ease; }
@@ -480,9 +476,6 @@
         .footer-brand img { height: 48px; background: #FFF; padding: 6px; border-radius: var(--radius-sm); }
         .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
 
-        /* ============================================
-           RESPONSIVE BREAKPOINTS
-           ============================================ */
         @media (min-width: 480px) {
             .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .image-grid { grid-template-columns: repeat(2, 1fr); }
@@ -511,7 +504,6 @@
 </head>
 <body class="lang-fr">
 
-    <!-- Compact Header with Visible CTA -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -522,9 +514,10 @@
                 <ul>
                     <li><a href="#about" class="lang-fr">À propos</a><a href="#about" class="lang-en">About</a></li>
                     <li><a href="#mission" class="lang-fr">Mission</a><a href="#mission" class="lang-en">Mission</a></li>
+                    <li><a href="#domains" class="lang-fr">Domaines</a><a href="#domains" class="lang-en">Domains</a></li>
                     <li><a href="#activities" class="lang-fr">Activités</a><a href="#activities" class="lang-en">Activities</a></li>
-                    <li><a href="#media" class="lang-fr">Médias</a><a href="#media" class="lang-en">Media</a></li>
-                    <li><a href="#careers" class="lang-fr">Carrières</a><a href="#careers" class="lang-en">Careers</a></li>
+                    <li><a href="#media" class="lang-fr">Média</a><a href="#media" class="lang-en">Media</a></li>
+                    <li><a href="#offres" class="lang-fr">Offres</a><a href="#offres" class="lang-en">Offers</a></li>
                     <li><a href="#contact" class="lang-fr">Contact</a><a href="#contact" class="lang-en">Contact</a></li>
                     <li><button class="lang-toggle" onclick="toggleLanguage()"><span class="lang-fr">EN</span><span class="lang-en">FR</span></button></li>
                 </ul>
@@ -542,13 +535,14 @@
         </div>
     </header>
 
-    <!-- Mobile Popup Menu -->
     <div class="mobile-popup-menu" id="mobile-menu">
         <a href="#about" class="menu-link" onclick="closeMenu()"><span class="lang-fr">À propos</span><span class="lang-en">About</span><i class="fas fa-arrow-right"></i></a>
         <a href="#mission" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Mission</span><span class="lang-en">Mission</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#objectives" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Objectifs</span><span class="lang-en">Objectives</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#domains" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Domaines</span><span class="lang-en">Domains</span><i class="fas fa-arrow-right"></i></a>
         <a href="#activities" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Activités</span><span class="lang-en">Activities</span><i class="fas fa-arrow-right"></i></a>
-        <a href="#media" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Médias</span><span class="lang-en">Media</span><i class="fas fa-arrow-right"></i></a>
-        <a href="#careers" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Carrières</span><span class="lang-en">Careers</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#media" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Média (Vidéos/Audio)</span><span class="lang-en">Media (Video/Audio)</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#offres" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Offres & Opportunités</span><span class="lang-en">Offers & Opportunities</span><i class="fas fa-arrow-right"></i></a>
         <a href="#contact" class="menu-link" onclick="closeMenu()"><span class="lang-fr">Contact</span><span class="lang-en">Contact</span><i class="fas fa-arrow-right"></i></a>
         
         <div class="mobile-actions">
@@ -561,7 +555,6 @@
         </div>
     </div>
 
-    <!-- HERO CARD -->
     <div class="hero-wrapper">
         <div class="hero-card">
             <div class="hero-content">
@@ -597,7 +590,6 @@
         </div>
     </div>
 
-    <!-- About -->
     <section id="about" data-theme="blue">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Qui Sommes-Nous</span>
@@ -608,32 +600,29 @@
         <p class="about-intro lang-fr">L'UFAD ONGD est une organisation humanitaire non gouvernementale à « Caractère Féminin », apolitique, créée le 23 Septembre 2015 au Nord-Kivu en RDC.</p>
         <p class="about-intro lang-en">UFAD ONGD is a non-governmental humanitarian organization with a "Feminine Character", apolitical, created on September 23, 2015, in North Kivu, DRC.</p>
         
-        <!-- ✅ UPDATE 2: Zone d'intervention exacte demandée -->
         <div class="zone-highlight">
             <i class="fas fa-map-location-dot"></i>
             <div>
                 <h4 class="lang-fr">Zone d'Intervention</h4>
                 <h4 class="lang-en">Intervention Zone</h4>
                 <p class="lang-fr">République Démocratique du Congo (RDC) et particulièrement dans la province du Nord-Kivu.</p>
-                <p class="lang-en">Democratic Republic of Congo (DRC) and particularly in the province of North Kivu.</p>
+                <p class="lang-en">Democratic Republic of Congo (DRC), particularly in the North Kivu province.</p>
             </div>
         </div>
 
         <div class="legal-card">
             <h4><i class="fas fa-certificate"></i> <span class="lang-fr">Statut Juridique</span><span class="lang-en">Legal Status</span></h4>
             <div class="legal-grid">
-                <div class="legal-item"><strong class="lang-fr">National</strong><strong class="lang-en">National</strong>F.92/49.994 | No. JUST.SG/20/TK/4385/2022</div>
-                <div class="legal-item"><strong class="lang-fr">Provincial</strong><strong class="lang-en">Provincial</strong>N° 01/284/CAB/GP-NK/2019</div>
-                <div class="legal-item"><strong class="lang-fr">Justice</strong><strong class="lang-en">Justice</strong>JUST.112/778/NK/2023</div>
+                <div class="legal-item"><strong class="lang-fr">Enregistrement National</strong><strong class="lang-en">National Registration</strong>F.92/49.994 | No. JUST.SG/20/TK/4385/2022</div>
+                <div class="legal-item"><strong class="lang-fr">Autorisation Provinciale</strong><strong class="lang-en">Provincial Authorization</strong>N° 01/284/CAB/GP-NK/2019</div>
+                <div class="legal-item"><strong class="lang-fr">Justice Provinciale</strong><strong class="lang-en">Provincial Justice</strong>JUST.112/778/NK/2023</div>
                 <div class="legal-item"><strong class="lang-fr">Affaires Sociales</strong><strong class="lang-en">Social Affairs</strong>N° 08/DIVAS/N-K/AS/95/2023</div>
-                <div class="legal-item"><strong class="lang-fr">Genre & Famille</strong><strong class="lang-en">Gender & Family</strong>N° 12/DIV-PR/GEFAE-NK/2024</div>
-                <!-- ✅ UPDATE 4: Numéro d'enregistrement Plan ajouté -->
-                <div class="legal-item"><strong class="lang-fr">Enreg. Provincial (Plan)</strong><strong class="lang-en">Provincial Reg. (Plan)</strong>S/No: 77 du 08/05/23</div>
+                <div class="legal-item"><strong class="lang-fr">Genre, Famille & Enfants</strong><strong class="lang-en">Gender, Family & Children</strong>N° 12/DIV-PR/GEFAE-NK/2024</div>
+                <div class="legal-item"><strong class="lang-fr">Accusé de réception (Plan)</strong><strong class="lang-en">Acknowledgment of Receipt (Plan)</strong>S/No: 77 du 08/05/23</div>
             </div>
         </div>
     </section>
 
-    <!-- Mission & Vision -->
     <div class="section-alt" id="mission" data-theme="warm">
         <div class="inner">
             <div class="section-header">
@@ -649,26 +638,16 @@
                     <p class="lang-fr">Assurer l'égalité et l'équité pour un monde inclusif offrant stabilité et paix.</p>
                     <p class="lang-en">Ensure equality and equity for an inclusive world offering stability and peace.</p>
                 </div>
-                <!-- ✅ UPDATE 1: Phrase complète de la Vision restaurée et ajoutée -->
                 <div class="mission-card vision">
                     <div class="m-icon"><i class="fas fa-eye"></i></div>
                     <h3 class="lang-fr">Vision</h3><h3 class="lang-en">Vision</h3>
-                    <p class="lang-fr">Une organisation où les valeurs humanitaires, morales et civiques sont promues dans la solidarité, le développement sans discrimination aucune et dans le respect des droits et de la dignité de la population.</p>
-                    <p class="lang-en">An organization where humanitarian, moral, and civic values are promoted in solidarity, development without discrimination, and respect for rights and dignity.</p>
-                    
-                    <div style="margin-top: 1.5rem; display: flex; gap: 0.8rem; align-items: flex-start;">
-                        <span style="color: #FFF; font-size: 1.2rem; line-height: 1; margin-top: 2px; flex-shrink: 0;">●</span>
-                        <div>
-                            <p class="lang-fr" style="font-weight: 600; color: #FFF; margin: 0; line-height: 1.6;">UFAD vise à Promouvoir l'égalité des Genres, Garantir les Droits des Femmes, la protection de l'enfant et des personnes à risques d'exclusion sociale dans la communauté.</p>
-                            <p class="lang-en" style="font-weight: 600; color: #FFF; margin: 0; line-height: 1.6;">UFAD aims to Promote Gender Equality, Guarantee Women's Rights, protect Children and People at Risk of social exclusion in the Community.</p>
-                        </div>
-                    </div>
+                    <p class="lang-fr">Promouvoir les valeurs humanitaires, la solidarité et le respect des droits et de la dignité.</p>
+                    <p class="lang-en">Promote humanitarian values, solidarity, and respect for rights and dignity.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Objectives -->
     <section id="objectives" data-theme="green">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Cap sur l'Impact</span>
@@ -700,7 +679,6 @@
         </div>
     </section>
 
-    <!-- Targets -->
     <div class="section-alt" id="targets" data-theme="lavender">
         <div class="inner">
             <div class="section-header">
@@ -721,7 +699,6 @@
         </div>
     </div>
 
-    <!-- Domains -->
     <section id="domains" data-theme="teal">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Nos Axes d'Action</span>
@@ -740,7 +717,7 @@
         </div>
     </section>
 
-    <!-- Activities (Restored with ALL images) -->
+    <!-- ACTIVITIES SECTION - ALL IMAGES PRESERVED (OLD + NEW) -->
     <div class="section-alt" id="activities" data-theme="neutral">
         <div class="inner">
             <div class="section-header">
@@ -752,41 +729,46 @@
                 <p class="lang-en">Discover our concrete field actions in North Kivu.</p>
             </div>
 
-            <!-- Activity 1 -->
+            <!-- Activity 1: Métiers Professionnels (3 images - from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">1</div><h3 class="lang-fr">Métiers Professionnels</h3><h3 class="lang-en">Professional Trades</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Formation technique et artisanale</div><div class="caption lang-en">Technical and craft training</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Ateliers pratiques pour les jeunes</div><div class="caption lang-en">Practical workshops for youth</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Acquisition de compétences professionnelles</div><div class="caption lang-en">Professional skills acquisition</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Métier Pro 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Formation technique et artisanale</div><div class="caption lang-en">Technical and craft training</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/21QCqBXJ/Whats-App-Image-2026-11-03-at-16-52-36-1.jpg" alt="Métier Pro 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Ateliers pratiques pour les jeunes</div><div class="caption lang-en">Practical workshops for youth</div></div>
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/yFHZNtpY/Whats-App-Image-2026-11-03-at-16-52-36.jpg" alt="Métier Pro 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Acquisition de compétences professionnelles</div><div class="caption lang-en">Professional skills acquisition</div></div>
                 </div>
             </div>
 
-            <!-- Activity 2 -->
+            <!-- Activity 2: Entrepreneuriat & Leadership Féminin (3 images - 1 NEW + 2 from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">2</div><h3 class="lang-fr">Entrepreneuriat & Leadership Féminin</h3><h3 class="lang-en">Entrepreneurship & Women's Leadership</h3></div>
                 <div class="image-grid">
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Accompagnement des femmes</div><div class="caption lang-en">Support for women</div></div>
-                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Soutien aux Activités Génératrices de Revenus (AGR)</div><div class="caption lang-en">Support for Income-Generating Activities (IGA)</div></div>
+                    <!-- NEW IMAGE from new site -->
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Accompagnement des femmes</div><div class="caption lang-en">Supporting women</div></div>
+                    <!-- OLD IMAGE from old site -->
+                    <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Entrepreneuriat 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Activités Génératrices de Revenus</div><div class="caption lang-en">Income-Generating Activities</div></div>
+                    <!-- RESTORED OLD IMAGE from old site -->
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/tpsJ3D20/Entre-Preneuriat-et-Leadership-Fe-minin3.jpg" alt="Entrepreneuriat 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Accompagnement des coopératives féminines</div><div class="caption lang-en">Support for women's cooperatives</div></div>
                 </div>
             </div>
 
-            <!-- Activity 3 -->
+            <!-- Activity 3: Sécurité Alimentaire (7 images - 4 NEW + 3 from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">3</div><h3 class="lang-fr">Sécurité Alimentaire</h3><h3 class="lang-en">Food Security</h3></div>
                 <div class="image-grid grid-4">
+                    <!-- 4 NEW IMAGES from new site -->
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Securite New 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Distribution de vivres</div><div class="caption lang-en">Food distribution</div></div>
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/PVXqgHD/Whats-App-Image-2026-11-19-at-11-34-38.jpg" alt="Securite New 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Jardins communautaires</div><div class="caption lang-en">Community gardens</div></div>
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/1GWH0znW/Whats-App-Image-2026-11-19-at-11-34-35.jpg" alt="Securite New 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Sécurité des ménages</div><div class="caption lang-en">Household security</div></div>
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/x8fXsK82/Whats-App-Image-2026-11-19-at-11-34-31.jpg" alt="Securite New 4" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Sensibilisation nutritionnelle</div><div class="caption lang-en">Nutritional awareness</div></div>
+                    <!-- 3 RESTORED OLD IMAGES from old site -->
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/20FB41DX/se-curite-Alimentaire.jpg" alt="Securite Old 1" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Distribution de vivres et kits alimentaires</div><div class="caption lang-en">Food and kit distribution</div></div>
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/B28M9yHb/se-curite-Alimentaire1.jpg" alt="Securite Old 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Appui aux jardins communautaires</div><div class="caption lang-en">Support for community gardens</div></div>
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/xS7kGHZ7/se-curite-Alimentaire2.jpg" alt="Securite Old 3" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Renforcement de la sécurité alimentaire des ménages</div><div class="caption lang-en">Strengthening household food security</div></div>
                 </div>
             </div>
 
-            <!-- Activity 4 -->
+            <!-- Activity 4: Environnement & Développement Durable (3 images - RESTORED from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">4</div><h3 class="lang-fr">Environnement & Développement Durable</h3><h3 class="lang-en">Environment & Sustainable Development</h3></div>
                 <div class="image-grid">
@@ -796,7 +778,7 @@
                 </div>
             </div>
 
-            <!-- Activity 5 -->
+            <!-- Activity 5: Éducation (3 images - RESTORED from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">5</div><h3 class="lang-fr">Éducation</h3><h3 class="lang-en">Education</h3></div>
                 <div class="image-grid">
@@ -806,7 +788,7 @@
                 </div>
             </div>
 
-            <!-- Activity 6 -->
+            <!-- Activity 6: AMEs / NFIs & Abris (2 images - RESTORED from old site) -->
             <div class="activity-block">
                 <div class="activity-title"><div class="num">6</div><h3 class="lang-fr">AMEs / NFIs & Abris</h3><h3 class="lang-en">NFIs & Shelter</h3></div>
                 <div class="image-grid">
@@ -814,72 +796,76 @@
                     <div class="image-card"><div class="img-wrap"><img src="https://i.ibb.co/398hbSkq/Whats-App-Image-2026-11-03-at-21-19-32.jpg" alt="Abris 2" loading="lazy" width="800" height="500"></div><div class="caption lang-fr">Installation d'abris de transition pour les déplacés</div><div class="caption lang-en">Transitional shelter installation for displaced persons</div></div>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <!-- ✅ UPDATE 1: NOUVELLE SECTION MÉDIAS (Vidéos & Audio) -->
+    <!-- Media: Vidéos & Audio (NEW SECTION) -->
     <section id="media" data-theme="warm">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Médiathèque</span>
             <span class="section-eyebrow lang-en">Media Library</span>
             <h2 class="lang-fr">Vidéos & Audio</h2>
             <h2 class="lang-en">Videos & Audio</h2>
-            <p class="lang-fr">Suivez nos reportages, témoignages et communications sur le terrain.</p>
-            <p class="lang-en">Follow our reports, testimonials, and communications from the field.</p>
+            <p class="lang-fr">Suivez nos reportages, témoignages et campagnes de sensibilisation.</p>
+            <p class="lang-en">Follow our reports, testimonials, and awareness campaigns.</p>
         </div>
         <div class="media-grid">
-            <!-- Exemple Vidéo -->
             <div class="media-card">
-                <div class="media-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                </div>
+                <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
                 <div class="media-info">
                     <span class="media-badge video">Vidéo</span>
-                    <h4 class="lang-fr">Reportage : Actions sur le terrain</h4>
-                    <h4 class="lang-en">Report: Field Actions</h4>
-                    <p class="lang-fr">Découvrez nos dernières interventions au Nord-Kivu.</p>
-                    <p class="lang-en">Discover our latest interventions in North Kivu.</p>
+                    <h4 class="lang-fr">Reportage sur le terrain</h4>
+                    <h4 class="lang-en">Field Report</h4>
+                    <p class="lang-fr">Découvrez nos actions de sécurité alimentaire au Nord-Kivu.</p>
+                    <p class="lang-en">Discover our food security actions in North Kivu.</p>
                 </div>
             </div>
-            <!-- Exemple Audio -->
             <div class="media-card">
-                <div class="media-placeholder audio">
-                    <i class="fas fa-microphone-alt"></i>
-                </div>
+                <div class="media-placeholder audio"><i class="fas fa-microphone-alt"></i></div>
                 <div class="media-info">
                     <span class="media-badge audio">Audio</span>
-                    <h4 class="lang-fr">Témoignage : Impact de nos programmes</h4>
-                    <h4 class="lang-en">Testimonial: Impact of our programs</h4>
-                    <p class="lang-fr">Écoutez les bénéficiaires partager leur expérience.</p>
-                    <p class="lang-en">Listen to beneficiaries share their experience.</p>
+                    <h4 class="lang-fr">Sensibilisation communautaire</h4>
+                    <h4 class="lang-en">Community Awareness</h4>
+                    <p class="lang-fr">Spot radio sur les droits des femmes et des filles.</p>
+                    <p class="lang-en">Radio spot on women's and girls' rights.</p>
+                </div>
+            </div>
+            <div class="media-card">
+                <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
+                <div class="media-info">
+                    <span class="media-badge video">Vidéo</span>
+                    <h4 class="lang-fr">Témoignage d'une bénéficiaire</h4>
+                    <h4 class="lang-en">Beneficiary Testimonial</h4>
+                    <p class="lang-fr">L'impact de l'entrepreneuriat féminin dans nos communautés.</p>
+                    <p class="lang-en">The impact of women's entrepreneurship in our communities.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ✅ UPDATE 3: NOUVELLE SECTION CARRIÈRES / OFFRES D'EMPLOI -->
-    <div class="section-alt" id="careers" data-theme="lavender">
+    <!-- Offres & Opportunités (NEW SECTION) -->
+    <div class="section-alt" id="offres" data-theme="green">
         <div class="inner">
             <div class="section-header">
                 <span class="section-eyebrow lang-fr">Rejoignez-nous</span>
                 <span class="section-eyebrow lang-en">Join Us</span>
-                <h2 class="lang-fr">Offres d'Emploi & Carrières</h2>
-                <h2 class="lang-en">Job Offers & Careers</h2>
-                <p class="lang-fr">Consultez nos offres actuelles ou soumettez votre candidature spontanée pour rejoindre l'organisation UFAD.</p>
-                <p class="lang-en">Check our current offers or submit a spontaneous application to join the UFAD organization.</p>
+                <h2 class="lang-fr">Offres & Opportunités</h2>
+                <h2 class="lang-en">Offers & Opportunities</h2>
+                <p class="lang-fr">Consultez nos offres d'emploi, appels à candidatures et opportunités de bénévolat.</p>
+                <p class="lang-en">Check our job offers, calls for applications, and volunteering opportunities.</p>
             </div>
             <div class="careers-card">
-                <h3 class="lang-fr">Travaillez avec UFAD</h3>
+                <h3 class="lang-fr">Travaillez avec l'UFAD</h3>
                 <h3 class="lang-en">Work with UFAD</h3>
-                <p class="lang-fr">Nous recherchons des personnes passionnées et dévouées pour renforcer notre impact humanitaire au Nord-Kivu.</p>
-                <p class="lang-en">We are looking for passionate and dedicated people to strengthen our humanitarian impact in North Kivu.</p>
-                <a href="#contact" class="btn lang-fr">Voir les offres / Postuler</a>
-                <a href="#contact" class="btn lang-en">View offers / Apply</a>
+                <p class="lang-fr">Nous sommes toujours à la recherche de personnes passionnées et dévouées pour renforcer notre équipe sur le terrain et faire avancer notre mission humanitaire.</p>
+                <p class="lang-en">We are always looking for passionate and dedicated people to strengthen our field team and advance our humanitarian mission.</p>
+                <a href="#contact" class="btn lang-fr">Voir les offres actuelles</a>
+                <a href="#contact" class="btn lang-en">View current offers</a>
             </div>
         </div>
     </div>
 
-    <!-- Contact -->
     <section id="contact" data-theme="blue">
         <div class="section-header">
             <span class="section-eyebrow lang-fr">Contact</span>
@@ -930,7 +916,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-inner">
             <div class="footer-content">
@@ -945,8 +930,8 @@
                     <h4 class="lang-fr">Liens</h4><h4 class="lang-en">Links</h4>
                     <a href="#about" class="lang-fr">À propos</a>
                     <a href="#activities" class="lang-fr">Activités</a>
-                    <a href="#media" class="lang-fr">Médias</a>
-                    <a href="#careers" class="lang-fr">Carrières</a>
+                    <a href="#media" class="lang-fr">Média</a>
+                    <a href="#offres" class="lang-fr">Offres</a>
                     <a href="#contact" class="lang-fr">Contact</a>
                 </div>
                 <div class="footer-section">
@@ -1007,7 +992,6 @@
             else header.classList.remove('scrolled');
         }, { passive: true });
 
-        // ENHANCED SCROLL COLOR EFFECTS
         const sections = document.querySelectorAll('section, .section-alt');
         const themeColors = {
             'blue': { bg: '#EFF6FF', accent: '#2563EB' },
@@ -1024,6 +1008,7 @@
                 if (entry.isIntersecting) {
                     const theme = entry.target.getAttribute('data-theme') || 'neutral';
                     const colors = themeColors[theme] || themeColors['neutral'];
+                    
                     document.body.style.backgroundColor = colors.bg;
                     document.body.style.setProperty('--theme-accent', colors.accent);
                 }
