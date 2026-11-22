@@ -398,6 +398,10 @@
         .target-card:nth-child(6) { background: #FFF0F5; border-color: #FED7E2; } .target-card:nth-child(6) .t-icon { background: #FED7E2; color: #B83280; }
         .target-card:nth-child(7) { background: #F0FDFA; border-color: #B2F5EA; } .target-card:nth-child(7) .t-icon { background: #B2F5EA; color: #285E61; }
 
+        /* Alignement harmonieux des cartes cibles (textes longs) */
+        .grid-3 .target-card { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 100%; }
+        .grid-3 .target-card h4 { text-wrap: balance; }
+
         /* --- DOMAINS & ACTIVITIES --- */
         .domain-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--theme-accent); opacity: 0.15; line-height: 1; margin-bottom: 0.3rem; transition: color 0.6s ease; }
         .activity-block { margin-bottom: 3rem; } 
@@ -762,13 +766,13 @@
                 <h2 class="lang-en">Beneficiary Targets</h2>
             </div>
             <div class="grid-3">
-                <div class="target-card"><div class="t-icon"><i class="fas fa-child"></i></div><h4 class="lang-fr">Filles Mineures Victimes</h4><h4 class="lang-en">Minor Girls Victims</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-child"></i></div><h4 class="lang-fr">Les Filles Mineures Victimes de Grossesses Précoces</h4><h4 class="lang-en">Minor Girls Victims of Early Pregnancy</h4></div>
                 <div class="target-card"><div class="t-icon"><i class="fas fa-user-clock"></i></div><h4 class="lang-fr">Personnes du 3ème Âge</h4><h4 class="lang-en">Elderly People</h4></div>
-                <div class="target-card"><div class="t-icon"><i class="fas fa-shield-alt"></i></div><h4 class="lang-fr">Victimes de Violences</h4><h4 class="lang-en">Survivors of Violence</h4></div>
-                <div class="target-card"><div class="t-icon"><i class="fas fa-tree"></i></div><h4 class="lang-fr">Pygmées</h4><h4 class="lang-en">Pygmy Communities</h4></div>
-                <div class="target-card"><div class="t-icon"><i class="fas fa-wheelchair"></i></div><h4 class="lang-fr">Handicapés</h4><h4 class="lang-en">People with Disabilities</h4></div>
-                <div class="target-card"><div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div><h4 class="lang-fr">Albinos</h4><h4 class="lang-en">Albinos</h4></div>
-                <div class="target-card"><div class="t-icon"><i class="fas fa-users-cog"></i></div><h4 class="lang-fr">Enfants des Forces Armées</h4><h4 class="lang-en">Children of Armed Forces</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-shield-alt"></i></div><h4 class="lang-fr">Les Victimes de Violences Sexuelles</h4><h4 class="lang-en">Survivors of Sexual Violence</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-tree"></i></div><h4 class="lang-fr">Les Pygmées</h4><h4 class="lang-en">Pygmy Communities</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-wheelchair"></i></div><h4 class="lang-fr">Les Handicapés</h4><h4 class="lang-en">People with Disabilities</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-hand-holding-heart"></i></div><h4 class="lang-fr">Les Albinos</h4><h4 class="lang-en">People with Albinism</h4></div>
+                <div class="target-card"><div class="t-icon"><i class="fas fa-users-cog"></i></div><h4 class="lang-fr">Les Enfants Associés et Sortis des Forces et Groupes Armés</h4><h4 class="lang-en">Children Associated with and Released from Armed Forces and Groups</h4></div>
             </div>
         </div>
     </div>
