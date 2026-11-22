@@ -232,21 +232,140 @@
             box-shadow: var(--shadow-hover);
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
-            .hero-card::before {
-            content: '';
+
+        /* ============================================
+           HERO CAROUSEL - Background Image Rotation
+           ============================================ */
+        .hero-carousel {
             position: absolute;
-            inset: -30px;
-            background: url('https://i.ibb.co/MxD57m5B/6905f4da05bb4ce286f0719b293d08e8.png') center/cover;
-            filter: brightness(0.6);
+            inset: 0;
             z-index: 0;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
         }
-        .hero-card::after {
+        .hero-carousel-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.8s ease-in-out;
+            will-change: opacity;
+        }
+        .hero-carousel-slide.active {
+            opacity: 1;
+        }
+        .hero-carousel-slide::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0.85));
-            z-index: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.9));
         }
+        /* Hide the static ::before background since we use the carousel now */
+        .hero-card::before { display: none; }
+
+        /* Carousel indicators */
+        .hero-carousel-indicators {
+            position: absolute;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+        .hero-carousel-indicators span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.25);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .hero-carousel-indicators span.active {
+            background: var(--theme-accent);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* ============================================
+           INFINITE SCROLLING BANNER
+           ============================================ */
+        .scroll-banner-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 1.5rem 0;
+            background: linear-gradient(to bottom, rgba(248, 250, 252, 0.8), rgba(248, 250, 252, 1));
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+        .scroll-banner-wrapper::before,
+        .scroll-banner-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .scroll-banner-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #F8FAFC, transparent);
+        }
+        .scroll-banner-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #F8FAFC, transparent);
+        }
+        .scroll-banner-track {
+            display: flex;
+            gap: 1rem;
+            width: max-content;
+            animation: scrollBanner 45s linear infinite;
+        }
+        .scroll-banner-wrapper:hover .scroll-banner-track {
+            animation-play-state: paused;
+        }
+        .scroll-banner-item {
+            flex-shrink: 0;
+            width: 260px;
+            height: 160px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        .scroll-banner-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .scroll-banner-item:hover img {
+            transform: scale(1.08);
+        }
+        .scroll-banner-item .scroll-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.5rem 0.8rem;
+            background: linear-gradient(to top, rgba(15,23,42,0.85), transparent);
+            color: #FFF;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        @keyframes scrollBanner {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        @media (max-width: 768px) {
+            .scroll-banner-item { width: 200px; height: 130px; }
+            .scroll-banner-track { animation-duration: 30s; }
+        }
+
         .hero-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
 
         .hero-logo {
@@ -623,6 +742,24 @@
     <!-- HERO CARD -->
     <div class="hero-wrapper">
         <div class="hero-card">
+            <!-- HERO CAROUSEL BACKGROUND -->
+            <div class="hero-carousel" id="heroCarousel">
+                <div class="hero-carousel-slide active" style="background-image: url('https://i.ibb.co/MxD57m5B/6905f4da05bb4ce286f0719b293d08e8.png');"></div>
+                <div class="hero-carousel-slide" style="background-image: url('https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg');"></div>
+                <div class="hero-carousel-slide" style="background-image: url('https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg');"></div>
+                <div class="hero-carousel-slide" style="background-image: url('https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg');"></div>
+                <div class="hero-carousel-slide" style="background-image: url('https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png');"></div>
+                <div class="hero-carousel-slide" style="background-image: url('https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg');"></div>
+            </div>
+            <div class="hero-carousel-indicators" id="heroIndicators">
+                <span class="active" data-index="0"></span>
+                <span data-index="1"></span>
+                <span data-index="2"></span>
+                <span data-index="3"></span>
+                <span data-index="4"></span>
+                <span data-index="5"></span>
+            </div>
+
             <div class="hero-content">
                 <div class="hero-logo">
                     <img src="https://i.ibb.co/KxcbW6bV/UFAD-Logo.png" alt="UFAD Logo">
@@ -653,6 +790,30 @@
                     <a href="#activities" class="btn btn-outline lang-en"><i class="fas fa-images"></i> Our Actions</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- INFINITE SCROLLING BANNER -->
+    <div class="scroll-banner-wrapper">
+        <div class="scroll-banner-track" id="scrollBannerTrack">
+            <!-- First set -->
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Formation" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Formation technique</span><span class="lang-en">Technical training</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Entrepreneuriat féminin</span><span class="lang-en">Women's entrepreneurship</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Sécurité alimentaire" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Sécurité alimentaire</span><span class="lang-en">Food security</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg" alt="Environnement" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Reboisement</span><span class="lang-en">Reforestation</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Éducation" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Éducation</span><span class="lang-en">Education</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Abris d'urgence</span><span class="lang-en">Emergency shelter</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Eau & Hygiène</span><span class="lang-en">Water & Hygiene</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Leadership" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Leadership féminin</span><span class="lang-en">Women's leadership</span></div></div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/CpND0Z3G/Whats-App-Image-2026-11-03-at-16-52-36-2.jpg" alt="Formation" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Formation technique</span><span class="lang-en">Technical training</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/RG8HT1nj/Whats-App-Image-2026-11-19-at-11-00-18.jpg" alt="Entrepreneuriat" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Entrepreneuriat féminin</span><span class="lang-en">Women's entrepreneurship</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/N6hN1Pdx/Whats-App-Image-2026-11-19-at-11-34-39.jpg" alt="Sécurité alimentaire" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Sécurité alimentaire</span><span class="lang-en">Food security</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/Rf3vZWk/environnement-et-De-veloppement-durable.jpg" alt="Environnement" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Reboisement</span><span class="lang-en">Reforestation</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/DHbZCSwJ/5d9d3c8884774535bc328a44c4377305.png" alt="Éducation" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Éducation</span><span class="lang-en">Education</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/LdqM9grD/Whats-App-Image-2026-11-19-at-11-51-20.jpg" alt="Abris" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Abris d'urgence</span><span class="lang-en">Emergency shelter</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/VW8Qhdf2/Whats-App-Image-2026-11-19-at-11-29-31-1.jpg" alt="WASH" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Eau & Hygiène</span><span class="lang-en">Water & Hygiene</span></div></div>
+            <div class="scroll-banner-item"><img src="https://i.ibb.co/wZqntdZL/Entre-Preneuriat-et-Leadership-Fe-minin2.jpg" alt="Leadership" loading="lazy"><div class="scroll-caption"><span class="lang-fr">Leadership féminin</span><span class="lang-en">Women's leadership</span></div></div>
         </div>
     </div>
 
@@ -1104,6 +1265,53 @@
                 document.documentElement.lang = 'fr';
             }
         }
+
+        // ============================================
+        // HERO CAROUSEL - Auto-rotate background images
+        // ============================================
+        (function() {
+            const slides = document.querySelectorAll('.hero-carousel-slide');
+            const indicators = document.querySelectorAll('.hero-carousel-indicators span');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            const intervalTime = 5000; // 5 seconds
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                indicators.forEach((ind, i) => {
+                    ind.classList.toggle('active', i === index);
+                });
+                currentIndex = index;
+            }
+
+            function nextSlide() {
+                const next = (currentIndex + 1) % totalSlides;
+                showSlide(next);
+            }
+
+            // Auto-rotate
+            let carouselInterval = setInterval(nextSlide, intervalTime);
+
+            // Click on indicators
+            indicators.forEach((ind) => {
+                ind.addEventListener('click', () => {
+                    clearInterval(carouselInterval);
+                    showSlide(parseInt(ind.dataset.index));
+                    carouselInterval = setInterval(nextSlide, intervalTime);
+                });
+            });
+
+            // Pause on hero hover
+            const heroCard = document.querySelector('.hero-card');
+            if (heroCard) {
+                heroCard.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+                heroCard.addEventListener('mouseleave', () => {
+                    carouselInterval = setInterval(nextSlide, intervalTime);
+                });
+            }
+        })();
 
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
